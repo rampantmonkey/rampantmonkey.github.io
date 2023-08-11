@@ -1,0 +1,87 @@
+<style>
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  .gallery div {
+    position: relative;
+  }
+
+  .gallery span {
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: var(--antique-white);
+    background: var(--cafe-noir);
+    padding: 0.5em;
+  }
+
+  .gallery div:hover span {
+    visibility: visible;
+  }
+
+  #overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 101;
+    background: rgba(34, 34, 34, 0.9);
+  }
+</style>
+
+<section class="gallery">
+  <div><span>Poker II</span><img src="images\keyboards\poker_ii.thumb.jpg" /></div>
+  <div><span>Ergodox EZ</span><img src="images\keyboards\ergodox-ez-white.thumb.jpg" /></div>
+  <div><span>Kinesis Advantage</span><img src="images\keyboards\kinesis-advantage.thumb.jpg" /></div>
+  <div><span>Planck EZ</span><img src="images\keyboards\planck-ez.thumb.jpg" /></div>
+  <div><span>Atreus</span><img src="images\keyboards\atreus.thumb.jpg" /></div>
+  <div><span>Happy Hacking Pro 2</span><img src="images\keyboards\hhkb_pro_2.thumb.jpg" /></div>
+  <div><span>Ergodox Infinity</span><img src="images\keyboards\ergodox-infinity.thumb.jpg" /></div>
+  <div><span>DASKey</span><img src="images\keyboards\daskey.thumb.jpg" /></div>
+  <div><span>Ergodox EZ</span><img src="images\keyboards\ergodox-ez-black.thumb.jpg" /></div>
+</section>
+
+<script>
+(() => {
+  window.addEventListener('load', function() {
+    const overlayEl = document.createElement('div')
+    overlayEl.style.visibility = 'hidden'
+    overlayEl.id = 'overlay'
+    document.body.appendChild(overlayEl)
+
+    const addShowcasedImg = (src) => {
+      const showcasedImg = document.createElement('img')
+      showcasedImg.style.zIndex = '102'
+      showcasedImg.style.maxHeight = '90vh'
+      showcasedImg.style.height = 'auto'
+      showcasedImg.style.margin = '5vh auto'
+      showcasedImg.style.display = 'block'
+      showcasedImg.src = src
+      overlayEl.appendChild(showcasedImg)
+      return showcasedImg
+    }
+
+    overlayEl.addEventListener('click', () => {
+      overlayEl.style.visibility = 'hidden'
+      while(overlayEl.firstChild) overlayEl.removeChild(overlayEl.firstChild)
+    }, false)
+
+    Array.prototype.forEach.call(document.images, (img) => {
+      if(img.classList.contains('no-full')) return;
+      img.addEventListener('click', () => {
+        const showcasedImg = addShowcasedImg(img.src.replace('.thumb', ''))
+        overlayEl.style.visibility = 'visible'
+      }, false)
+    })
+  })
+})();
+</script>

@@ -1,0 +1,163 @@
+:root {
+    --brass: #b5a642;
+    --light-cyan: #dcf3f0;
+    --antique-white: #ffe9d3;
+    --antique-white-light: #fdf9f3;
+    --cafe-noir: #4e3822;
+    --dark-sienna: #230c0f;
+    --flame: #d45113;
+    --polished-pine: #4ea699;
+    --puce: #d496a7;
+    --english-violet: #51355a;
+
+}
+
+pre {
+  background: var(--dark-sienna);
+  color: var(--antique-white);
+  padding: 0.5em 1em;
+  overflow-x: scroll;
+}
+
+code {
+  background: var(--dark-sienna);
+  color: var(--antique-white);
+}
+p code {
+  padding: 0 0.25em;
+}
+
+body {
+    font-size: 1.1em;
+    margin: 0 auto;
+    padding: 0 2em;
+    max-width: 1024px;
+    background-color: var(--antique-white-light);
+    color: var(--dark-sienna);
+    font-family: monospace;
+}
+
+footer {
+    margin-top: 1em;
+    border-top: 2px dashed black;
+}
+
+a {
+    color: var(--brass);
+}
+
+a:visited {
+    filter: brightness(.65);
+}
+
+h1 {
+    font-size: 2em;
+}
+
+hr {
+    border-top: 2px dashed black;
+    border-bottom: none;
+    background: transparent;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.blog-list {
+    margin: 0;
+    padding: 5px;
+    list-style-type: none;
+}
+
+.blog-list > li {
+    text-indent: -5px;
+}
+
+.blog-list > li:before {
+    content: "- ";
+    text-indent: -5px;
+}
+
+.landing-page aside img {
+    display: block;
+    margin: 0 auto;
+}
+
+.landing-page aside a {
+    visibility: hidden;
+}
+
+.widget {
+  width: 90%;
+  margin: 0.5em auto;
+  border: 1px solid var(--brass);
+}
+
+input {
+  border-color: var(--cafe-noir);
+}
+
+input:focus {
+  outline: none !important;
+  border: 2px solid var(--brass);
+  box-shadow: 0 0 10px var(--brass);
+}
+
+.print-only {
+  display: none;
+}
+
+@media (min-width: 950px) {
+    .landing-page {
+        display: flex;
+        gap: 1em;
+        margin-top: 1.33em;
+    }
+
+    .landing-page > aside {
+        flex: 0 0 auto;
+    }
+
+    .landing-page > article {
+        flex-grow: 1;
+    }
+
+    .landing-page h1 {
+        margin-top: 0;
+    }
+
+    .landing-page aside a {
+        visibility: visible;
+    }
+}
+
+@media print {
+  body {
+    font-size: 12pt;
+    color: black;
+  }
+
+  nav {
+    display: none;
+  }
+
+  a {
+    color: black;
+    text-decoration: none;
+  }
+
+  p a:after {
+    content: " (" attr(href) ")";
+    font-size: 90%;
+  }
+
+  footer {
+    display: none;
+  }
+
+  .print-only {
+    display: initial;
+  }
+}

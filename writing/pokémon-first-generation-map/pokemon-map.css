@@ -1,0 +1,17 @@
+.ascii {
+  font-size: 2px;
+  color: #081820;
+  background: #e0f8d0
+}
+
+.widget {
+  overflow-x: scroll;
+}
+.widget select {
+  display: block;
+  margin: 0 auto;
+}
+.widget canvas {
+  display: block;
+  margin: 0 auto;
+}

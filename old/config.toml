@@ -1,0 +1,15 @@
+baseurl = "http://rampantmonkey.com"
+languageCode = "en-us"
+title = "Rampant Monkey"
+paginate = 4
+footnotereturnlinkcontents = "↩"
+
+[permalinks]
+  posts = "/:year/:month/:filename/"
+  code = "/:filename/"
+
+[taxonomies]
+  tag = "tags"
+
+[markup.goldmark.renderer]
+  unsafe = true

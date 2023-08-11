@@ -1,0 +1,108 @@
+<html>
+<head>
+ <title>RampantMonk3y-Energy Conversion</title>
+</head>
+
+<body>
+ <script language="JavaScript" >
+ <!--
+ function updt (f,n) {
+   ry2ev=13.6;
+   ev2ry=1/ry2ev;
+   ha2kc=627.5;
+   kc2ha=1/ha2kc;
+   ha2ry=2.0;
+   ry2ha=1/ha2ry;
+   ev2cm=8065.541154;
+   cm2ev=1/ev2cm;
+   ev2ke=11604.5;
+   ke2ev=1/ev2ke;
+   ev2kj=96.4854;
+   kj2ev=1/ev2kj;
+   ev2th=241.7988407662022;
+   th2ev=1/ev2th;
+   hc=1239.84; // h.c in eV * nm
+   eval ("v=new Number(f.field"+n+".value)");
+   if (n==1) { // Input ev
+     ev=v;
+   }
+   if (n==2) { // Input ry
+     ev=v*ry2ev;
+   }
+   if (n==3) { // Input ha
+     ev=v*ha2ry*ry2ev;
+   }
+   if (n==4) { // Input kc
+     ev=v*kc2ha*ha2ry*ry2ev;
+   }
+   if (n==5) { // Input nm
+     ev=hc/v;
+   }
+   if (n==6) { // Input cm-1
+     ev=v*cm2ev;
+   }
+   if (n==7) { // Input K
+     ev=v*ke2ev;
+   }
+   if (n==8) { // Input kj
+     ev=v*kj2ev;
+   }
+   if (n==9) { // Input THz
+     ev=v*th2ev;
+   }
+   f.field1.value=ev;
+   f.field2.value=ev*ev2ry;
+   f.field3.value=ev*ev2ry*ry2ha;
+   f.field4.value=ev*ev2ry*ry2ha*ha2kc;
+   f.field5.value=hc/ev;
+   f.field6.value=ev*ev2cm;
+   f.field7.value=ev*ev2ke;
+   f.field8.value=ev*ev2kj;
+   f.field9.value=ev*ev2th;
+ }
+ // -->
+ </SCRIPT>
+<FORM ACTION="energyconversion.html">
+<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=1><TR><TD BGCOLOR="silver">
+ <TABLE>
+  <TR>
+   <TD ALIGN="center">eV</TD>
+   <TD ALIGN="center">Ry</TD>
+   <TD ALIGN="center">Ha</TD>
+   <TD ALIGN="center">kcal/mol</TD>
+
+   <TD ALIGN="center">nm</TD>
+   <TD ALIGN="center">cm<sup>-1</sup></TD>
+   <TD ALIGN="center">K</TD>
+   <TD ALIGN="center">kJ/mol</TD>
+   <TD ALIGN="center">THz</TD>
+   <TD ALIGN="center"> </TD>
+
+  </TR>
+  <TR>
+   <TD ALIGN="center"><INPUT TYPE="text" NAME="field1" SIZE=7 MAXLENGTH=7 onChange="updt (this.form,1)"></TD>
+   <TD ALIGN="center"><INPUT TYPE="text" NAME="field2" SIZE=7 MAXLENGTH=7 onChange="updt (this.form,2)"></TD>
+   <TD ALIGN="center"><INPUT TYPE="text" NAME="field3" SIZE=7 MAXLENGTH=7 onChange="updt (this.form,3)"></TD>
+   <TD ALIGN="center"><INPUT TYPE="text" NAME="field4" SIZE=7 MAXLENGTH=7 onChange="updt (this.form,4)"></TD>
+   <TD ALIGN="center"><INPUT TYPE="text" NAME="field5" SIZE=7 MAXLENGTH=7 onChange="updt (this.form,5)"></TD>
+   <TD ALIGN="center"><INPUT TYPE="text" NAME="field6" SIZE=7 MAXLENGTH=7 onChange="updt (this.form,6)"></TD>
+   <TD ALIGN="center"><INPUT TYPE="text" NAME="field7" SIZE=7 MAXLENGTH=7 onChange="updt (this.form,7)"></TD>
+
+   <TD ALIGN="center"><INPUT TYPE="text" NAME="field8" SIZE=7 MAXLENGTH=7 onChange="updt (this.form,8)"></TD>
+   <TD ALIGN="center"><INPUT TYPE="text" NAME="field9" SIZE=7 MAXLENGTH=7 onChange="updt (this.form,9)"></TD>
+   <TD ALIGN="center"><INPUT TYPE="reset" VALUE="reset"></TD>
+  </TR>
+  <TR>
+   <TD ALIGN="center" COLSPAN=5>
+     <FONT FACE="arial,helvetica" SIZE=1>Write a value in the suitable input field and press TAB</FONT>
+   </TD>
+
+  </TR>
+ </TABLE>
+</TD>
+</TR>
+</TABLE>
+</FORM>
+
+</body>
+</html>

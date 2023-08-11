@@ -1,0 +1,12 @@
+<article class="group">
+  <div class="metadata grid2">
+    <a href="{{ .Permalink }}">
+        {{ .Date.Format "15:04:05" }}
+        <br />
+        {{ .Date.Format "2 Jan 2006" }}
+    </a>
+  </div>
+  <div class="postbody grid14">
+    {{ .Content }}
+  </div>
+</article>

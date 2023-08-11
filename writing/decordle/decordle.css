@@ -1,0 +1,37 @@
+:root {
+  --spacing: 2px;
+  --boxsize: 49px;
+}
+
+.key {
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.button {
+  width: var(--boxsize);
+  height: var(--boxsize);
+}
+
+.box {
+  border: var(--cafe-noir) 1px solid;
+  padding: 0px;
+  text-align: center;
+  background-color: var(--antique-white-light);
+  overflow: hidden;
+  border-spacing: var(--spacing);
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: var(--cafe-noir);
+}
+
+#decordle table {
+  border-collapse: collapse;
+}
+
+#decordle {
+  font-family: sans-serif;
+  font-size: 28px;
+}

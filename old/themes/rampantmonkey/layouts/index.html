@@ -1,0 +1,46 @@
+<!doctype html>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+<link rel="stylesheet" type="text/css" media="screen, projection" href="css/style.css" />
+<link rel="shortcut icon" type="image/png" href="media/rmLogoSmall.png">
+<title>Rampant Monkey | Home</title>
+<base href="/" />
+
+<body class="land">
+  <section class="banner">
+    <div class="scaffold group">
+      <div class="grid16">
+        <object data="/media/rmLogo.svg" type="image/svg+xml"></object>
+        <p>Hi. I'm <b class="indivisible">Casey Robinson</b>.</p>
+        <p>I enjoy <b class="indivisible">playing games</b> and <b class="indivisible">writing software</b>.</p>
+      </div>
+    </div>
+  </section>
+  <section class="teaser scaffold group">
+    <div class="grid4"><h2>Latest Post</h2>
+      {{ range .Pages }}
+        {{ range first 1 (where .Data.Pages "Type" "article") }}
+          <p><emph>{{ .Title }}</emph><br />{{ .Description }}</p>
+          <a href="{{ .Permalink }}">View Post &rarr;</a>
+        {{ end }}
+      {{ end }}
+    </div>
+    <div class="grid4"><!-- make dynamic with "projects section" -->
+      <h2>Project Underway</h2>
+      <p>I am learning about line drawing algorithms and testing methods like property based testing and mutation testing.</p>
+      <a href="https://src.rampantmonkey.com/spatial">Source Code &rarr;</a>
+    </div>
+    <div class="grid4"><!-- make dynamic with "reading list/bookshelf section" -->
+      <h2>Reading List</h2>
+      <p>I am reading through <em>Practical TLA+</em> by Hillel Wayne to better understand how to apply formal methods.</p>
+      <a href="https://www.hillelwayne.com/post/practical-tla/">Book Website &rarr;</a>
+    </div>
+    <div class="grid4">
+      <h2>Contact Me</h2>
+      <p>If you have any comments, project ideas, or just want to chat download my <a href="/gpg/caseyrobinson.public.gpg-key">PGP key</a> and send me a message.</p>
+      <a href="mailto:casey@rampantmonkey.com">casey@rampantmonkey.com</a>
+    </div>
+  </section>
+  {{ partial "footer.html" . }}
+</body>

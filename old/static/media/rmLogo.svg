@@ -1,0 +1,40 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" 
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="720" height="720" viewBox="0 0 720 720">
+
+<g>
+<ellipse cx="175" cy="95" rx="100" ry="125" fill="#ffdab9" transform="rotate(27)" />
+<ellipse cx="465" cy="425" rx="100" ry="125" fill="#ffdab9" transform="rotate(-27)" />
+</g>
+
+<ellipse cx="360" cy="345" rx="250" ry="330" fill="#733e1a" />
+
+<g>
+ <ellipse cx="360" cy="543" rx="275" ry="163" fill="#ffdab9" />
+ <ellipse cx="220" cy="325" rx="113" ry="169" transform="rotate(-8)" fill="#ffdab9" />
+ <ellipse cx="500" cy="222" rx="113" ry="169" transform="rotate(8)" fill="#ffdab9" />
+ <ellipse cx="360" cy="205" rx="100" ry="75" fill="#ffdab9" />
+</g>
+
+<g>
+ <ellipse cx="293" cy="265" rx="30" ry="60" fill="#000000" />
+ <ellipse cx="427" cy="265" rx="30" ry="60" fill="#000000" />
+ <ellipse cx="300" cy="254" rx="10" ry="26" fill="#ffffff" />
+ <ellipse cx="420" cy="254" rx="10" ry="26" fill="#ffffff" />
+</g>
+
+<g>
+ <polygon fill="#000000" points="322,232 247,211 223,220 250,191 327,207" />
+ <polygon fill="#000000" points="398,232 473,211 497,220 470,191 393,207" />
+</g>
+
+<g>
+ <polygon fill="#000000" points="219,536 486,468 495,471 513,625 501,632 351,555 227,542" />
+ <!--Circles are temporary to round out corners of mouth. When a better method is discovered this will be the first place to implement -->
+ <circle fill="#000000" cx="489" cy="474" r="6" />
+ <circle fill="#000000" cx="505" cy="625" r="8" />
+ <polygon fill="#ffffff" points="350,537 350,516 477,487 486,533 436,528 494,576 497,609 377,546" />
+ <circle fill="#ffffff" cx="350" cy="526.5" r="10.5" />
+</g>
+</svg>

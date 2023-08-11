@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   width="720"
+   height="720"
+   viewBox="0 0 720 720"
+   id="svg861"
+   sodipodi:docname="rmLogoSleep.svg"
+   inkscape:version="0.92.2 2405546, 2018-03-11">
+  <metadata
+     id="metadata867">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs865" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="3828"
+     inkscape:window-height="1070"
+     id="namedview863"
+     showgrid="false"
+     inkscape:snap-global="false"
+     inkscape:zoom="0.70710678"
+     inkscape:cx="177.75704"
+     inkscape:cy="176.1413"
+     inkscape:window-x="1925"
+     inkscape:window-y="5"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg861" />
+  <g
+     id="g819">
+    <ellipse
+       cx="175"
+       cy="95"
+       rx="100"
+       ry="125"
+       fill="#ffdab9"
+       transform="rotate(27)"
+       id="ellipse815" />
+    <ellipse
+       cx="465"
+       cy="425"
+       rx="100"
+       ry="125"
+       fill="#ffdab9"
+       transform="rotate(-27)"
+       id="ellipse817" />
+  </g>
+  <ellipse
+     cx="360"
+     cy="345"
+     rx="250"
+     ry="330"
+     fill="#733e1a"
+     id="ellipse821" />
+  <g
+     id="g831">
+    <ellipse
+       cx="360"
+       cy="543"
+       rx="275"
+       ry="163"
+       id="ellipse823"
+       fill="#ffdab9" />
+    <ellipse
+       cx="220"
+       cy="325"
+       rx="113"
+       ry="169"
+       transform="rotate(-8)"
+       id="ellipse825"
+       fill="#ffdab9" />
+    <ellipse
+       cx="500"
+       cy="222"
+       rx="113"
+       ry="169"
+       transform="rotate(8)"
+       id="ellipse827"
+       fill="#ffdab9" />
+    <ellipse
+       cx="360"
+       cy="205"
+       rx="100"
+       ry="75"
+       id="ellipse829"
+       fill="#ffdab9" />
+  </g>
+  <g
+     id="g841"
+     transform="matrix(1,0,0,0.18185234,0,268.10842)">
+    <ellipse
+       cx="293"
+       cy="265"
+       rx="30"
+       ry="60"
+       id="ellipse833"
+       style="fill:#000000" />
+    <ellipse
+       cx="427"
+       cy="265"
+       rx="30"
+       ry="60"
+       id="ellipse835"
+       style="fill:#000000" />
+    <ellipse
+       style="fill:#000000"
+       cx="293.07455"
+       cy="267.70175"
+       rx="30"
+       ry="60"
+       id="ellipse833-3" />
+  </g>
+  <g
+     id="g847">
+    <polygon
+       fill="#000000"
+       points="322,232 247,211 223,220 250,191 327,207"
+       id="polygon843" />
+    <polygon
+       fill="#000000"
+       points="398,232 473,211 497,220 470,191 393,207"
+       id="polygon845" />
+  </g>
+  <g
+     id="g841-5"
+     transform="matrix(1,0,0,0.18185234,-0.089891,263.11403)">
+    <ellipse
+       cx="293.18387"
+       cy="265"
+       rx="32.022472"
+       ry="60"
+       id="ellipse833-6"
+       style="fill:#ffdab9;fill-opacity:1;stroke-width:1.03315806" />
+    <ellipse
+       cx="426.26456"
+       cy="265"
+       rx="31.103167"
+       ry="60"
+       id="ellipse835-2"
+       style="fill:#ffdab9;fill-opacity:1;stroke-width:1.01822007" />
+  </g>
+  <rect
+     style="opacity:0.98000004;fill:#000000;fill-opacity:0;stroke:none"
+     id="rect936"
+     width="548.27374"
+     height="13.605721"
+     x="86.046989"
+     y="539.44843" />
+  <ellipse
+     style="opacity:0.98000004;fill:#000000;fill-opacity:1;stroke:none"
+     id="path944"
+     cx="370.26682"
+     cy="561.38849"
+     rx="128.44931"
+     ry="14.041018" />
+  <flowRoot
+     xml:space="preserve"
+     id="flowRoot946"
+     style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     transform="rotate(17.1,441.21122,495.66477)"><flowRegion
+       id="flowRegion948"><rect
+         id="rect950"
+         width="58.244202"
+         height="54.603985"
+         x="503.9165"
+         y="495.34372" /></flowRegion><flowPara
+       id="flowPara952"
+       style="font-size:42.66666794px;fill:#000000;fill-opacity:0.53333297">Z</flowPara></flowRoot>  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:68px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.70000005px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     x="646.7132"
+     y="390.14642"
+     id="text956"
+     transform="rotate(4)"><tspan
+       sodipodi:role="line"
+       id="tspan954"
+       x="646.7132"
+       y="390.14642"
+       style="fill:#000000;fill-opacity:0.53333285;stroke-width:2.8900001px">Z</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:56.34034729px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.40850866px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     x="668.729"
+     y="367.12375"
+     id="text960"
+     transform="matrix(0.92784552,0.18430878,-0.16360419,1.045267,0,0)"><tspan
+       sodipodi:role="line"
+       id="tspan958"
+       x="668.729"
+       y="367.12375"
+       style="fill:#000000;fill-opacity:0.53333285;stroke-width:1.97191203px">Z</tspan></text>
+</svg>

@@ -1,0 +1,28 @@
+<article class="group">
+  <div class="grid14 thetitle">
+    <a href="{{ .Params.external }}">
+      <h1>
+        {{ .Title }}
+        <span>&rarr;</span>
+      </h1>
+    </a>
+  </div>
+  <div class="metadata grid2">
+    <span class="date">
+      {{ .Date.Format "2 Jan 2006" }}
+    </span>
+    {{ range .Params.tags }}
+      <span class="tag">
+        <a href="/tags/{{. | urlize}}">
+          {{ . }}
+        </a>
+      </span>
+    {{ end }}
+    <span>
+      <a class="permalink nohover" href="{{ .Permalink }}">&infin;</a>
+    </span>
+  </div>
+  <div class="postbody grid14">
+    {{ .Content }}
+  </div>
+</article>

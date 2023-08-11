@@ -1,0 +1,89 @@
+<h1>Casey Robinson</h1>
+<hr />
+<h3>Software Engineer</h3>
+<h4 class="print-only"><a href="https://rampantmonkey.com">rampantmonkey.com</a></h4>
+
+<!--<p><code>Docker</code>, <code>Git</code>, <code>Go</code>, <code>Javascript</code>, <code>Nginx</code>, <code>PostgreSQL</code>, <code>SQLite</code>, <code>GraphViz</code>, <code>Linux</code>, <code>ZeroMQ</code>, <code>Redis</code>, <code>Logic Programming</code>, <code>Expert Systems</code>, <code>Testing</code></p>-->
+
+<h2>Experience</h2>
+<h3>Cognition Controls - Solution Architect - 02/2022-Present</h3>
+<blockquote>Purpose-Built, Smart HVAC Controls. Engineered for light commercial, industrial, and retail spaces.</blockquote>
+<h4>Highlights</h4>
+<h5>Thermodynamic Model</h5>
+<p>I developed a thermodynamic model of multi-zone spaces using Julia. This model forms the basis of the rest of the product including control, anomaly detection, and runtime estimation.</p>
+<h5>Control Algorithm</h5>
+<p>Reusing the thermodynamic model, I implemented model predictive control in the firmware of our building control device. This control algorithm continually seeks to achieve tenant comfort in the least energy intensive way.</p>
+<h5>Data Pipeline</h5>
+<p>Terraform. Julia. AWS. Cellular IoT Fleet Management. ML Training. Slurm.</p>
+
+
+<h3>WireWheel Inc. - Lead Architect - 11/2020-02/2022</h3>
+<blockquote> WireWheel offers products for achieving compliance with privacy laws while preparing your organization to respond to upcoming privacy standards.  </blockquote>
+<h4>Highlights</h4>
+<h5>Privacy Operations Management</h5>
+<p>I led a team of engineers to build a new product for managing collection and reporting of privacy compliance data within large organizations. Previously many privacy officers used spreadsheets and other manual processes for gathering the required information throughout their organization. This is error prone and an expensive process. And as more privacy laws are enacted this burdeon will only increase. Our solution was to build a custom task and information management system for gathering compliance information.</p>
+<p>The ultimate goal of the privacy officers is to produce a compliance document for each asset in their company and each compliance regulation they are obligated to follow. To address the combinatorial nature and reduce the disruption to the rest of the organization our product focused on three key areas: templating, automation, and inventory.</p>
+
+<p>Privacy compliance lawyers, either our employees or the customer's, could define a template for the compliance report they would like to produce. This template was then translated into a series of tasks distributed to their team. Upon completing the tasks the template was populated and a final compliance report document could be produced.</p>
+<p>We built automation to prefill answers and conditionally skip answers that were determined to be irrelevant - e.g. not in EU, then GDPR not relevant. We also built automation to check for conflicting answers and ask the participants to reconcile - e.g. encryption required yet not enabled.</p>
+<p>Compliance is always done against an asset and most standards require overlapping information. To remove this redundant work we introduced an asset inventory. Task answers populated an asset inventory. If the inventory contained information we would prefill that answer for the user - e.g. two standards ask for a data retention policy, only need to provide that once since it is a property of the data storage system.</p>
+<p>All of the business logic and automation was implemented in PostgreSQL using PL/pgsql. The API layer was implemented using Go. The template system was implemented using Go compiled to WebAssembly. The UI was implemented using PureScript.</p>
+
+<h3>Till Inc. - Senior Software Engineer - 04/2020-11/2020</h3>
+<blockquote> Till is a company that works with landlords and renters to provide customized payment schedules and budgeting tools to help renters pay on time and improve their financial outlook.  </blockquote>
+<h4>Highlights</h4>
+<h5>Rent Roll Data Pipeline</h5>
+<p>The ingestion pipeline for daily updates of renter status and balance designed to support multiple vendor APIs and manually created excel files. I designed the pipeline as a streaming system with support for change detection notifications and replayable historical input data.</p> <h5>Matching Service</h5>
+<p>Each vendor provides their own identifier for a user. The matching service is responsible for translating external identifiers into internal identifiers. The service also provided a fuzzy matching endpoint to find data for new users during the enrollment flow. I built this service with go, redis, and bloom filters.</p>
+
+<h3>Upside Business Travel - Senior Software Engineer - 04/2019-04/2020</h3>
+<blockquote> Upside Business Travel (now defunct - business travel and global pandemics don't mix) was a business travel booking platform focused on planning an entire trips for frequent travelers.  </blockquote>
+<h4>Highlights</h4>
+<h5>Sabre Session Token Pool</h5>
+<p>Sabre, the primary source of data for the airline industry, uses session tokens to handle authentication and authorization of their API. Each company purchases a fixed number of tokens and is charged, without warning, an overage fee if they try to use more than the number. Thus, an accurate count of the tokens in use is critical to controlling cost. I designed a distributed session pool manager to accurately enforce the limit while providing tokens to the 180 microservices in our infrastructure. I used TLA+ to design the management algorithm and implemented the service using redis, lua, and nodejs.</p>
+<h5>Booking Engine</h5>
+<p>Sabre is the source of truth for bookings across the airline industry. Sabre was originally created in 1960 to make American Airlines booking system available to other airlines. As you can imagine, there are many idiosyncracies which introduce an impedance mismatch with HTTP/JSON/NodeJS microservices. A unique character encoding (the service predates ASCII), 6-bit integers, and a terminal based UI which travel agents use to manage all bookings. Sabre has been working to modernize their APIs. However, many features still only exist through the low-level <a href="https://developer.sabre.com/sabrecommandllsrq">Sabre Send Command</a>, <code>SabreCommandLLSRQ</code>. To use this command you need to send the keys that a travel agent would type in the terminal UI.</p>
+<p>My project was to build a booking engine service which accepted booking requests from the rest of our services, reserved the requested inventory, and provided actionable error messages for users when the request could not be fulfilled. I built the initial proof of concept and led the implementation of the service across four engineering teams.</p>
+
+<h3>Fugue Inc. - Senior Software Engineer - 10/2017-02/2019</h3>
+<blockquote> Fugue provides infrastructure as code with an emphasis on security, auditability, and remediation.  </blockquote>
+<h4>Highlights</h4>
+<h5>Cloud Objects</h5>
+<p>List every item in an AWS account to create a snapshot or diff with a previous snapshot. This was implemented with Python and fully tested using property based testing with Hypothesis. This project also introduced property based testing to many of the engineers.</p>
+<h5>Pertubation Testing and Monitoring</h5>
+<p>One of the primary goals of the product is to detect unintended changes to infrastructure, revert to the last known state, and alert the end user. To test this feature I created a fuzz testing framework which introduced arbitrary changes into an AWS account and measured the remediation latency. The largest constraint on this project is the cost of running complex AWS infrastructure. Thus the perturbation selection criteria was critical and ultimately derived from analyzing historical data about bugs and feature changes.</p>
+
+<h3>Distil Networks - Platform Architect - 08/2014-10/2017</h3>
+<blockquote> Protect websites, mobile applications, and APIs from automated attacks without affecting the flow of business-critical traffic.  </blockquote>
+<h4>Highlights</h4>
+<h5>Growing the team</h5>
+<p>When I joined Distil, the platform team consisted of one co-founder and one manager. When I left there were nine engineers across four offices and two continents. I was heavily involved in the recruiting, hiring process for all of them. This included organizing an ongoing rust meetup, working with recruiting to define job descriptions, and working with my manager to define onboarding and training plans.</p>
+<p>During my time at Distil I was involved in talks to acquire three different companies. Two were successful and I led the architecture effort to integrate their products into our platform.</p>
+<h5>Development Environment and Test Suite</h5>
+<p>As part of onboarding new engineers I built an automated test suite which centralized the ad hoc scripts engineers had created up until that point. The test runner was built primarily using rust and selenium with support for a variety other headless browsers (when I left there were 12 different browsers in active rotation).  </p>
+<p>Our product was deployed to multiple machines in a customer's data center. This was an environment most engineers were not familiar with replicating locally. I built a tool using go, python, and lxc (eventually replaced with docker and docker compose) to replicate the deployment environment locally. This allowed the team to focus on processes and messages instead of file paths and virtual machines. It also allowed teams to accurately run the test suite locally.</p>
+<h5>Fault Tolerance</h5>
+<p>Multi-node deployments were less reliable than single node deployments despite being sold to customers for the redundancy (critical since our product was directly in line with their production traffic). I determined that the root cause was errors being propagated between machines due to the design of our ZeroMQ messaging system.  </p>
+<p>I redesigned the data flow to improve reliability. In two node deployments we replicated input to tolerate a single node failure. In larger deployments we use data replication, service discovery, and service migration to tolerate n/2 - 1 failures.</p> <p>As part of this work I created a test suite which introduces faults into the network and observes the failover.  </p>
+<h5>Nginx</h5>
+<p>We used nginx as our primary http request handling process. I was responsible for maintaining the build process for our custom plugins and any patches we created for nginx itself.</p>
+<h5>Visitor Identification</h5>
+<p>We used browser fingerprinting as the primary component in identifying visitors. This code was untouched for three years and lacked data validation. I collaborated with the data science team to define the set of features which provided the most uniqueness and validate new proposed features. This resulted in 2.5x the number of identifiers after normalizing for traffic volume.</p>
+<p>However, with the initial approach it was trivial for a bot writer to obtain a new identifier and thus evade our tracking by appearing as a new visitor on each request. I added HashCash to increase the cost of requesting an identifier. This resulted in a 30% increase in the number of bots detected with no customer complaints about false positives.</p>
+<p>To prevent bot writers from resubmitting the same token we required that each token is unique. Effectively, deduplicating an infinite steram of data. For this, I implemented a stable bloom filter with lua inside of redis.</p>
+<h5>Data Pipelines</h5>
+<p>Our product had two primary components: edge nodes which filtered requests in the customer's live producton traffic and a reporting cluster which provided machine learning and customer dashboards. The edge nodes were located in customer's data centers or cloud infrastructure while the reporting cluster was hosted on our own infrastructure. Many features required sending data between the two components. Configuration and ML models were sent to the edge nodes and logs were returned.</p>
+<p>To provide visibility and control over this communication we built a data pipeline daemon. This process controlled all data flow from the edge to our reporting cluster. It provided a web interface for customers to view and manage all aspects of this data transfer. We chose to use go and kafka for this project.</p> <p>We also decided to improve the usability of our log stream for internal customers as part of this project. We used protocol buffers to provide the data science team with a strict schema. We also introduced counters for our operations team to quickly diagnose issues.</p>
+<h5>Customization</h5>
+<p>Our product had many interconnected features and providing a direct list of settings to end users and support engineers proved to be confusing and ineffective. Similarly, adding new features required understanding every existing and in-development feature to avoid conflicts. This cost us excessive downtime downtime and multiple customers.</p>
+<p>To increase understandability of the product I designed a rule engine and worked with the engineers, support team, and analysts to encode our knowledge of the platform into a digestible format and provide a customizable tool for end users.</p>
+<p>Latency was the primary external constraint on the design of this system. We had contractual obligations to introduce no more than 20ms of latency into the request flow. I decided to build the rule engine as an nginx module written in rust to meet the latency requirment. Rust also allowed us to onboard engineers who only previously had experience with application level programming in ruby. Rust also had the unexpected benefit of compiling to webassembly which allowed the library to be reused in the web configuration interface.</p>
+<p>The rule engine was implemented as an abstract virtual machine for executing rules. This virtual machine explicitly limited memory usage and execution time of each rule so that we could accurately predict the impact of any given configuration before deploying to production. Rules were defined in boolean logic and translated into <a href="https://en.wikipedia.org/wiki/Disjunctive_normal_form">disjunctive normal form</a> to evaluate rules in constant space. The compiler was designed to provide user feedback on the rules and esitmate resource usage.</p>
+<p>The rule engine was shipped to production and meets the latency and resource requirments. When I left we were continuing to collect usage and performance data to further improve execution.</p>
+
+<h2>Education</h2>
+<ul>
+  <li>Graduate Student in Computer Science at University of Notre Dame from June 2012 - May 2014</li>
+  <li>M.S. Computer Science at Youngstown State University in May 2012</li>
+  <li>B.S. Physics at Pennsylvania State University in December 2009</li>
+</ul>

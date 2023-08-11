@@ -1,0 +1,132 @@
+digraph {
+  start [label="Start"];
+  caught [label="Caught"];
+  if_master_ball[shape="diamond", label="Master ball?"];
+  if_poke_ball[shape="diamond", label="Poké ball?"];
+  if_great_ball[shape="diamond", label="Great ball?"];
+  ultra_or_safari[shape="diamond", label="Ultra ball\nor\nSafari ball?"];
+  r1_255 [label="R1 = rand(0,255)"];
+  r1_200 [label="R1 = rand(0,200)"];
+  r1_150 [label="R1 = rand(0,150)"];
+  { rank=same; r1_255; r1_200; r1_150; }
+  if_asleep_or_frozen [shape="diamond" label="Target Pokémon\nasleep\nor frozen?"];
+  if_poisoned_burned_or_paralyzed [shape="diamond" label="Target Pokémon\npoisoned,\nburned, or\n frozen?"];
+  s_0  [label="S = 0"];
+  s_12 [label="S = 12"];
+  s_25 [label="S = 25"];
+  { rank=same; s_0; s_12; s_25 }
+  r_star [label="R* = R1 - S"]
+  if_r_star_negative [shape="diamond" label="R* < 0"]
+
+
+  start -> if_master_ball;
+  if_master_ball -> caught [label="yes"];
+  if_master_ball -> if_poke_ball [label="no"];
+  if_poke_ball -> if_great_ball [label="no"];
+  if_poke_ball -> r1_255 [label="yes"];
+  if_great_ball -> r1_200 [label="yes"];
+  if_great_ball -> ultra_or_safari [label="no"];
+  ultra_or_safari -> r1_150 [label="yes"];
+
+  r1_255 -> if_asleep_or_frozen;
+  r1_200 -> if_asleep_or_frozen;
+  r1_150 -> if_asleep_or_frozen;
+
+  if_asleep_or_frozen -> if_poisoned_burned_or_paralyzed [label="no"];
+  if_asleep_or_frozen -> s_25 [label="yes"];
+  if_poisoned_burned_or_paralyzed  -> s_12 [label="yes"];
+  if_poisoned_burned_or_paralyzed  -> s_0 [label="no"];
+
+  s_0  -> r_star;
+  s_12 -> r_star;
+  s_25 -> r_star;
+
+  r_star -> if_r_star_negative;
+  if_r_star_negative -> caught [label="yes"];
+  if_r_star_negative -> hp_factor [label="no"];
+
+  hp_factor [label="F = 255 * max_HP"];
+  divisor_8 [label="F /= 8"];
+  divisor_12 [label="F /= 12"];
+  if_great_ball_2 [shape="diamond" label="Great ball?"];
+  hp_factor -> if_great_ball_2;
+  if_great_ball_2 -> divisor_8 [label="yes"];
+  if_great_ball_2 -> divisor_12 [label="no"];
+
+  divisor_8  -> current_hp;
+  divisor_12 -> current_hp;
+  current_hp [shape="diamond" label="current_HP/4 > 0"];
+  f_div_hp_4 [label="F /= (current_HP/4)"];
+  current_hp -> f_div_hp_4 [label="yes"];
+  f_div_hp_4 -> round_f;
+  current_hp -> round_f [label="no"];
+  round_f [label="F = min{255, F}"];
+  round_f -> base_catch_rate;
+
+  base_catch_rate [shape="diamond" label="base_catch_rate >= R*"];
+  base_catch_rate -> w_init [label="no"];
+  base_catch_rate -> r2 [label="yes"];
+
+  r2 [label="R2 = rand(0,255)"];
+  r2 -> r2_and_f;
+  r2_and_f [shape="diamond" label="R2 <= F"];
+  r2_and_f -> caught [label="yes"];
+  r2_and_f -> w_init [label="no"];
+
+  w_init [label="W = 100 * base_catch_rate"];
+  w_init -> if_poke_ball_2
+  if_poke_ball_2 [shape="diamond" label="Poké Ball?"];
+  if_poke_ball_2 -> if_great_ball_3 [label="no"];
+  if_poke_ball_2 -> w_255[label="yes"];
+  w_255 [label="W /= 255"]
+  if_great_ball_3 [shape="diamond" label="Great Ball?"];
+  if_great_ball_3 -> w_200[label="yes"];
+  w_200 [label="W /= 200"]
+  if_great_ball_3 -> if_ultra_ball_2 [label="no"];
+  if_ultra_ball_2 [shape="diamond" label="Ultra Ball?"];
+  if_ultra_ball_2 -> w_150[label="yes"];
+  w_150 [label="W /= 150"];
+  { rank=same; w_150; w_200; w_255 };
+  w_150 -> w_overflow;
+  w_200 -> w_overflow;
+  w_255 -> w_overflow;
+  w_overflow [shape="diamond" label="W > 255"];
+  w_overflow -> wobble_3 [label="yes"];
+  w_overflow -> w_by_f [label="no"];
+  w_by_f [label="W *= F"];
+  w_by_f -> w_mod_255;
+  w_mod_255 [label="W /= 255"];
+  w_mod_255 -> if_asleep_or_frozen_2;
+  if_asleep_or_frozen_2 -> if_poisoned_burned_or_paralyzed_2 [label="no"];
+  if_asleep_or_frozen_2 -> w_plus_10 [label="yes"];
+  w_plus_10 [label="W += 10";]
+  w_plus_10 -> if_poisoned_burned_or_paralyzed_2 [label="no"];
+  if_asleep_or_frozen_2 [shape="diamond" label="Target Pokémon\nasleep\nor frozen?"];
+  if_poisoned_burned_or_paralyzed_2 [shape="diamond" label="Target Pokémon\npoisoned,\nburned, or\n frozen?"];
+  w_plus_5 [label="W += 5"];
+  if_poisoned_burned_or_paralyzed_2 -> w_plus_5 [label="yes"];
+  w_plus_5 -> w_less_than_10;
+  if_poisoned_burned_or_paralyzed_2 -> w_less_than_10 [label="no"];
+  w_less_than_10 [shape="diamond" label="W < 10"];
+  w_less_than_10 -> w_less_than_30 [label="no"];
+  w_less_than_10 -> missed [label="yes"];
+  w_less_than_30 [shape="diamond" label="W < 30"];
+  w_less_than_30 -> w_less_than_70 [label="no"];
+  w_less_than_30 -> wobble_1 [label="yes"];
+  w_less_than_70 [shape="diamond" label="W < 70"];
+  w_less_than_70 -> wobble_2 [label="yes"];
+  w_less_than_70 -> wobble_3 [label="no"];
+
+  missed [label="'The ball missed the POKéMON!'"];
+  wobble_1 [label="Wobble 1 times"];
+  wobble_1 -> broke_free;
+  broke_free [label="'Darn! The POKéMON broke free!'"];
+  wobble_2 [label="Wobble 2 times"];
+  wobble_2 -> appeared_to_be_caught;
+  appeared_to_be_caught [label="'Aww! It appeared to be caught!'"];
+  wobble_3 [label="Wobble 3 times"];
+  wobble_3 -> shoot;
+  shoot [label="'Shoot! It was so close too!'"];
+
+  { rank=same; caught; missed; broke_free; appeared_to_be_caught; shoot }
+}
