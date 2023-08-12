@@ -25,4 +25,4 @@ And now for a brief summary of the lessons I learned.
 [^2]: Supersonic plane design.
 [^3]: Attitude and orbit control subsystem for satellites.
 
-I hope that I am able to attend again next year. Maybe even with a talk about [GottaCatchEmAll.jl](https://gottacatchemaljl.com).
+I hope that I am able to attend again next year. Maybe even with a talk about [GottaCatchEmAll.jl](https://gottacatchemalljl.com).
