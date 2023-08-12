@@ -144,7 +144,7 @@ func BuildBlog(inPath string, outDir string, pageLayout *template.Template) {
 			continue
 		}
 
-		rendered += fmt.Sprintf("  <li>%s - <a href=\"/writing/%s\">%s</a></li>", p.PublicationDate.Format("2006-01-02"), p.Slug, p.Title)
+		rendered += fmt.Sprintf("  <li>%s - <a href=\"/writing/%s/\">%s</a></li>", p.PublicationDate.Format("2006-01-02"), p.Slug, p.Title)
 
 		fmt.Printf("- %s\n", p.Title)
 	}

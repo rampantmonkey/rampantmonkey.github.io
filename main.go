@@ -129,13 +129,24 @@ func main() {
 
 			page.Content = template.HTML(string(content))
 
-			fd, err := os.OpenFile(path.Join(outDir, f.Name()), os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0700)
-			if err != nil {
-				fmt.Printf("Error opening output file: %v\n", err)
-				return
-			}
-			layout.Execute(fd, page)
-			fd.Close()
+                        if f.Name() == "index.html" {
+				fd, err := os.OpenFile(path.Join(outDir, "index.html"), os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0755)
+				if err != nil {
+					fmt.Printf("Error opening output file: %v\n", err)
+					return
+				}
+				layout.Execute(fd, page)
+				fd.Close()
+                        } else {
+				os.Mkdir(path.Join(outDir, strings.TrimSuffix(f.Name(), ".html")), 0755)
+				fd, err := os.OpenFile(path.Join(outDir, strings.TrimSuffix(f.Name(), ".html"), "index.html"), os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0755)
+				if err != nil {
+					fmt.Printf("Error opening output file: %v\n", err)
+					return
+				}
+				layout.Execute(fd, page)
+				fd.Close()
+                        }
 		}
 	}
 

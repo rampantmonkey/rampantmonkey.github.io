@@ -4,7 +4,7 @@
 
 I have been using Julia full time at work for the past year and for a few side projects. So I decided to have a summer family road trip up the east coast to Boston and attend [JuliaCon 2023](https://juliacon.org/2023/) at MIT.
 
-<img style="display: inline-block" class="aligncenter" alt="Coffee and Swat Bag from first day at JuliaCon" src="coffee-and-swag-bag.png" />
+<img style="display: inline-block" class="aligncenter" alt="Coffee and Swag Bag from first day at JuliaCon" src="coffee-and-swag-bag.png" />
 
 Overall it was a fantastic experience. Delicious food trucks and more fascinating talks that I could attend.[^1]
 
