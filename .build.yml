@@ -1,0 +1,23 @@
+image: alpine/edge
+oauth: pages.sr.ht/PAGES:RW
+packages:
+  - go
+  - hut
+sources:
+  - git@git.sr.ht:~rampantmonkey/rampantmonkey.com
+secrets:
+  - 3e45ccba-972b-4e1d-9148-2c48414fa027
+environment:
+    site: rampantmonkey.srht.site
+tasks:
+  - compile: |
+      cd rampantmonkey.com
+      go build
+  - render: |
+      cd rampantmonkey.com
+      ./website
+      sudo chmod 755 -R rendered
+  - publish: |
+      cd rampantmonkey.com
+      tar -C rendered -czvf rampantmonkey.com.tar.gz .
+      hut pages publish -d $site rampantmonkey.com.tar.gz
