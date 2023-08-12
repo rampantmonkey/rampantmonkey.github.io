@@ -8,16 +8,16 @@ sources:
 secrets:
   - 3e45ccba-972b-4e1d-9148-2c48414fa027
 environment:
-    site: rampantmonkey.srht.site
+    site: rampantmonkey.com
 tasks:
   - compile: |
-      cd rampantmonkey.com
+      cd $site
       go build
   - render: |
-      cd rampantmonkey.com
+      cd $site
       ./website
       sudo chmod 755 -R rendered
   - publish: |
-      cd rampantmonkey.com
-      tar -C rendered -czvf rampantmonkey.com.tar.gz .
-      hut pages publish -d $site rampantmonkey.com.tar.gz
+      cd $site
+      tar -C rendered -czvf $site.tar.gz .
+      hut pages publish -d $site $site.tar.gz
