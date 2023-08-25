@@ -14,8 +14,7 @@
 <h5>Control Algorithm</h5>
 <p>Reusing the thermodynamic model, I implemented model predictive control in the firmware of our building control device. This control algorithm continually seeks to achieve tenant comfort in the least energy intensive way.</p>
 <h5>Data Pipeline</h5>
-<p>Terraform. Julia. AWS. Cellular IoT Fleet Management. ML Training. Slurm.</p>
-
+<p>To capture and process the logs from our devices I led the construction of our data pipeline. It is deployed on AWS with Terraform and ParallelCluster. We chose to use Julia as the implementation language , Dagger.jl as the workflow engine, and Slurm as the compute cluster. This pipeline is responsible for normalizing our time series data, detecting anomalies, and training our thermodynamic model for each building.</p>
 
 <h3>WireWheel Inc. - Lead Architect - 11/2020-02/2022</h3>
 <blockquote> WireWheel offers products for achieving compliance with privacy laws while preparing your organization to respond to upcoming privacy standards.  </blockquote>
