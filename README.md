@@ -2,6 +2,10 @@
 
 A collection of configurations, tools, and websites to support my life.
 
+## Project Management
+
+I am experimenting with sourcehut todo as a lightweight project management tool. Tickets for my websites can be found [here](https://todo.sr.ht/~rampantmonkey/Websites).
+
 ## Components
 
 - Personal website source [rampantmonkey.com](https://git.sr.ht/~rampantmonkey/rampantmonkey.com)
