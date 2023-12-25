@@ -8,6 +8,7 @@ import (
 	"os"
 	"path"
 	"strings"
+	"time"
 )
 
 type Page struct {
@@ -73,12 +74,8 @@ func copyDir (src string, dst string) error {
 	return nil
 }
 
-func main() {
-	if len(os.Args) > 1  && os.Args[1] == "serve" {
-		serve()
-		return
-	}
-
+func buildeverything() {
+	fmt.Printf("Building everything...\n")
 	os.RemoveAll(outDir)
 	os.Mkdir(outDir, 0755)
 	err := copyFile("main.css", path.Join(outDir, "main.css"))
@@ -129,7 +126,7 @@ func main() {
 
 			page.Content = template.HTML(string(content))
 
-                        if f.Name() == "index.html" {
+            if f.Name() == "index.html" {
 				fd, err := os.OpenFile(path.Join(outDir, "index.html"), os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0755)
 				if err != nil {
 					fmt.Printf("Error opening output file: %v\n", err)
@@ -146,9 +143,31 @@ func main() {
 				}
 				layout.Execute(fd, page)
 				fd.Close()
-                        }
+            }
 		}
 	}
 
 	BuildBlog(path.Join(cwd, "writing"), path.Join(outDir, "writing"), layout)
+}
+
+func main() {
+	if len(os.Args) > 1  && os.Args[1] == "serve" {
+		ticker := time.NewTicker(5 * time.Second)
+		quit := make(chan struct{})
+		go func() {
+			for {
+				select {
+				case <- ticker.C:
+					buildeverything()
+				case <- quit:
+					ticker.Stop()
+					return
+				}
+			}
+		}()
+		serve()
+		return
+	}
+
+	buildeverything()
 }
