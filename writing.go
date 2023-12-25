@@ -99,7 +99,7 @@ func BuildBlog(inPath string, outDir string, pageLayout *template.Template) {
 			}
 
 			subOutDir := path.Join(outDir, f.Name())
-			os.Mkdir(subOutDir, 755)
+			os.Mkdir(subOutDir, 0755)
 
 			for _, sf := range subfiles {
 				if strings.HasSuffix(sf.Name(), ".md") {
@@ -121,7 +121,7 @@ func BuildBlog(inPath string, outDir string, pageLayout *template.Template) {
 
 		if strings.HasSuffix(f.Name(), ".md") {
 			subOutDir := path.Join(outDir, strings.TrimSuffix(f.Name(), ".md"))
-			os.Mkdir(subOutDir, 755)
+			os.Mkdir(subOutDir, 0755)
 			post := fromFile(path.Join(inPath, f.Name()), strings.TrimSuffix(f.Name(), ".md"))
 			posts = append(posts, post)
 			fd, err := os.OpenFile(path.Join(subOutDir, "index.html"), os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0600)
