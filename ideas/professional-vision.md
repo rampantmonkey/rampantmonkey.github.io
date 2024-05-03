@@ -39,9 +39,7 @@ What about native apps?
 (Or working copy and pythonista)
 
 Book Writing
-(what was the text editor Jason mentioned?)
-
-Runestone
+(what was the text editor Jason mentioned?) -> Runestone
 
 Data Science Learning
 Read pdfs
@@ -68,7 +66,7 @@ Apps I’ve tried
 - Omnifocus
 - Vroom
 - Wisp World
-- Screens (ipad Compatibility)
+- Screens (iPad Compatibility)
 - Mail
 - Calendar
 - Safari
