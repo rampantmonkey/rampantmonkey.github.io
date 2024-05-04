@@ -1,5 +1,6 @@
 :title Professional Vision
 :description Adventures in Being a Professional with my Vision
+:date 2024-05-10
 :slug professional-vision
 
 ## Initial goals and motivation
