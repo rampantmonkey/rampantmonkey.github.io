@@ -2,15 +2,11 @@
 :description Cross country adventure with my family.
 :date 2024-05-04
 
-After our failed pregnancy last fall I have wanted to go on a road trip.
-Nowhere in particular.
-I just needed to go.
-Take the people I love and explore.
-Anywhere other than here.
 
-We did it. 
 We spent 18 days driving across the country and back.
 6,759.8 miles through 23 states.
+No particular destination in mind.
+Just following the road wherever it takes us and spending quality time as a family.
 
 TODO: insert map of the route we took.
 
