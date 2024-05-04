@@ -1,0 +1,30 @@
+name: pages
+on:
+  push:
+    branches:
+      - main
+    tags: '*'
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install go toolchain
+        uses: actions/setup-go@v5
+        with:
+          go-version: '^1.16.0'
+      - name: Compile static site generator
+        run: go build
+      - name: Render Website
+        run: ./website
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./rendered
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
