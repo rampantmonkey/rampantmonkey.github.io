@@ -3,6 +3,19 @@
 :date 2024-05-10
 :slug professional-vision
 
+I opted to purchase an Apple Vision Pro earlier this year.
+I wanted to use it as an external monitor for my laptop when I am away from my desk.
+Either around the house or when I travel.
+
+<img style="display: inline-block" class="aligncenter" alt="Apple Vision Pro in a case at Joshua Tree" src="joshua-tree-thumb.jpeg" />
+
+This has worked better than expected.
+Even when at my desk I find myself gravitating to Vision Pro over my monitors for the ergonomic benefits.
+The height of my desk is no longer a compromise between the monitor and the keyboard.
+Particularly when switching from sitting to standing.
+
+
+
 # Initial goals and motivation
 
 1. Replace monitor for a minimum of 2 hours without fatigue or eye strain
@@ -42,6 +55,12 @@ Workable for playing turn based games but the lack of fidelity took away some of
 ## Moonlight
 How can I stream my gaming pc? To be tested still.
 
+# Getting things done
+
+Working copy
+
+Runestone
+
 # It's Roadtrip
 Used on [road trip](/writing/road-trip).
 
@@ -80,3 +99,6 @@ My 3yo daughter thinks I have my “robot eyes on”.
 # Nova Spatial Labs
 A local [Vision Pro user group](https://www.meetup.com/nova-spatial-labs/).
 Surprisingly fun to go and talk with other people about a new technology.
+
+
+<script src="/files/img-showcase.js"></script>
