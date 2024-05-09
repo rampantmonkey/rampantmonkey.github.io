@@ -41,6 +41,9 @@ Barbeque with red and green chili peppers.
 Elevator at Planet Hollywood having as much fun in Vegas as I did.
 <img style="display: inline-block" class="aligncenter" alt="Planet Hollywood Elevator BIOS error" src="planet-hollywood-elevator.jpeg" />
 
+Testing out my new computer in its native habitat.
+<img style="display: inline-block" class="aligncenter" alt="Using the Vision Pro in Joshua Tree National Park" src="joshua-tree.jpeg" />
+
 A bridge we heard about.
 <img style="display: inline-block" class="aligncenter" alt="Reflection of family an Golden Gate Bridge" src="golden-gate-bridge.jpeg" />
 
