@@ -61,6 +61,8 @@ Working copy
 
 Runestone
 
+These two tools are how I wrote this entire post.
+
 # It's Roadtrip
 Used on [road trip](/writing/road-trip).
 
@@ -79,21 +81,21 @@ My 3yo daughter thinks I have my “robot eyes on”.
 # Apps I've tried
 
 ## Native
-- Blackbox
-- Game Room
-- La Terminal
-- Lego Builder’s Journey
-- Omnifocus
-- Puzzling Places
-- Runestone
-- Screens
+- [Blackbox for Vision](https://apps.apple.com/us/app/blackbox-for-vision/id6458588937)
+- [Game Room](https://apps.apple.com/us/app/game-room/id1642897935)
+- [La Terminal](https://apps.apple.com/us/app/la-terminal-ssh-client/id1629902861)
+- [Lego Builder’s Journey](https://apps.apple.com/us/app/lego-builders-journey/id1441636691)
+- [Omnifocus](https://apps.apple.com/us/app/omnifocus-4/id1542143627)
+- [Puzzling Places](https://apps.apple.com/us/app/puzzling-places/id6473639841)
+- [Runestone](https://apps.apple.com/us/app/runestone-text-editor/id1548193893)
+- [Screens](https://apps.apple.com/us/app/screens-5-vnc-remote-desktop/id1663047912)
 - [Vroom](https://www.reddit.com/r/VisionPro/comments/1b5ij71/vroom_f1_app_on_apple_vision_is_amazing/)
 - [Wisp World](https://apps.apple.com/us/app/wisp-world/id6476198961)
 
 
 ## iPad Compatability
-- Working Copy
-- Xbox
+- [Working Copy](https://apps.apple.com/us/app/working-copy-git-client/id896694807)
+- [Xbox](https://apps.apple.com/us/app/xbox/id736179781)
 
 
 # Nova Spatial Labs
