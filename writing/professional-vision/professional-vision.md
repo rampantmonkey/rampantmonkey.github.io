@@ -96,7 +96,11 @@ My 3yo daughter thinks I have my “robot eyes on”.
 ## iPad Compatability
 - [Working Copy](https://apps.apple.com/us/app/working-copy-git-client/id896694807)
 - [Xbox](https://apps.apple.com/us/app/xbox/id736179781)
+- [A Game of Thrones: Board Game](https://apps.apple.com/us/app/a-game-of-thrones-board-game/id1483771411)
 
+Being an iPad first user for the past 8 years has definitely set me up to be successful with VisionOS.
+Most of my workflows have translated directly.
+But now window management works.
 
 # Nova Spatial Labs
 A local [Vision Pro user group](https://www.meetup.com/nova-spatial-labs/).
