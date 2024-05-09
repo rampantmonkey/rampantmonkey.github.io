@@ -109,6 +109,16 @@ input:focus {
   display: none;
 }
 
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 101;
+  background: rgba(34, 34, 34, 0.9);
+}
+
 @media (min-width: 950px) {
     .landing-page {
         display: flex;

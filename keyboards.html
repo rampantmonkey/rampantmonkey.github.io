@@ -26,16 +26,6 @@
   .gallery div:hover span {
     visibility: visible;
   }
-
-  #overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 101;
-    background: rgba(34, 34, 34, 0.9);
-  }
 </style>
 
 <section class="gallery">
@@ -50,38 +40,4 @@
   <div><span>Ergodox EZ</span><img src="/images/keyboards/ergodox-ez-black.thumb.jpg" /></div>
 </section>
 
-<script>
-(() => {
-  window.addEventListener('load', function() {
-    const overlayEl = document.createElement('div')
-    overlayEl.style.visibility = 'hidden'
-    overlayEl.id = 'overlay'
-    document.body.appendChild(overlayEl)
-
-    const addShowcasedImg = (src) => {
-      const showcasedImg = document.createElement('img')
-      showcasedImg.style.zIndex = '102'
-      showcasedImg.style.maxHeight = '90vh'
-      showcasedImg.style.height = 'auto'
-      showcasedImg.style.margin = '5vh auto'
-      showcasedImg.style.display = 'block'
-      showcasedImg.src = src
-      overlayEl.appendChild(showcasedImg)
-      return showcasedImg
-    }
-
-    overlayEl.addEventListener('click', () => {
-      overlayEl.style.visibility = 'hidden'
-      while(overlayEl.firstChild) overlayEl.removeChild(overlayEl.firstChild)
-    }, false)
-
-    Array.prototype.forEach.call(document.images, (img) => {
-      if(img.classList.contains('no-full')) return;
-      img.addEventListener('click', () => {
-        const showcasedImg = addShowcasedImg(img.src.replace('.thumb', ''))
-        overlayEl.style.visibility = 'visible'
-      }, false)
-    })
-  })
-})();
-</script>
+<script src="/files/img-showcase.js"></script>
