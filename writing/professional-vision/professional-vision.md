@@ -50,82 +50,33 @@ Used on [road trip](/writing/road-trip).
 - In hotels (worked great even with bizarre captive portals/etc. super glad VPN support is built in. gave me confidence to experiment.)
 - At Joshua Tree. My favorite spatial environment.
 
-Watched Into the Spiderverse
+Watched [Spider-Man: Into the Spiderverse](https://en.wikipedia.org/wiki/Spider-Man:_Into_the_Spider-Verse)
 - Great movie. Highly recommend in whatever format or device you want.
 - Pretty sure that depth of field is the most important cinematography aspect to me. I am not a fan of the 3d movies or spatial video. I want to be in control of what I’m looking at. Not having focus change while the perspective does is disorienting to me. The environments and full 3d apps on the other hand -> A+
 
 My 3yo daughter thinks I have my “robot eyes on”.
 
-<!--
 
-# Scratch Pad
-Areas to investigate
-Can I work with just the Vision Pro?
-More accurately: What percentage of my life can be done without connecting to my laptop?
-(Remote machines are fine. Home lab is fine.)
-The question I’m mostly asking is if the headset is a separate computer or just a MacBook accessory.
+# Apps I've tried
 
-And if it becomes a mac accessory, can I swap between yggdrasil, andvaranaut, and eldhrimnir easily?
-
-
-Virtual Display requires a direct wifi connection between the headset and the laptop.
-This makes it difficult to move rooms with the headset or use the computers in the rack. (well those have wifi disabled anyway.)
-
-Using Screens from Edovia I am able to connect to all 5 macs. Easy. Just need to test it from upstairs. I still prefer the virtual display when I’m offline / within touching distance of my macbook. But that is quite limited. I’ll take the flexibility over quality tradeoff.
-
-Development
-Have a browser based ide so I can write python and Julia?
-GitHub - coder/code-server: VS Code in the browser
-
-Does it make more sense to use a terminal + ssh?
-
-What about native apps?
-
-(Or working copy and pythonista)
-
-Book Writing
-(what was the text editor Jason mentioned?) -> Runestone
-
-Data Science Learning
-Read pdfs
-pyto? (notebooks locally)
-re-use the development setup above?
-
-Fun
-Watch f1. What app was recommended here? (Try rewatching a race so that I can talk about it if I go to the meetup)
-https://www.reddit.com/r/VisionPro/comments/1b5ij71/vroom_f1_app_on_apple_vision_is_amazing/
-
-Apple TV?
-Black box
-
-https://apps.apple.com/us/app/wisp-world/id6476198961
-
-https://apps.apple.com/us/app/juno-for-youtube/id6476961640
-
-
-
-Apps I’ve tried
+## Native
 - Blackbox
-- Runestone
-- Working Copy
+- Game Room
+- La Terminal
+- Lego Builder’s Journey
 - Omnifocus
-- Vroom
-- Wisp World
-- Screens (iPad Compatibility)
-- Mail
-- Calendar (iPad Compatibility)
-- Safari
-- 
-
-Apps I want to try
-- [x] La Terminal
-- [x] Game Room
-- [x] Lego Builder’s Journey
-- [x] Puzzling Places
+- Puzzling Places
+- Runestone
+- Screens
+- [Vroom](https://www.reddit.com/r/VisionPro/comments/1b5ij71/vroom_f1_app_on_apple_vision_is_amazing/)
+- [Wisp World](https://apps.apple.com/us/app/wisp-world/id6476198961)
 
 
-The meetup was a huge success. I am all in on this. Now it is more a question “how do I balance family/cognition/gotta/vision/cameras/health” than it is “do I want to return this thing”.
+## iPad Compatability
+- Working Copy
+- Xbox
 
 
-
--->
+# Nova Spatial Labs
+A local [Vision Pro user group](https://www.meetup.com/nova-spatial-labs/).
+Surprisingly fun to go and talk with other people about a new technology.
