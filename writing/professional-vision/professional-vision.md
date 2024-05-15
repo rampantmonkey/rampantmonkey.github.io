@@ -107,4 +107,32 @@ A local [Vision Pro user group](https://www.meetup.com/nova-spatial-labs/).
 Surprisingly fun to go and talk with other people about a new technology.
 
 
+# Train
+On the train to New York I used my Vision Pro.
+
+I watched [Fantastic Beasts and Where to Find Them](https://en.wikipedia.org/wiki/Fantastic_Beasts_and_Where_to_Find_Them_(film\)) and [Dune: Part 1](https://en.wikipedia.org/wiki/Dune_(2021_film\)).
+
+I'm not sure what it is about 3D movies.
+I get a massive headache and eye strain within 10 minutes.
+My only 3D experience prior was with the Nintendo 3DS.
+No issues there despite hundreds of hours of Pokémon.
+I think it has something to do with the lack of control.
+Having to go along with the director's opinion on what things are at what depth doesn't work with my eyes and brain.
+Oh well.
+Watching the movies in 2D on a giant screen exceeded my expectations.
+
+Travel mode has quite a few limitations that I somehow didn't run in to on the road trip.
+Looking out of the window, even partially, would cause tracking to fail.
+Turning the interface into a single full screen prompt.
+I also got very good at recentering my vision.
+The movie would slowly tilt with the motion of the train.
+
+Having power in the seat was convenient.
+No issues with battery on a three hour train ride. (I even bought a second battery in anticipation of this trip. Didn't end up needing it.)
+
+
+# Conclusion
+I am thrilled with my purchase.
+The ergonomic benefits and flexible working locations are a huge quality of life improvement.
+I look forward to seeing what comes at WWDC.
 <script src="/files/img-showcase.js"></script>
