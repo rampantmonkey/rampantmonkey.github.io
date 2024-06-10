@@ -10,7 +10,8 @@
       showcasedImg.style.zIndex = '102'
       showcasedImg.style.maxHeight = '90vh'
       showcasedImg.style.height = 'auto'
-	  showcasedImg.style.width = '90vw'
+	    showcasedImg.style.maxWidth = '90vw'
+      showcasedImg.style.width = 'auto'
       showcasedImg.style.margin = '5vh auto'
       showcasedImg.style.display = 'block'
       showcasedImg.src = src
