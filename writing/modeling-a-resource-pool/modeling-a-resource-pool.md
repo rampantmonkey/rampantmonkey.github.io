@@ -1,6 +1,7 @@
 :title Modeling a Resource Pool
 :description Redesigning a service with TLA+.
 :date 2020-01-09
+:category Computer Science
 
 During a hackathon at work I took the opportunity to use TLA+[^1] to model one of our services.
 After modeling this service I found a correctness bug, which led to a new design and a second model which upholds the desired invariant.

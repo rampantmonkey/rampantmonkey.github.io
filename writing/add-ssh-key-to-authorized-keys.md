@@ -1,6 +1,7 @@
 :title Add SSH Key to Authorized Keys
 :date 2012-08-07
 :description Appending your ssh key to authorized_keys in a single command
+:category DevOps
 
 <p>This great trick pushes your public key to the server in one step</p>
 

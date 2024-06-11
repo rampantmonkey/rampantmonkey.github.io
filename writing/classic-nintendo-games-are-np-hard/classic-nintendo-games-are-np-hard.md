@@ -2,6 +2,7 @@
 :description Exploration of computational complexity of some of my favorite childhood video games.
 :date 2012-11-20
 :slug classic-nintendo-games-are-np-hard
+:category Computer Science
 
 In computational complexity theory [NP-hard](http://en.wikipedia.org/wiki/NP-hard) is the category which contains decision problems that cannot be solved by a computer in finite time. Since it is impossible to solve without guessing (or breaking relativity), these type of problems form the foundation for excellent game mechanics. It turns out that many of the games I grew up playing fall into the NP-hard category. In March 2012, Greg Aloupis, Erik D. Demaine, and Alan Guo [published proofs for five of these games](http://arxiv.org/abs/1203.1895): [Mario](http://en.wikipedia.org/wiki/Super_Mario_(series\)), [Donkey Kong](http://en.wikipedia.org/wiki/Donkey_Kong), [Legend of Zelda](http://en.wikipedia.org/wiki/The_Legend_of_Zelda_(video_game)), [Metroid](http://en.wikipedia.org/wiki/Metroid_(video_game\)), and [Pok&eacute;mon](http://en.wikipedia.org/wiki/Pokémon_(video_game_series\)).
 

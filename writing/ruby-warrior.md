@@ -1,6 +1,7 @@
 :title Ruby Warrior
 :description Ruby Warrior provides a playground for learning Ruby at any level.
 :date 2013-08-23
+:category Web Development
 
 <p><a href="https://github.com/ryanb/ruby-warrior">Ruby Warrior</a> is a fascinating game in which the player writes a program to navigate their warrior through a tower to rescue the fair maiden, Ruby.
 As you progress through the tower each level becomes more complex.

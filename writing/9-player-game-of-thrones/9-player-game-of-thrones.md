@@ -2,6 +2,7 @@
 :description Developing an expansion to one of my favorite board games
 :slug 9-player-game-of-thrones
 :date 2015-12-11
+:category Life
 
 Last fall at my local board game meetup I was introduced to [A Game of Thrones The Board Game](https://www.fantasyflightgames.com/en/products/a-game-of-thrones-the-board-game-second-edition/).
 Originally based on [Diplomacy](https://en.wikipedia.org/wiki/Diplomacy%5F%28game%29), _A Game of Thrones_ places three to six players in charge of the great houses of Westeros to vie for control of the continent.

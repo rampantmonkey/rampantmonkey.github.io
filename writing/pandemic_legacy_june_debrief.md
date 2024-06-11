@@ -2,6 +2,7 @@
 :description Documenting our progress through the first half of Pandemic Legacy. Warning: spoilers ahead.
 :slug pandemic-legacy-june-debrie"
 :date 2015-12-26
+:category Life
 
 > Warning: The rest of this post will reveal many of the twists introduced in the first six months. Come back after you play through June.
 

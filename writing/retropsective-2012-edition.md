@@ -1,6 +1,7 @@
 :title Retrospective 2102 Edition
 :description A look back on the year that was.
 :date 2012-12-31
+:category Life
 
 2012 was a big year. Lots of things happened and I learned many things. My hope is that this post will serve as an inspiration for 2013 and beyond.
 

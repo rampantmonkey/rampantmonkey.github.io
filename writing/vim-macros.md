@@ -1,6 +1,7 @@
 :title Vim Macros
 :description Primer on vim macro recording, playback, and editing.
 :date 2014-02-27
+:category Unix Utilities
 
 <p>Suppose that you would like to add anchors to a blog post which allow readers to link to specific sections.
 This is a tedious task and therefore a candidate for automation.

@@ -2,6 +2,7 @@
 :tags [puzzles, minizinc]
 :description Using integer programming and nlp to solve logic puzzles
 :date 2020-12-05
+:category Puzzling
 
 For the past month my wife and I have been solving [Brainzilla's zebra puzzles](https://www.brainzilla.com/logic/zebra) in the evenings while we wait for dinner to cook.
 I wanted to see if I could write a program to solve the puzzles.

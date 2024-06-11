@@ -1,6 +1,7 @@
 :title Exploration
 :description What I've been up to for the past year.
 :date 2019-09-30
+:category Life
 
 So it has been more than a year since I have published a post to this website.
 The past year has provided a lot of change and exploration.

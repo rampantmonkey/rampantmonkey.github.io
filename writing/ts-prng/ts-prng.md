@@ -2,6 +2,7 @@
 :description A seedable PRNG for node and browsers.
 :date 2022-04-14
 :slug ts-prng
+:category Web Development
 
 Often I run into scenarios[^1] where I want to have a seedable random number generator.
 So I went looking for prior work and found Alea.[^2]

@@ -1,6 +1,7 @@
 :title JuliaCon 2023
 :description Takeaways from attending JuliaCon 2023
 :date 2023-08-05
+:category Life
 
 I have been using Julia full time at work for the past year and for a few side projects. So I decided to have a summer family road trip up the east coast to Boston and attend [JuliaCon 2023](https://juliacon.org/2023/) at MIT.
 

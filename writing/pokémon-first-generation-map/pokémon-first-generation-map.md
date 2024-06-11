@@ -2,6 +2,7 @@
 :description Rendering the world map with Three.js
 :date 2022-06-26
 :slug pokemon-first-generation-map
+:category Pokémon
 
 Starting from the data in the [pokered disassembly](https://github.com/pret/pokered) render the world using various browser techniques including ASCII art, canvas, and WebGL.
 

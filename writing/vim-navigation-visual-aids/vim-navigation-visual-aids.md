@@ -1,6 +1,7 @@
 :title Vim Navigation Visual Aids
 :description Two configurations I rely on in vim to reduce cognitive load when navigating in vim.
 :date 2019-11-06
+:category Unix Utilities
 
 ![Screenshot of editing my vimrc file with both settings enabled](vim-visual-aids.png)
 

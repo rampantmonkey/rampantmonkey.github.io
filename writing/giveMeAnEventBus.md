@@ -1,6 +1,7 @@
 :title giveMeAnEventBus
 :description Creating an event bus to decouple components and share information across pages.
 :date 2022-08-08
+:category Web Development
 
 Feeling down?
 No need to inject yourself with dependencies, just call 1-800-`giveMeAnEventBus` today.

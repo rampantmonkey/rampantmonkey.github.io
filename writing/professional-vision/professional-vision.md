@@ -2,6 +2,7 @@
 :description Adventures in Being a Professional with my Vision
 :date 2024-05-10
 :slug professional-vision
+:category Apple
 
 I opted to purchase an Apple Vision Pro earlier this year.
 I wanted to use it as an external monitor for my laptop when I am away from my desk.

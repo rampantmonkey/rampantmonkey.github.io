@@ -1,6 +1,7 @@
 :title D&D: Season 1
 :description Lessons learned playing Dungeons & Dragons
 :date 2019-10-08
+:category Life
 
 Over the past 9 months we have been playing Dungeons & Dragons nearly every Sunday.
 We wanted to spend more time in person with our friends doing something collaborative and creative.

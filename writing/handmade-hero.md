@@ -2,6 +2,7 @@
 :description An awesome project for anyone interested in game programming or C in general.
 :date 2014-11-26
 :slug handmade-hero
+:external http://handmadehero.org
 
 
 <p>Yesterday I stumbled across a project on twitter that fascinated me so I figured that I would share it here.

@@ -2,6 +2,7 @@
 :tags [vim]
 :description A handful of small efficiency gains with vim
 :date 2021-04-01
+:category Unix Utilities
 
 Sorting through my old Dropbox files I ran into a collection of notes from when I was learning Vim that still seemed relevant to share.
 

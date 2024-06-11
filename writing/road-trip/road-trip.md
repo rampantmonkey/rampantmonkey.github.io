@@ -1,6 +1,7 @@
 :title Road Trip
 :description Cross country adventure with my family.
 :date 2024-05-04
+:category Life
 
 
 We spent 18 days driving across the country and back.

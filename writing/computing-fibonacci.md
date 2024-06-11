@@ -2,6 +2,7 @@
 :description Comparison of various Fibonacci sequence algorithms
 :date 2015-06-16
 :slug computing-fibonacci
+:category Computer Science
 
 The [Fibonacci sequence](https://en.wikipedia.org/wiki/Fibonacci_number) is the sequence of integers where the next number is the sum of the previous two.
 While there are numerous examples in nature and many applications this post will focus on algorithms for computing any given number in the sequence.

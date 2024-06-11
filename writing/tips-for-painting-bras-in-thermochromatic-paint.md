@@ -1,6 +1,7 @@
 :title 5 Hot Tips for Painting Bras with Thermochromatic Paint
 :description Tips for creating recognizable bras with thermochromatic paint
 :date 2018-06-25
+:category Puzzling
 
 1. The band is crucial.
 2. Loose straps are more recognizable than taut straps.

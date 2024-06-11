@@ -1,6 +1,7 @@
 :title Escape Rooms
 :description Reflections on Escape Rooms after playing my 100th room.
 :date 2018-08-24
+:category Puzzling
 
 ## Intro
 On Memorial Day 2015 I was invited to play my first escape room[^1] with my local puzzling group. The room was unremarkable and full of red herrings, but the feeling of escaping is addicting. Ever since, I have been chasing the high and playing every escape room I came across[^2]. Now that I have escaped from more than one hundred rooms I wanted to create a list of the most memorable experiences. This is that list.

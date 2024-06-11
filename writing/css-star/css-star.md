@@ -1,6 +1,7 @@
 :title CSS Star
 :date 2011-12-14
 :description Using CSS to create shapes with a single html element
+:category Web Development
 
 <p>Making unconventional shapes with CSS is nothing new. <a href="http://css-tricks.com/examples/ShapesOfCSS/">CSS-Tricks</a> has an entire page of interesting shapes from the infinity symbol to a yin-yang. Steve Dennis even <a href="http://www.subcide.com/articles/pure-css-twitter-fail-whale/">recreated</a> the infamous Twitter fail whale without images. In this post I will explain how to create a five pointed star using only one div and some CSS trickery.</p>
 

@@ -1,6 +1,7 @@
 :title Rainbow Box
 :description Polychromatic, 3D printed, electronic logic puzzle
 :date 2017-01-30
+:category Puzzling
 
 <video autoplay="autoplay" loop="loop" width="400" height="300">
   <source src="rainbow_box_intro.mp4" type="video/mp4" />

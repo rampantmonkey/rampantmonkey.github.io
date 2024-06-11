@@ -1,6 +1,7 @@
 :title Dynamic Levenshtein
 :date 2012-01-08
 :description Using dynamic programming to compute the edit distance between two strings
+:category Computer Science
 
 <p>Previously, I had looked at calculating the <a href="/blog/levenshtein-distance">Levenshtein distance</a> between two strings. In that post I did some hand waving and claimed that the dynamic implementation will not register with the time command. Well I decided to test that claim and here is the proof.</p>
 

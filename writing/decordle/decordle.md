@@ -2,6 +2,7 @@
 :description What is the first step of decorating for any holiday?
 :date 2022-04-08
 :slug decordle
+:category Puzzling
 
 What is the first step of decorating for any holiday?
 

@@ -1,6 +1,7 @@
 :title Lycanthropic Love
 :description An experiment with Elm and Hammer.js
 :date 2016-10-18
+:category Puzzling
 
 For the past few months I have been working with a team of puzzlers to write a puzzle hunt for the DC area called [DCPH&reg;](https://dcphr.org)[^1].
 A puzzle hunt is an event where teams of people compete to solve puzzles of all types at different locations around the city.

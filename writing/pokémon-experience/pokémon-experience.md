@@ -1,6 +1,7 @@
 :title Pokémon Experience
 :description Visualizing the amount of experience required to level up in Pokémon
 :date 2023-07-22
+:category Pokémon
 
 I have been experimenting with [Plots.jl](https://docs.juliaplots.org/stable/) and I have also been binging videos of solo Pokémon playthroughs from [Scott's Thoughts](https://www.youtube.com/@ScottsThoughtsPokemon). The different rate at which Pokémon gain experience is one of the largest differences in how long it will take to complete a playthrough. Pokémon are divided into six level-up groups: fluctuating, slow, medium slow, medium fast, fast, and erratic. The graphs below show how these groups vary as level increases.
 

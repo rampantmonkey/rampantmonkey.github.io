@@ -1,6 +1,7 @@
 :title FFmpeg Clip Extraction
 :description Simple command that I always forget.
 :date 2014-03-31
+:category Unix Utilities
 
 <p><a href="http://www.ffmpeg.org/">FFmpeg</a> is my swiss army knife for video manipulation.
 Since there are so many options I find it difficult to remember the syntax.

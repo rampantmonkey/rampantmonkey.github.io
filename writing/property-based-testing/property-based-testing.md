@@ -1,6 +1,7 @@
 :title Property Based Testing
 :description Using randomness to assert properties of software
 :date 2020-05-05
+:category Computer Science
 
 <script type="application/javascript" src="triangularizationDemo.dist.js"></script>
 

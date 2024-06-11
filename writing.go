@@ -20,6 +20,7 @@ type WritingPost struct {
 	RawContent []byte
 	Description string
 	ExternalLink string
+	Category string
 }
 
 func fromFile(path string, slug string) WritingPost {
@@ -38,26 +39,28 @@ func fromFile(path string, slug string) WritingPost {
 		if err != nil {
 			break
 		}
-		// if line starts with : -> it is a command
-		// else -> this line and the rest of the file is the actual content...
 		if line[0] == ':' {
 			fields := strings.Fields(string(line[1:]))
-			switch fields[0] {
+			cmd := fields[0]
+			payload := strings.Join(fields[1:], " ")
+			switch cmd {
 			case "title":
-				wp.Title = strings.Join(fields[1:], " ")
+				wp.Title = payload
 			case "description":
-				wp.Description = strings.Join(fields[1:], " ")
+				wp.Description = payload
 			case "date":
-				date, err := time.Parse("2006-01-02", strings.Join(fields[1:], " "))
+				date, err := time.Parse("2006-01-02", payload)
 				if err == nil {
 					wp.PublicationDate = date
 				} else {
 					fmt.Printf("Error parsing publication date in %s: %v\n", path, err)
 				}
 			case "external":
-				wp.ExternalLink = strings.Join(fields[1:], " ")
+				wp.ExternalLink = payload
+			case "category":
+				wp.Category = payload
 			}
-			// this line is a command
+
 			bytesRead += len(line)
 			continue
 		} else {
@@ -78,6 +81,12 @@ func (wp WritingPost) render() template.HTML {
 			   )))
 }
 
+type Category struct {
+	Title string
+	LatestPublicationDate time.Time
+	Posts []WritingPost
+}
+
 func BuildBlog(inPath string, outDir string, pageLayout *template.Template) {
 	files, err := os.ReadDir(inPath)
 	if err != nil {
@@ -87,7 +96,7 @@ func BuildBlog(inPath string, outDir string, pageLayout *template.Template) {
 
 	os.Mkdir(outDir, 0755)
 
-	var posts []WritingPost
+	categoryPosts := map[string][]WritingPost{}
 
 	for _, f := range files {
 		if f.IsDir() {
@@ -104,7 +113,7 @@ func BuildBlog(inPath string, outDir string, pageLayout *template.Template) {
 			for _, sf := range subfiles {
 				if strings.HasSuffix(sf.Name(), ".md") {
 					post := fromFile(path.Join(subpath, sf.Name()), strings.TrimSuffix(sf.Name(), ".md"))
-					posts = append(posts, post)
+					categoryPosts[post.Category] = append(categoryPosts[post.Category], post)
 					fd, err := os.OpenFile(path.Join(subOutDir, "index.html"), os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0600)
 					if err != nil {
 						fmt.Printf("Error opening output file: %v\n", err)
@@ -123,7 +132,7 @@ func BuildBlog(inPath string, outDir string, pageLayout *template.Template) {
 			subOutDir := path.Join(outDir, strings.TrimSuffix(f.Name(), ".md"))
 			os.Mkdir(subOutDir, 0755)
 			post := fromFile(path.Join(inPath, f.Name()), strings.TrimSuffix(f.Name(), ".md"))
-			posts = append(posts, post)
+			categoryPosts[post.Category] = append(categoryPosts[post.Category], post)
 			fd, err := os.OpenFile(path.Join(subOutDir, "index.html"), os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0600)
 			if err != nil {
 				fmt.Printf("Error opening output file: %v\n", err)
@@ -134,21 +143,33 @@ func BuildBlog(inPath string, outDir string, pageLayout *template.Template) {
 		}
 	}
 
-	sort.Slice(posts, func(i, j int) bool {
-		return posts[i].PublicationDate.After(posts[j].PublicationDate)
+	rendered := "<h1>Posts</h1>\n<hr />\n"
+	categories := make([]Category, 0, len(categoryPosts))
+	for c, posts := range categoryPosts {
+		sort.Slice(posts, func(i, j int) bool {
+			return posts[i].PublicationDate.After(posts[j].PublicationDate)
+		})
+		categories = append(categories, Category{c, posts[0].PublicationDate, posts})
+	}
+	sort.Slice(categories, func(i, j int) bool {
+		return categories[i].LatestPublicationDate.After(categories[j].LatestPublicationDate)
 	})
 
-	rendered := "<h1>Posts</h1>\n<hr />\n<ul class=\"blog-list\">"
-	for _, p := range posts {
-		if(p.ExternalLink != "") { // The posts should just be my own stuff. The external links are a replacement for social media.
-			continue
+
+	for _, cat := range categories {
+		rendered += fmt.Sprintf("<h2>%s</h2>\n", cat.Title)
+		rendered += "<ul class=\"blog-list\">\n"
+		for _, p := range cat.Posts {
+			if(p.ExternalLink != "") { // The posts should just be my own stuff. The external links are a replacement for social media.
+				continue
+			}
+
+			rendered += fmt.Sprintf("  <li>%s - <a href=\"/writing/%s/\">%s</a></li>", p.PublicationDate.Format("2006-01-02"), p.Slug, p.Title)
+
+			//fmt.Printf("- %s\n", p.Title)
 		}
-
-		rendered += fmt.Sprintf("  <li>%s - <a href=\"/writing/%s/\">%s</a></li>", p.PublicationDate.Format("2006-01-02"), p.Slug, p.Title)
-
-		//fmt.Printf("- %s\n", p.Title)
+		rendered += "</ul>"
 	}
-	rendered += "</ul>"
 
 	fd, err := os.OpenFile(path.Join(outDir, "index.html"), os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0600)
 	if err != nil {

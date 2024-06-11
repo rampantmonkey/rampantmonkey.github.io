@@ -1,6 +1,7 @@
 :title Levenshtein distance
 :date 2011-11-21
 :description Iteratively computing the edit distance between two strings
+:category Computer Science
 
 <p>The Levenshtein distance is a measure of the number of changes required to get one string from another. The possiblities are insertion, deletion, and replacement. Below we calculate the distance between two random 14 letter words. Thus the Levenshtein distance must be between 0 and 14. That makes fifteen possiblities for the correct answer. Let's see how many function calls it takes with this recursive implementation to determine the answer.</p>
 

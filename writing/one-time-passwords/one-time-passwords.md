@@ -2,6 +2,7 @@
 :description Releasing version one of my one time password generator
 :date 2014-12-15
 :slug one-time-passwords
+:category Computer Science
 
 
 <p><a href="http://en.wikipedia.org/wiki/Two_factor_authentication">Two factor authentication</a> has become commonplace amongst the multitude of web services I use on a daily basis.

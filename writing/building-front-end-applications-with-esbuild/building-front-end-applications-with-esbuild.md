@@ -2,6 +2,7 @@
 :description front-end build server without the hassle
 :date 2022-08-01
 :slug Building Front End Applications with esbuild
+:category Web Development
 
 Browser front end applications are composed of a wide variety of kinds of files.
 Image assets, third-party dependencies, and source code written in a variety of languages[^1].

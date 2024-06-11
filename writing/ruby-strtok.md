@@ -2,6 +2,7 @@
 :description Imitating a common idiom from C in Ruby.
 :date 2014-05-04
 :slug ruby-strtok
+:category Web Development
 
 <p>When developing a CSS analyzer, I needed to develop a method for splitting the CSS files into meaningful chunks.
 These &#39;meaningful&#39; chunks should be the sequence of characters which have semantic value in the CSS specification such as keywords (<code>em</code>, <code>border</code>), selectors(<code>div</code>, <code>p + p</code>), and property values(<code>bold</code>, <code>#773e1a</code>).</p>

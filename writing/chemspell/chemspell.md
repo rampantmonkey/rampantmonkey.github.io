@@ -2,6 +2,7 @@
 :description Spelling words with atomic symbols
 :date 2022-01-07
 :slug chemspell
+:category Puzzling
 
 During a recent [puzzle writing](/puzzling) session I was looking for a new mechanic to build the next puzzle around.
 I remembered sitting in chemistry class and staring at the periodic table on the wall.

@@ -2,6 +2,7 @@
 :description Undoing fat-finger rm -rf with hexdump.
 :date 2014-10-01
 :slug btrfs-and-hexdump
+:category Unix Utilities
 
 
 <p>Today I made a silly mistake.
