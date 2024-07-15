@@ -1,7 +1,7 @@
 <h1>Casey Robinson</h1>
 <hr />
 <h3>Software Engineer</h3>
-<h4 class="print-only"><a href="https://rampantmonkey.com">rampantmonkey.com</a></h4>
+<!--<h4 class="print-only"><a href="https://rampantmonkey.com">rampantmonkey.com</a></h4>-->
 
 <!--<p><code>Docker</code>, <code>Git</code>, <code>Go</code>, <code>Javascript</code>, <code>Nginx</code>, <code>PostgreSQL</code>, <code>SQLite</code>, <code>GraphViz</code>, <code>Linux</code>, <code>ZeroMQ</code>, <code>Redis</code>, <code>Logic Programming</code>, <code>Expert Systems</code>, <code>Testing</code></p>-->
 
@@ -10,11 +10,16 @@
 <blockquote>Purpose-Built, Smart HVAC Controls. Engineered for light commercial, industrial, and retail spaces.</blockquote>
 <h4>Highlights</h4>
 <h5>Thermodynamic Model</h5>
-<p>I developed a thermodynamic model of multi-zone spaces using Julia. This model forms the basis of the rest of the product including control, anomaly detection, and runtime estimation.</p>
+<p>I developed a thermodynamic model of multi-zone spaces using Python and PyTorch. This model forms the basis of the rest of the product including control, anomaly detection, and runtime estimation.</p>
 <h5>Control Algorithm</h5>
-<p>Reusing the thermodynamic model, I implemented model predictive control in the firmware of our building control device. This control algorithm continually seeks to achieve tenant comfort in the least energy intensive way.</p>
-<h5>Data Pipeline</h5>
-<p>To capture and process the logs from our devices I led the construction of our data pipeline. It is deployed on AWS with Terraform and ParallelCluster. We chose to use Julia as the implementation language , Dagger.jl as the workflow engine, and Slurm as the compute cluster. This pipeline is responsible for normalizing our time series data, detecting anomalies, and training our thermodynamic model for each building.</p>
+<p>Reusing the thermodynamic model, I implemented model predictive control with a genetic in the firmware of our building control device. This genetic control algorithm continually seeks to achieve tenant comfort in the least energy intensive way.</p>
+<h5>Anomaly Detection and Classification</h5>
+<p>To detect when HVAC equipment is running in a degraded capacity, I built an anomaly detection process and alerting system. The candidates are first detected with a straightforward regression to quickly highlight areas which require deeper analysis. These candidates are then clustered using soft dynamic time warping. Labels are applied to the clusters automatically from past issues confirmed through an HVAC srevice visit. This allows our product to send alerts tailored to the most likely issue such as operating at the limit or equipment malfunction.</p>
+<h5>Time Series Feature Store</h5>
+<p>At the core of our product is a time series feature store. This data store is an online cache of our data resampled and aligned to a standard time step for consistent downstream consumption by our machine learning pipelines and user dashboard. I built this with Python, Zig, and Redis and deployed to an EC2 autoscaling group managed by Terraform.</p>
+<p>Data is ingested from a variety of sources - SNS, MQTT, Kinesis, and S3. The service can currently serve 2k requests per second per core in the EC2 autoscaling group with further optimizations in the works.</p>
+<h5>Temperature Compensation</h5>
+<p>Our thermostat contains many heat generating components - cellular radio, processor, and power management. These components introduce heat into the enclosure which can cause inaccuracies in the temperature reading from our on-board temperature sensor. In collaboration with our electrical engineer I designed an ongoing experiment to capture data with reference temperature sensors and internal temperature readings from each component in a variety of locations and power usage scenarios. Then I developed a pipeline on top of the time series feature store to build a model that compensates for this heat to produce a more accurate temperature reading.</p>
 
 <h3>WireWheel Inc. - Lead Architect - 11/2020-02/2022</h3>
 <blockquote> WireWheel offers products for achieving compliance with privacy laws while preparing your organization to respond to upcoming privacy standards.  </blockquote>
@@ -42,7 +47,7 @@
 <p>Sabre, the primary source of data for the airline industry, uses session tokens to handle authentication and authorization of their API. Each company purchases a fixed number of tokens and is charged, without warning, an overage fee if they try to use more than the number. Thus, an accurate count of the tokens in use is critical to controlling cost. I designed a distributed session pool manager to accurately enforce the limit while providing tokens to the 180 microservices in our infrastructure. I used TLA+ to design the management algorithm and implemented the service using redis, lua, and nodejs.</p>
 <h5>Booking Engine</h5>
 <p>Sabre is the source of truth for bookings across the airline industry. Sabre was originally created in 1960 to make American Airlines booking system available to other airlines. As you can imagine, there are many idiosyncracies which introduce an impedance mismatch with HTTP/JSON/NodeJS microservices. A unique character encoding (the service predates ASCII), 6-bit integers, and a terminal based UI which travel agents use to manage all bookings. Sabre has been working to modernize their APIs. However, many features still only exist through the low-level <a href="https://developer.sabre.com/sabrecommandllsrq">Sabre Send Command</a>, <code>SabreCommandLLSRQ</code>. To use this command you need to send the keys that a travel agent would type in the terminal UI.</p>
-<p>My project was to build a booking engine service which accepted booking requests from the rest of our services, reserved the requested inventory, and provided actionable error messages for users when the request could not be fulfilled. I built the initial proof of concept and led the implementation of the service across four engineering teams.</p>
+<p>My project was to build a booking engine service which accepted booking requests from the rest of our services, reserved the requested inventory, and provided actionable error messages for users when the request could not be fulfilled. I built the initial proof of concept and led the implementation of the service across four engineering teams and our data science team.</p>
 
 <h3>Fugue Inc. - Senior Software Engineer - 10/2017-02/2019</h3>
 <blockquote> Fugue provides infrastructure as code with an emphasis on security, auditability, and remediation.  </blockquote>
