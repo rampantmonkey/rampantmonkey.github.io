@@ -9,14 +9,11 @@ We spent 18 days driving across the country and back.
 No particular destination in mind.
 Just following the road wherever it takes us and spending quality time as a family.
 
-TODO: insert map of the route we took.
+<img style="display: inline-block" class="aligncenter" alt="map of the route we took." src="roadtrip-route-map-thumb.png" />
 
 TODO: insert the weird license plates we found
 
 TODO: insert story about the hunt for shiny beany babies
-
-
-TODO: Link to my vision pro story
 
 TODO: every state seemed to have different colored wild flowers
 TODO: share overall highlights while driving
@@ -42,7 +39,7 @@ Barbeque with red and green chili peppers.
 Elevator at Planet Hollywood having as much fun in Vegas as I did.
 <img style="display: inline-block" class="aligncenter" alt="Planet Hollywood Elevator BIOS error" src="planet-hollywood-elevator-thumb.jpeg" />
 
-Testing out my new computer in its native habitat.
+Testing out my [new computer](/writing/professional-vision/) in its native habitat.
 <img style="display: inline-block" class="aligncenter" alt="Using the Vision Pro in Joshua Tree National Park" src="joshua-tree-thumb.jpeg" />
 
 A bridge we heard about.
