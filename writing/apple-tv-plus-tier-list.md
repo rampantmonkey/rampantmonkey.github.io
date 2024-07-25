@@ -20,15 +20,16 @@ An entirely incomplete and subjective ranking of the shows and movies I have wat
 # B-Tier
 - [The Afterparty](https://tv.apple.com/us/show/the-afterparty)
 - [Home](https://tv.apple.com/us/show/home)
+- [Acapulco](https://tv.apple.com/us/show/acapulco)[^5]
 - [Long Way Round](https://tv.apple.com/us/show/long-way-round)
 - [Mythic Quest](https://tv.apple.com/us/show/mythic-quest)
 
 # C-Tier
-- [Long Way Down](https://tv.apple.com/us/show/long-way-down)[^5]
-- [Ted Lasso](https://tv.apple.com/us/show/ted-lasso)[^6]
+- [Long Way Down](https://tv.apple.com/us/show/long-way-down)[^6]
+- [Ted Lasso](https://tv.apple.com/us/show/ted-lasso)[^7]
 
 # D-Tier
-- [Long Way Up](https://tv.apple.com/us/show/long-way-up)[^7]
+- [Long Way Up](https://tv.apple.com/us/show/long-way-up)[^8]
 
 # F-Tier
 - [Loot](https://tv.apple.com/us/show/loot)
@@ -37,6 +38,7 @@ An entirely incomplete and subjective ranking of the shows and movies I have wat
 [^2]: Only movie I have watched twice since having kids. Well, movie that I chose to watch twice.
 [^3]: You know what you are signing up for just reading the cast list.
 [^4]: Genuine interest in new locations with self deprecating humor.
-[^5]: Similar plot to Long Way Round with more difficult countries to navigate. Being a sequel took away some of the uncertainty.
-[^6]: Well made show. For someone else. Too heartfelt and sincere for me.
-[^7]: Too many things handed to the team and too much emphasis on the prototype electric motorcycles. Inspiring me to put Bolivia at the top of my travel wishlist is the only reason this is not in F-tier.
+[^5]: How I Met Your Mother. In Spanish. Funny, less offensive, and no filler to hit the 24 episode per season demands of network tv.
+[^6]: Similar plot to Long Way Round with more difficult countries to navigate. Being a sequel took away some of the uncertainty.
+[^7]: Well made show. For someone else. Too heartfelt and sincere for me.
+[^8]: Too many things handed to the team and too much emphasis on the prototype electric motorcycles. Inspiring me to put Bolivia at the top of my travel wishlist is the only reason this is not in F-tier.
