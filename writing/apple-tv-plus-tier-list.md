@@ -8,31 +8,31 @@ An entirely incomplete and subjective ranking of the shows and movies I have wat
 
 # S-Tier
 
-- [The Completely Made Up Adventures of Dick Turpin](https://tv.apple.com/us/show/the-completely-made-up-adventures-of-dick-turpin)[^1]
-- [Ghosted](https://tv.apple.com/us/movie/ghosted)[^2]
+- [The Completely Made Up Adventures of Dick Turpin](https://tv.apple.com/us/show/the-completely-made-up-adventures-of-dick-turpin/umc.cmc.37r7vskzmm8hk2pfbzaxlcwzg)[^1]
+- [Ghosted](https://tv.apple.com/us/movie/ghosted/umc.cmc.6nodv9rf3ltfk2ar3pfc8hced)[^2]
 
 # A-Tier
 
-- [Platonic](https://tv.apple.com/us/show/platonic)[^3]
-- [The Reluctant Traveler with Eugene Levy](https://tv.apple.com/us/show/the-reluctant-traveler-with-eugene-levy)[^4]
-- [Argylle](https://tv.apple.com/us/movie/argylle)
+- [Platonic](https://tv.apple.com/us/show/platonic/umc.cmc.y7bc18x7co813l8i2tlsyb4l)[^3]
+- [The Reluctant Traveler with Eugene Levy](https://tv.apple.com/us/show/the-reluctant-traveler-with-eugene-levy/umc.cmc.237ur6qdup9h826huv7jg25yu)[^4]
+- [Argylle](https://tv.apple.com/us/movie/argylle/umc.cmc.3qy6j44hfqtekx6fx3yzh9w8i)
 
 # B-Tier
-- [The Afterparty](https://tv.apple.com/us/show/the-afterparty)
-- [Home](https://tv.apple.com/us/show/home)
-- [Acapulco](https://tv.apple.com/us/show/acapulco)[^5]
-- [Long Way Round](https://tv.apple.com/us/show/long-way-round)
-- [Mythic Quest](https://tv.apple.com/us/show/mythic-quest)
+- [The Afterparty](https://tv.apple.com/us/show/the-afterparty/umc.cmc.5wg8cnigwrkfzbdruaufzb6b0)
+- [Home](https://tv.apple.com/us/show/home/umc.cmc.5xjrgoblr5l5i1ypamtayuhe9)
+- [Acapulco](https://tv.apple.com/us/show/acapulco/umc.cmc.8xrkg9zywke7g6a9ahmvpr3l)[^5]
+- [Long Way Round](https://tv.apple.com/us/show/long-way-round/umc.cmc.13c4zk3hpybm6u0cfk1x0vyi)
+- [Mythic Quest](https://tv.apple.com/us/show/mythic-quest/umc.cmc.1nfdfd5zlk05fo1bwwetzldy3)
 
 # C-Tier
-- [Long Way Down](https://tv.apple.com/us/show/long-way-down)[^6]
-- [Ted Lasso](https://tv.apple.com/us/show/ted-lasso)[^7]
+- [Long Way Down](https://tv.apple.com/us/show/long-way-down/umc.cmc.cal17ey3zhv2lx3xkzjqjstb)[^6]
+- [Ted Lasso](https://tv.apple.com/us/show/ted-lasso/umc.cmc.vtoh0mn0xn7t3c643xqonfzy)[^7]
 
 # D-Tier
-- [Long Way Up](https://tv.apple.com/us/show/long-way-up)[^8]
+- [Long Way Up](https://tv.apple.com/us/show/long-way-up/umc.cmc.1nv0tluok21c2f8549mdjqdnh)[^8]
 
 # F-Tier
-- [Loot](https://tv.apple.com/us/show/loot)
+- [Loot](https://tv.apple.com/us/show/loot/umc.cmc.5erbujil1mpazuerhr1udnk45)
 
 [^1]: Absurdist twist on the typical stagecoach robbery story with my favorite Taskmaster contestants.
 [^2]: Only movie I have watched twice since having kids. Well, movie that I chose to watch twice.
