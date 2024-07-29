@@ -15,12 +15,12 @@ An entirely incomplete and subjective ranking of the shows and movies I have wat
 
 - [Platonic](https://tv.apple.com/us/show/platonic/umc.cmc.y7bc18x7co813l8i2tlsyb4l)[^3]
 - [The Reluctant Traveler with Eugene Levy](https://tv.apple.com/us/show/the-reluctant-traveler-with-eugene-levy/umc.cmc.237ur6qdup9h826huv7jg25yu)[^4]
+- [Acapulco](https://tv.apple.com/us/show/acapulco/umc.cmc.8xrkg9zywke7g6a9ahmvpr3l)[^5]
 - [Argylle](https://tv.apple.com/us/movie/argylle/umc.cmc.3qy6j44hfqtekx6fx3yzh9w8i)
 
 # B-Tier
 - [The Afterparty](https://tv.apple.com/us/show/the-afterparty/umc.cmc.5wg8cnigwrkfzbdruaufzb6b0)
 - [Home](https://tv.apple.com/us/show/home/umc.cmc.5xjrgoblr5l5i1ypamtayuhe9)
-- [Acapulco](https://tv.apple.com/us/show/acapulco/umc.cmc.8xrkg9zywke7g6a9ahmvpr3l)[^5]
 - [Long Way Round](https://tv.apple.com/us/show/long-way-round/umc.cmc.13c4zk3hpybm6u0cfk1x0vyi)
 - [Mythic Quest](https://tv.apple.com/us/show/mythic-quest/umc.cmc.1nfdfd5zlk05fo1bwwetzldy3)
 
