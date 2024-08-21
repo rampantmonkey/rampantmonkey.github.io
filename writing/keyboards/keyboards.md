@@ -44,5 +44,3 @@
   <div><span>DASKey</span><img src="daskey.thumb.jpg" /></div>
   <div><span>Ergodox EZ</span><img src="ergodox-ez-black.thumb.jpg" /></div>
 </section>
-
-<script src="/files/img-showcase.js"></script>

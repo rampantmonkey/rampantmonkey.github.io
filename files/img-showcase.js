@@ -26,6 +26,8 @@
 
     Array.prototype.forEach.call(document.images, (img) => {
       if(img.classList.contains('no-full')) return;
+      if(!img.src.includes("thumb")) return;
+      
       img.addEventListener('click', () => {
         const showcasedImg = addShowcasedImg(img.src.replace('.thumb', ''))
         overlayEl.style.visibility = 'visible'

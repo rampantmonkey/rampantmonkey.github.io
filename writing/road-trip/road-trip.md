@@ -50,5 +50,3 @@ Visiting a pizza shop mentioned on [Upgrade 459](https://www.relay.fm/upgrade/45
 
 Revisiting a place we used to play board games in grad school.
 <img style="display: inline-block" class="aligncenter" alt="South Bend Chocolate Cafe Storefront" src="sb-chocolate-cafe-thumb.jpeg" />
-
-<script src="/files/img-showcase.js"></script>
