@@ -10,6 +10,7 @@ An entirely incomplete and subjective ranking of the shows and movies I have wat
 
 - [The Completely Made Up Adventures of Dick Turpin](https://tv.apple.com/us/show/the-completely-made-up-adventures-of-dick-turpin/umc.cmc.37r7vskzmm8hk2pfbzaxlcwzg)[^1]
 - [Ghosted](https://tv.apple.com/us/movie/ghosted/umc.cmc.6nodv9rf3ltfk2ar3pfc8hced)[^2]
+- [Shrinking](https://tv.apple.com/us/show/shrinking/umc.cmc.apzybj6eqf6pzccd97kev7bs)
 
 # A-Tier
 
