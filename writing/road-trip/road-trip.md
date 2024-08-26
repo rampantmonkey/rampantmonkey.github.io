@@ -11,12 +11,23 @@ Just following the road wherever it takes us and spending quality time as a fami
 
 <img style="display: inline-block" class="aligncenter" alt="map of the route we took." src="roadtrip-route-map-thumb.png" />
 
-TODO: insert the weird license plates we found
+On this trip we decided to keep track of all of the license plates we saw.
+We ended up finding all of the continental states, D.C., and U.S. government official use.
+The last state we found was West Virginia twenty minutes from home.
+Nuevo León and Chihuahua Mexico.
+Cherokee, Chocktaw, and Kiowa Nations.
+Ontario, Alberta, British Columbia, and Manitoba Canada.
+Sixty different license plates overall.
 
-TODO: insert story about the hunt for shiny beany babies
+This year Ty re-released some of the original Beanie Babies.
+Except this time, with different colors.
+Just like a shiny Pokémon hunt.
+As we found them they became our driving companions tucked into various corners of the car.
+We ended up finding eleven different ones on our trip.
+Of course my daughter immediately claimed all of the cats.
 
-TODO: every state seemed to have different colored wild flowers
-TODO: share overall highlights while driving
+Driving through the south eastern states we noticed that each state seemed to have a different color flower.
+North Carolina, orange. South Carolina, red. Alabama, yellow. Mississippi, purple.
 
 Enjoying a ride on a swing at the Cherry Blossom festival on our way out of town.
 <img style="display: inline-block" class="aligncenter" alt="daughter on swing in D.C." src="dc-swing-thumb.jpeg" />
