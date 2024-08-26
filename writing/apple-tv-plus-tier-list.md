@@ -31,6 +31,7 @@ An entirely incomplete and subjective ranking of the shows and movies I have wat
 
 # D-Tier
 - [Long Way Up](https://tv.apple.com/us/show/long-way-up/umc.cmc.1nv0tluok21c2f8549mdjqdnh)[^8]
+- [The Instigators](https://tv.apple.com/us/movie/the-instigators/umc.cmc.3ocr6483492qm53io2bsy2o69)
 
 # F-Tier
 - [Loot](https://tv.apple.com/us/show/loot/umc.cmc.5erbujil1mpazuerhr1udnk45)
