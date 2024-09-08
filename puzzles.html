@@ -1,17 +1,53 @@
-<main>
-    <h1>Puzzle Collection</h1>
-    <hr />
-    <section>
-        <ul>
-			<li><a href="https://puzzlepotato.com/products/puzzle-box-anti-gravity">Anti-Gravity</a> by Puzzle Potato</li>
-			<li><a href="https://puzzlepotato.com/products/puzzle-box-philosophers-stone">The Philosopher's Stone</a> by Puzzle Potato</li>
-			<li><a href="https://us.escapewelt.com/shop/house-of-dragon">House of the Dragon</a> by Escapewelt</li>
-			<li><a href="https://www.logicagiochi.com/en/dice-secret-box">Dice Secret Box</a> by Logica Giochi</li>
-			<li><a href="https://www.idventure-shop.de/Cluebox-Escape-Room-in-a-Box-Cambridge-Labyrinth">Cambridge Labyrinth</a> by idVenture</li>
-			<li><a href="https://www.idventure-shop.de/Davy-Jones-Escape-Room-in-a-Box-Puzzle-Thinking-game-brain-teaser">Davy Jones Locker</a> by idVenture</li>
-			<li><a href="https://www.idventure-shop.de/Cluebox-Escape-Room-in-a-Box-Puzzle-Thinking-game-brain-teaser">Schrödinger's Cat</a> by idVenture</li>
-			<li><a href="https://www.idventure-shop.de/a-maze-ing-safe-en">A-maze-ing Safe</a> by idVenture</li>
-			<li>Sherlock's Camera</a> by idVenture</li>
-        </ul>
-	</section>
+<style>
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  .gallery div {
+    position: relative;
+  }
+
+  .gallery span {
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: var(--antique-white);
+    background: var(--cafe-noir);
+    padding: 0.5em;
+  }
+
+  .gallery div:hover span {
+    visibility: visible;
+  }
+</style>
+
+<main class="gallery">
+	<div><span>Quest Ball</span><img src="/images/puzzleboxen/esc_welt_quest_ball.thumb.jpg" /></div>
+	<div><span>Anti-Gravity</span><img src="/images/puzzleboxen/antigravity.thumb.jpg" /></div> <!-- https://puzzlepotato.com/products/puzzle-box-anti-gravity -->
+	<div><span>House of the Dragon</span><img src="/images/puzzleboxen/house_of_the_dragon.thumb.jpg" /></div> <!-- https://us.escapewelt.com/shop/house-of-dragon -->
+	<div><span>Dice Secret Box</span><img src="/images/puzzleboxen/dice_secret_box.thumb.jpg" /></div> <!-- https://www.logicagiochi.com/en/dice-secret-box -->
+	<div><span>Caesar's Riches</span><img src="/images/puzzleboxen/caesars_riches.thumb.jpg" /></div> <!--  -->
+	<div><span>Davy Jones Locker</span><img src="/images/puzzleboxen/davy_jones.thumb.jpg" /></div> <!-- https://www.idventure-shop.de/Davy-Jones-Escape-Room-in-a-Box-Puzzle-Thinking-game-brain-teaser -->
+	<div><span>A-maze-ing Safe</span><img src="/images/puzzleboxen/amazeing_safe.thumb.jpg" /></div> <!-- https://www.idventure-shop.de/a-maze-ing-safe-en -->
+	<div><span>Azetca</span><img src="/images/puzzleboxen/azteca.thumb.jpg" /></div> <!--  -->
+	<div><span>Blackbeard's Compass</span><img src="/images/puzzleboxen/blackbeards_compass.thumb.jpg" /></div> <!--  -->
+	<div><span>Camelot</span><img src="/images/puzzleboxen/camelot.thumb.jpg" /></div> <!--  -->
+	<div><span>Jungle Cruise</span><img src="/images/puzzleboxen/jungle_cruise.thumb.jpg" /></div> <!--  -->
+	<div><span>Sherlock's Camera</span><img src="/images/puzzleboxen/sherlocks_camera.thumb.jpg" /></div> <!--  -->
+	<div><span>Schrödinger's Box</span><img src="/images/puzzleboxen/schrodingers_box.thumb.jpg" /></div> <!-- https://www.idventure-shop.de/Cluebox-Escape-Room-in-a-Box-Puzzle-Thinking-game-brain-teaser -->
+	<div><span>The Philosopher's Stone</span><img src="/images/puzzleboxen/philosophers_stone.thumb.jpg" /></div> <!-- https://puzzlepotato.com/products/puzzle-box-philosophers-stone -->
+	<div><span>Cambridge Labyrinth</span><img src="/images/puzzleboxen/labyrinth.thumb.jpg" /></div> <!-- hhttps://www.idventure-shop.de/Cluebox-Escape-Room-in-a-Box-Cambridge-Labyrinth -->
+	<div><span>La Casa di da Vinci</span><img src="/images/puzzleboxen/la_casa_di_da_vinci.thumb.jpg" /></div> <!--  -->
+	<div><span>Lost City: Chapter 1</span><img src="/images/puzzleboxen/lost_city_ch_1.thumb.jpg" /></div> <!--  -->
+	<div><span>Maya's Myths</span><img src="/images/puzzleboxen/mayas_myths.thumb.jpg" /></div> <!--  -->
+	<div><span>Nocturna</span><img src="/images/puzzleboxen/nocturna.thumb.jpg" /></div> <!--  -->
+	<div><span>Pharaoh's Secret</span><img src="/images/puzzleboxen/pharaohs_secret.thumb.jpg" /></div> <!--  -->
+	<div><span>Tin Woodsman's Heart</span><img src="/images/puzzleboxen/tin_woodsmans_heart.thumb.jpg" /></div> <!--  -->
 </main>
