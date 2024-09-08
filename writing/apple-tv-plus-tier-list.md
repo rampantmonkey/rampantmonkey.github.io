@@ -32,6 +32,7 @@ An entirely incomplete and subjective ranking of the shows and movies I have wat
 # D-Tier
 - [Long Way Up](https://tv.apple.com/us/show/long-way-up/umc.cmc.1nv0tluok21c2f8549mdjqdnh)[^8]
 - [The Instigators](https://tv.apple.com/us/movie/the-instigators/umc.cmc.3ocr6483492qm53io2bsy2o69)
+- [Slow Horses](https://tv.apple.com/us/show/slow-horses/umc.cmc.2szz3fdt71tl1ulnbp8utgq5o)[^9]
 
 # F-Tier
 - [Loot](https://tv.apple.com/us/show/loot/umc.cmc.5erbujil1mpazuerhr1udnk45)
@@ -44,3 +45,4 @@ An entirely incomplete and subjective ranking of the shows and movies I have wat
 [^6]: Similar plot to Long Way Round with more difficult countries to navigate. Being a sequel took away some of the uncertainty.
 [^7]: Well made show. For someone else. Too heartfelt and sincere for me.
 [^8]: Too many things handed to the team and too much emphasis on the prototype electric motorcycles. Inspiring me to put Bolivia at the top of my travel wishlist is the only reason this is not in F-tier.
+[^9]: What if we make 24, without the clock gimick, and make CTU itself the mole. Oh, and we need to film it like it is the Battle of Winterfell.
