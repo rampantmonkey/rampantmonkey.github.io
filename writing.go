@@ -75,10 +75,10 @@ func fromFile(path string, slug string) WritingPost {
 
 func (wp WritingPost) render() template.HTML {
 	return template.HTML(
-		fmt.Sprintf("<h1>%s</h1>\n<hr />\n", wp.Title) +
+		fmt.Sprintf("<main class=\"writing\"><h1>%s</h1>\n<hr />\n", wp.Title) +
 		string(blackfriday.Run(wp.RawContent,
 			   blackfriday.WithExtensions(blackfriday.Footnotes | blackfriday.LaxHTMLBlocks | blackfriday.FencedCode),
-			   )))
+			   )) + "\n</main>\n")
 }
 
 type Category struct {
