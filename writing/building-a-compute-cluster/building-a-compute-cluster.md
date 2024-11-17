@@ -1,6 +1,6 @@
 :title Building a compute cluster
 :description Building my own compute cluster.
-:date 2024-12-31
+:date 2024-11-10
 :slug building-a-compute-cluster
 :category DevOps
 
