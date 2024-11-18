@@ -145,6 +145,18 @@ node2
 node1</code></pre>
 </section>
 
+<section>
+<h2>Running jobs on the cluster</h2>
+<p>In the previous section we used <code>srun</code> to run commands in real time on the cluster. Now we want to submit jobs with <code>sbatch</code> to the queue to be run when resources are available.</p>
+
+<p>Repeat the hostname command above as a batch job</p>
+
+<p>Julia hello world</p>
+
+<p>Julia run a package</p>
+
+<p>Julia @distributed</p>
+</section>
 
 <section>
 <h2>What Next?</h2>
