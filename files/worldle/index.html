@@ -1,0 +1,828 @@
+<!doctype html>
+<meta charset="utf8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Worldle</title>
+<style type="text/css">
+body * {
+    font-family: system-ui;
+    padding: 0;
+    margin: 0;
+}
+
+div {
+    max-width: 800px;
+    width: 100%;
+    margin: 8px auto;   
+}
+
+#header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#header img {
+    height: 4em;
+}
+
+#header h1 {
+    display: inline-block;
+    font-size: 4em;
+    margin: 0.1em;
+}
+
+#countryshape canvas {
+    display: block;
+    margin: 0 auto;
+}
+
+#entry {
+    display: grid;
+    column-gap: 1em;
+    grid-template-columns: 4fr 1fr;
+}
+
+.box {
+    border: 1px solid #323232;
+    padding: 8px;    
+}
+
+#entry * {
+    text-transform: uppercase;
+    font-size: 1.4em;
+}
+
+#entry input:focus {
+    boder: none;
+    outline: 4px solid black;
+    caret-color: black;
+}
+
+#entry button {
+    background: white;
+}
+
+#entry button:hover {
+    background: #ededed;
+}
+
+#history > * {
+    display: grid;
+    column-gap: 1em;
+    grid-template-columns: 3fr 2fr 1fr 1fr;
+}
+
+#history a {
+    color: black;
+    text-decoration: none;
+}
+
+#history span {
+    font-size: 1.4em;
+    display: inline-block;
+    padding: 8px;
+    border: 1px solid #323232;
+    text-align: center;
+}
+
+#history .current {
+    grid-column: span 4;
+    text-transform: uppercase;
+}
+
+#history .future {
+    grid-column: span 4;
+    text-indent: 200%;
+    white-space: nowrap;
+    overflow: hidden;
+    border: 2px #cbcbcb dashed;
+    background: #ededed;
+}
+
+#history .direction {
+    font-weight: bold;
+}
+
+#share {
+    display: grid;
+    column-gap: 1em;
+    grid-template-columns: 1fr 1fr;
+}
+
+#share * {
+    text-transform: uppercase;
+    font-size: 1.4em;
+}
+
+#share button {
+    background: white;
+}
+
+.confetticannon {
+  max-width: 100vw;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 0;
+}
+.confetti {
+  width: 15px;
+  height: 15px;
+  background-color: #f2d74e;
+  position: absolute;
+  left: 50%;
+  animation: confetti 5s ease-in-out -2s infinite;
+  transform-origin: left top;
+}
+.confetti:nth-child(1) {
+  background-color: #f2d74e; left: 10%; animation-delay: 0;
+}
+.confetti:nth-child(2) {
+  background-color: #95c3de; left: 20%; animation-delay: -5s;
+}
+.confetti:nth-child(3) {
+  background-color: #ff9a91; left: 30%; animation-delay: -3s;
+}
+.confetti:nth-child(4) {
+  background-color: #f2d74e; left: 40%; animation-delay: -2.5s;
+}
+.confetti:nth-child(5) {
+  background-color: #95c3de; left: 50%; animation-delay: -4s;
+}
+.confetti:nth-child(6) {
+  background-color: #ff9a91; left: 60%; animation-delay: -6s;
+}
+.confetti:nth-child(7) {
+  background-color: #f2d74e; left: 70%; animation-delay: -1.5s;
+}
+.confetti:nth-child(8) {
+  background-color: #95c3de; left: 80%; animation-delay: -2s;
+}
+.confetti:nth-child(9) {
+  background-color: #ff9a91; left: 90%; animation-delay: -3.5s;
+}
+.confetti:nth-child(10) {
+  background-color: #f2d74e; left: 100%; animation-delay: -2.5s;
+}
+
+@keyframes confetti {
+  0% { transform: rotateZ(15deg) rotateY(0deg) translate(0,0); }
+  25% { transform: rotateZ(5deg) rotateY(360deg) translate(-5vw,20vh); }
+  50% { transform: rotateZ(15deg) rotateY(720deg) translate(5vw,60vh); }
+  75% { transform: rotateZ(5deg) rotateY(1080deg) translate(-10vw,80vh); }
+  100% { transform: rotateZ(15deg) rotateY(1440deg) translate(10vw,110vh); }
+}
+</style>
+
+<script type="application/javascript">
+    const Rng = (seed, ...extraSeed) => {
+      const args = [seed, ...extraSeed];
+
+      let mash = Mash();
+      let s0 = mash(' ');
+      let s1 = mash(' ');
+      let s2 = mash(' ');
+      let c = 1;
+
+      for (let i = 0; i < args.length; ++i) {
+        s0 -= mash(args[i]);
+        if (s0 < 0) { s0 += 1; }
+        s1 -= mash(args[i]);
+        if (s1 < 0) { s1 += 1; }
+        s2 -= mash(args[i]);
+        if (s2 < 0) { s2 += 1; }
+      }
+
+      return {
+        seed: args,
+        random: () => {
+          let t = 2091639 * s0 + c * 2.3283064365386963e-10; // 2^-32
+          s0 = s1;
+          s1 = s2;
+          return s2 = t - (c = t | 0);
+        },
+      }
+    };
+
+    const shuffleInPlace = (r, a) => {
+      for (let i = a.length - 1; i > 0; --i) {
+        const j = Math.floor(r.random() * i);
+        const tmp = a[i];
+        a[i] = a[j];
+        a[j] = tmp;
+      }
+    };
+
+    const pick = (r, a) => a[uint32(r) % a.length];
+    const pickIndex = (r, a) => uint32(r) % a.length;
+
+    const str = (() => {
+      const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz ';
+      return (r, min, max) => {
+        let result = '';
+        let l = range(r, min, max);
+        for(let i = 0; i < l; ++i) {
+          result += charset.charAt(Math.floor(r.random() * charset.length));
+        }
+        return result;
+      }
+    })();
+
+    const range = (r, min, max) => min + r.random() * (max - min);
+    const uint32 = (r) => r.random() * 0x100000000; // 2^32
+    const fract53 = (r) => r.random() + (r.random() * 0x200000 | 0) * 1.1102230246251565e-16; // 2^-53
+
+    const Mash = () => {
+      var n = 0xefc8249d;
+
+      return ((data) => {
+        for (var i = 0; i < data.length; i++) {
+          n += data.charCodeAt(i);
+          var h = 0.02519603282416938 * n;
+          n = h >>> 0;
+          h -= n;
+          h *= n;
+          n = h >>> 0;
+          h -= n;
+          n += h * 0x100000000; // 2^32
+        }
+        return (n >>> 0) * 2.3283064365386963e-10; // 2^-32
+      });
+    };
+
+    const giveMeAnEventBus = (() => {
+      let eventBusId = 0
+
+      return (key=null) => {
+        eventBusId++
+        let subscribers = []
+        let subscriberId = 0
+
+        if(key) {
+          window.addEventListener('storage', (e) => {
+            if(e.key === key) {
+              try { var value = JSON.parse(e.newValue) }
+              catch(err) { return }
+              publish(value.payload, false)
+            }
+          })
+
+          setTimeout(() => {
+            const initialValues = JSON.parse(localStorage.getItem(key))
+            if(initialValues) {
+              publish(initialValues.payload, false)
+            }
+          }, 0)
+        }
+
+        const unsubscribe = (handle) => {
+          if(handle.eventBusId === eventBusId) {
+            for(var i=0, l=subscribers.length; i < l; i++) {
+              if(subscribers[i].subscriberId === handle.subscriberId) {
+                subscribers.splice(i, 1)
+                return
+              }
+            }
+          }
+        }
+
+        const subscribe = (cb) => {
+          subscriberId++
+          subscribers.push({cb, subscriberId})
+          let handle = { subscriberId, eventBusId }
+          handle.unsubscribe = () => unsubscribe(handle)
+          return handle
+        }
+
+        let eventId = 0
+        const publish = (event, persist=true) => {
+          eventId++
+          subscribers.forEach(s => s.cb({eventId, payload: event}))
+          if(persist) {
+            localStorage.setItem(key, JSON.stringify({payload: event, nonce: new Date()}))
+          }
+        }
+
+        return { subscribe, unsubscribe, publish }
+      }
+    })()
+
+    const drawGeoJson = (ctx, feature) => {
+        let boundingbox = getGeoBounds(feature.geo)
+        if(feature.geo.type === 'Polygon') {
+            drawPolygon(ctx, boundingbox, feature.geo.coordinates[0])
+        }
+
+        if(feature.geo.type === 'MultiPolygon') {
+            feature.geo.coordinates.forEach(coord => drawPolygon(ctx, boundingbox, coord[0]))
+        }
+    }
+
+    const getGeoBounds = (geo) => {
+        let minlon = 200
+        let minlat = 200
+        let maxlon = -200
+        let maxlat = -200
+        for(let i=0; i < geo.coordinates.length; i++) {
+            for(let j=0; j < geo.coordinates[i].length; j++) {
+                for(let k=0; k < geo.coordinates[i][j].length; k++) {
+                    let [lon, lat] = geo.coordinates[i][j][k]
+                    if(lon < minlon) {
+                        minlon = lon
+                    }
+                    if(lon > maxlon) {
+                        maxlon = lon
+                    }
+                    if(lat < minlat) {
+                        minlat = lat
+                    }
+                    if(lat > maxlat) {
+                        maxlat = lat
+                    }
+                }
+            }
+        }
+
+        return {minlat, minlon, maxlat, maxlon}
+    }
+
+
+    const drawPolygon = (ctx, boundingbox, coords) => {
+        ctx.fillStyle = getColor()
+        ctx.beginPath()
+        let initialPoint = project(coords.shift(), boundingbox)
+        let scalex = ctx.canvas.width/(boundingbox.maxlon - boundingbox.minlon)
+        let scaley = ctx.canvas.height/(boundingbox.maxlat - boundingbox.minlat)
+        let scale = Math.min(scalex, scaley)
+        let shapew = (boundingbox.maxlon - boundingbox.minlon)*scale
+        let shapeh = (boundingbox.maxlat - boundingbox.minlat)*scale
+        let offx = (ctx.canvas.width - shapew) / 2
+        let offy = (ctx.canvas.height - shapeh) / 2
+        ctx.moveTo(initialPoint.x*scale + offx, (boundingbox.maxlat - boundingbox.minlat)*scale - initialPoint.y*scale + offy)
+        coords.map(coord => project(coord, boundingbox)).forEach(point => ctx.lineTo(point.x*scale + offx, (boundingbox.maxlat - boundingbox.minlat)*scale - point.y*scale + offy))
+        ctx.closePath()
+        ctx.fill()
+    }
+
+    const getColor = () => {
+        return "rgb(50, 50, 50)"
+    }
+
+    const project = (point, boundingbox) => {
+        let [lon, lat] = point
+        return { x: (lon-boundingbox.minlon), y: (lat-boundingbox.minlat)}
+    }
+
+    const setupCanvas = (parent) => {
+        const canvas = document.createElement('canvas')
+        const mapsize = parent.clientWidth
+        canvas.width = mapsize
+        canvas.height = mapsize * .5
+        parent.appendChild(canvas)
+        return canvas
+    }
+
+    const removeAllChildren = (parent) => {
+        while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
+        }
+    }
+
+    const historian = ((bus) => {
+        let guessels = [1, 2, 3, 4, 5, 6].map(i => document.getElementById(`guess${i}`))
+        let rendered = 0
+        let history = []
+
+
+        bus.subscribe((ev) => {
+            if(ev.payload.kind == "sharefull") {
+                let rendered = history.map(h => `${h.guess} ${h.dir} ${(h.percent * 100).toFixed(1)}%`).join("\n")
+                navigator.clipboard.writeText(rendered)
+                return
+            }
+
+            if(ev.payload.kind == "sharecensored") {
+                let rendered = history.map(h => `${h.dir} ${(h.percent * 100).toFixed(1)}%`).join("\n")
+                navigator.clipboard.writeText(rendered)
+                return
+            }
+
+            if(ev.payload.kind == "wrong" || ev.payload.kind == "correct") {
+                history = JSON.parse(JSON.stringify(ev.payload.guesses))
+                let previous = rendered
+                let next = rendered + 1
+                if(rendered >= guessels.length) { return; }
+
+                removeAllChildren(guessels[previous])
+                let nameel = document.createElement('span')
+                nameel.classList.add("box")
+                nameel.classList.add("past")
+                let namelink = document.createElement('a')
+                namelink.href = `http://maps.apple.com/?ll=${history[previous].lat},${history[previous].lon}&z=6`
+                namelink.innerText = history[previous].guess
+                nameel.appendChild(namelink)
+                guessels[previous].appendChild(nameel)
+                let distel = document.createElement('span')
+                distel.classList.add("box")
+                distel.classList.add("past")
+                distel.innerText = `${history[previous].distance.toLocaleString()} mi`
+                guessels[previous].appendChild(distel)
+                let direl = document.createElement('span')
+                direl.classList.add("box")
+                direl.classList.add("past")
+                direl.classList.add("direction")
+                direl.innerText = history[previous].dir
+                guessels[previous].appendChild(direl)
+                let perel = document.createElement('span')
+                perel.classList.add("box")
+                perel.classList.add("past")
+                perel.innerText = `${(history[previous].percent * 100).toFixed(1)}%`
+                guessels[previous].appendChild(perel)
+
+                if(ev.payload.kind == "correct") {
+                    return
+                }
+
+                removeAllChildren(guessels[next])
+                let currentspanel = document.createElement('span')
+                currentspanel.classList.add("box")
+                currentspanel.classList.add("current")
+                currentspanel.innerText = `Guess ${next + 1} / ${guessels.length}`
+                guessels[next].appendChild(currentspanel)
+
+                rendered = next
+            }
+        })
+    })
+
+
+    const haversineDistanceKM = (lat1Deg, lon1Deg, lat2Deg, lon2Deg) => {
+        function toRad(degree) {
+            return degree * Math.PI / 180;
+        }
+        
+        const lat1 = toRad(lat1Deg);
+        const lon1 = toRad(lon1Deg);
+        const lat2 = toRad(lat2Deg);
+        const lon2 = toRad(lon2Deg);
+        
+        const { sin, cos, sqrt, atan2 } = Math;
+        
+        const R = 6371; // earth radius in km 
+        const dLat = lat2 - lat1;
+        const dLon = lon2 - lon1;
+        const a = sin(dLat / 2) * sin(dLat / 2)
+                + cos(lat1) * cos(lat2)
+                * sin(dLon / 2) * sin(dLon / 2);
+        const c = 2 * atan2(sqrt(a), sqrt(1 - a)); 
+        const d = R * c;
+        return d; // distance in km
+    }
+
+    const haversineDistanceMI = (lat1Deg, lon1Deg, lat2Deg, lon2Deg) => haversineDistanceKM(lat1Deg, lon1Deg, lat2Deg, lon2Deg) * 0.621371
+
+
+    const bearing = (lat1Deg, lon1Deg, lat2Deg, lon2Deg) => {
+        function toRad(degree) {
+            return degree * Math.PI / 180;
+        }
+
+        const phi1 = toRad(lat1Deg)
+        const phi2 = toRad(lat2Deg)
+        const lambda1 = toRad(lon1Deg)
+        const lambda2 = toRad(lon2Deg)
+        const y = Math.sin(lambda2 - lambda1) * Math.cos(phi2)
+        const x = Math.cos(phi1)*Math.sin(phi2) - Math.sin(phi1)*Math.cos(phi2)*Math.cos(lambda2 - lambda1)
+        const theta = Math.atan2(y, x)
+        const b = (theta * 180/Math.PI + 360) % 360
+        return b
+    }
+
+
+    const closenessKM = (distance) => (20010-distance)/20010
+    const closenessMI = (distance) => (12430-distance)/12430
+
+
+    const levenshtein = (function() {
+      function _min(d0, d1, d2, bx, ay) {
+        return d0 < d1 || d2 < d1
+            ? d0 > d2
+                ? d2 + 1
+                : d0 + 1
+            : bx === ay
+                ? d1
+                : d1 + 1;
+      }
+
+      return function(a, b) {
+        if (a === b) {
+          return 0;
+        }
+
+        if (a.length > b.length) {
+          var tmp = a;
+          a = b;
+          b = tmp;
+        }
+
+        var la = a.length;
+        var lb = b.length;
+
+        while (la > 0 && (a.charCodeAt(la - 1) === b.charCodeAt(lb - 1))) {
+          la--;
+          lb--;
+        }
+
+        var offset = 0;
+
+        while (offset < la && (a.charCodeAt(offset) === b.charCodeAt(offset))) {
+          offset++;
+        }
+
+        la -= offset;
+        lb -= offset;
+
+        if (la === 0 || lb < 3) {
+          return lb;
+        }
+
+        var x = 0;
+        var y;
+        var d0;
+        var d1;
+        var d2;
+        var d3;
+        var dd;
+        var dy;
+        var ay;
+        var bx0;
+        var bx1;
+        var bx2;
+        var bx3;
+
+        var vector = [];
+
+        for (y = 0; y < la; y++) {
+          vector.push(y + 1);
+          vector.push(a.charCodeAt(offset + y));
+        }
+
+        var len = vector.length - 1;
+
+        for (; x < lb - 3;) {
+          bx0 = b.charCodeAt(offset + (d0 = x));
+          bx1 = b.charCodeAt(offset + (d1 = x + 1));
+          bx2 = b.charCodeAt(offset + (d2 = x + 2));
+          bx3 = b.charCodeAt(offset + (d3 = x + 3));
+          dd = (x += 4);
+          for (y = 0; y < len; y += 2) {
+            dy = vector[y];
+            ay = vector[y + 1];
+            d0 = _min(dy, d0, d1, bx0, ay);
+            d1 = _min(d0, d1, d2, bx1, ay);
+            d2 = _min(d1, d2, d3, bx2, ay);
+            dd = _min(d2, d3, dd, bx3, ay);
+            vector[y] = dd;
+            d3 = d2;
+            d2 = d1;
+            d1 = d0;
+            d0 = dy;
+          }
+        }
+
+        for (; x < lb;) {
+          bx0 = b.charCodeAt(offset + (d0 = x));
+          dd = ++x;
+          for (y = 0; y < len; y += 2) {
+            dy = vector[y];
+            vector[y] = dd = _min(dy, d0, dd, bx0, vector[y + 1]);
+            d0 = dy;
+          }
+        }
+
+        return dd;
+      };
+    })();
+
+    const checker = ((bus) => {
+        let answer = null
+        let acceptedGuesses = []
+        let locationidx = {}
+        let iscountry = () => false
+        let distanceToAnswer = () => 9000
+        let directionToAnswer = () => "left"
+        let autocorrect = (s) => s
+
+        bus.subscribe((ev) => {
+            if(ev.payload.kind == "dataFetched") {
+                ((countries) => {
+                    let names = []
+                    countries.forEach(c => {
+                        names.push(c[0])
+                        locationidx[c[0]] = c[1]
+                    })
+                    iscountry = (c) => names.includes(c.toUpperCase())
+
+                    autocorrect = (c) => {
+                        let C = c.toUpperCase()
+                        let min = 500
+                        let bestguess = ""
+                        for(i = 0; i < names.length; i++) {
+                            let dist = levenshtein(C, names[i])
+                            if(dist < min) {
+                                min = dist
+                                bestguess = names[i]
+                            }
+                        }
+                        console.log(C, bestguess)
+                        return bestguess
+                    }
+                })(ev.payload.data.map(d => [d.name.toUpperCase(), d.coord]))
+
+                return
+            }
+
+            if(ev.payload.kind == "pickPuzzle") {
+                answer = ev.payload.puzzle.name.toUpperCase()
+                localStorage.setItem('answer', answer)
+
+                distanceToAnswer = (guess) => {
+                    gl = locationidx[guess]
+                    al = locationidx[answer]
+                    return Math.floor(haversineDistanceMI(gl.lat, gl.lon, al.lat, al.lon))
+                }
+
+                directionToAnswer = (guess) => {
+                    gl = locationidx[guess]
+                    al = locationidx[answer]
+                    b = bearing(gl.lat, gl.lon, al.lat, al.lon)
+
+                    switch(Math.floor((b + 22.5)/45)) {
+                    case 0: {
+                        return "⬆"
+                    } break;
+                    case 1: {
+                        return "⬈" // Argentina -> Gambia
+                    } break;
+                    case 2: {
+                        return "➡"
+                    } break;
+                    case 3: {
+                        return "⬊"
+                    } break;
+                    case 4: {
+                        return "⬇"
+                    } break;
+                    case 5: {
+                        return "⬋"
+                    } break;
+                    case 6: {
+                        return "⬅"
+                    } break;
+                    case 7: {
+                        return "⬉"
+                    } break;
+                    default: {
+                        return " "
+                    } break;
+                    }
+                }
+            }
+
+            if(ev.payload.kind == "guess") {
+                g = ev.payload.guess.toUpperCase()
+
+                if(!iscountry(g)) {
+                    bus.publish({kind: "notacountry", g}, false)
+                    g = autocorrect(g)
+                }
+
+                if(acceptedGuesses.find(ag => ag.guess == g)) {
+                    bus.publish({kind: "duplicateguess", guess: g}, false)
+                    return
+                }
+
+                let {lat, lon} = locationidx[g]
+
+                if(answer == g) {
+                    acceptedGuesses.push({guess: g, distance: 0.0, dir: "◎", percent: 1.0, lat: lat, lon: lon})
+                    bus.publish({kind: "correct", guesses: acceptedGuesses}, false)
+                    return
+                }
+
+
+                acceptedGuesses.push({
+                    guess: g, 
+                    distance: distanceToAnswer(g), 
+                    dir: directionToAnswer(g), 
+                    percent: closenessMI(distanceToAnswer(g)),
+                    lat: lat, 
+                    lon: lon,
+                })
+                bus.publish({kind: "wrong", guesses: acceptedGuesses}, false)
+            }
+        })
+    })
+
+
+    const confettiCannon = ((bus) => {
+        bus.subscribe((ev) => {
+            if(ev.payload.kind == "correct") {
+                const container = document.createElement('div')
+                container.classList.add("confetticannon")
+                for(let i=0; i < 20; i++) {
+                    let confetti = document.createElement('div')
+                    confetti.classList.add("confetti")
+                    container.appendChild(confetti)
+                }
+                document.body.appendChild(container)
+                setTimeout(() => container.remove(), 15 * 1000)
+            }
+        })
+    })
+
+    const puzzlePicker = (bus) => {
+        let now = new Date()
+        let start = new Date(now.getFullYear(), 0, 0)
+        let diff = now - start + (start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000
+        let oneDay = 24 * 60 * 60 * 1000
+        let day = Math.floor(diff / oneDay)
+        let r = Rng(`worldle-game-day${day}`)
+
+        bus.subscribe((ev) => {
+            if(ev.payload.kind == "dataFetched") {
+                puzzle = pick(r, ev.payload.data)
+                bus.publish({kind: "pickPuzzle", puzzle: puzzle}, false)
+            }
+        })
+    }
+
+    const buslogger = (bus) => {
+        bus.subscribe((ev) => console.log(ev))
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        canvas = setupCanvas(document.getElementById("countryshape"))
+        ctx = canvas.getContext('2d')
+
+        bus = giveMeAnEventBus()
+
+        bus.subscribe((ev) => {
+            if(ev.payload.kind == "pickPuzzle") {
+                drawGeoJson(ctx, ev.payload.puzzle)
+            }
+        })
+
+        checker(bus)
+        confettiCannon(bus)
+        puzzlePicker(bus)
+        buslogger(bus)
+        historian(bus)
+
+        let submitguess = () => {
+            let el = document.getElementById("currentguess")
+            bus.publish({kind: "guess", guess: el.value}, false)
+            el.value = ""
+        }
+
+        document.getElementById("currentguess").addEventListener("keypress", (e) => {
+            if(e.key === "Enter") { submitguess() }
+        })
+
+        document.getElementById("guessbutton").addEventListener("click", submitguess)
+
+        document.getElementById("sharefull").addEventListener("click", () => bus.publish({kind: "sharefull"}, false))
+        document.getElementById("sharecensored").addEventListener("click", () => bus.publish({kind: "sharecensored"}, false))
+
+        fetch("d.json")
+            .then(resp => resp.json())
+            .then(data => bus.publish({kind: "dataFetched", data: data}, false))
+    })
+</script>
+
+<div id="header"><img src="icon.jpg" /><h1>WORLDLE</h1></div>
+<hr />
+
+<div id="countryshape">
+</div>
+
+<div id="entry">
+    <input id="currentguess" type="text" class="box" placeholder="country" />
+    <button id="guessbutton" class="box">Guess</button>
+</div>
+
+<div id="history">
+    <div id="guess1"><span class="box current">Guess 1/6</span></div>
+    <div id="guess2"><span class="box future">Guess 2/6</span></div>
+    <div id="guess3"><span class="box future">Guess 3/6</span></div>
+    <div id="guess4"><span class="box future">Guess 4/6</span></div>
+    <div id="guess5"><span class="box future">Guess 5/6</span></div>
+    <div id="guess6"><span class="box future">Guess 6/6</span></div>
+</div>
+
+<div id="share">
+    <button id="sharefull" class="box">Share Full</button>
+    <button id="sharecensored" class="box">Share Spoiler Free</button>
+</div>
