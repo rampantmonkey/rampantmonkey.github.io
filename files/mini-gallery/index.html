@@ -1,0 +1,168 @@
+<!doctype html>
+
+<meta charset="utf-8" />
+<title>Miniature Gallery</title>
+
+<style>
+  body {
+    margin: 0;
+  }
+
+  .gallery {
+    margin: 0 auto;
+  }
+
+  img {
+    max-width: 100%;
+    margin: 0;
+    float: left;
+  }
+
+  @media (min-width: 720px) {
+    img {
+      max-width: 50%;
+    }
+
+    .gallery {
+      max-width: 1080px;
+    }
+  }
+
+  @media (min-width: 2048px) {
+    .gallery {
+      max-width: 2560px;
+    }
+
+    img {
+      max-width: 25%;
+    }
+  }
+</style>
+
+<section id="gallery" class="gallery">
+</section>
+
+<script type="application/javascript">
+  window.addEventListener('load', function() {
+    var parent = document.getElementById('gallery')
+
+    // TODO Handle packing for vertical images as well...
+    var numColumns = 0
+    if(window.innerWidth < 720) numColumns = 1
+    else if(window.innerWidth < 1920) numColumns = 2
+    else numColumns = 4
+    var baseImageHeight = 1365
+    var baseImageWidth = 2048
+    var imageHeight = (parent.clientWidth / numColumns) * (baseImageHeight / baseImageWidth)
+    var screenHeight = window.innerHeight
+    var imagesPerScreenPerColumn = Math.ceil(screenHeight/imageHeight)
+
+    var imageHashes = [
+      {full: "7cf23945b00d5070fdc36cfddb910df8474de35cb1f8fb86ba40a0e6d9cbe03d", half: "66eb522f4b057ac34e0919ea7c3bc108dd5177773ebbf2463ef19ccc148e0208", name: "Harlan Globetrotter"},
+      {full: "04cc002bfe8404a2aa327986448053e3d8c4ac151ef0cadec71c3329eb3bb1b9", half: "7fe613f4503dc3ae2efb0296edae4505fd97fbd30f25fd26535cfb3e3fee5ef6", name: "Displacer Beast"},
+      {full: "abcbdde4b10c23b31231c2b8dea97438fab9907dbb05364250f87c49effe0304", half: "e87a2600416ff87b57928683494f7de4dc2cd416f6f97a69597b0768330b9674", name: "Mindflayer Wizard"},
+      {full: "fbc231975b096bc03b776961383cf8e256b9adb5e72936e651db66dbc7968a01", half: "b90255faf917b5be559bd7a5d4956eba5dccb4cbf631fc0284bd1282144ed997", name: "Mindflayer"},
+      {full: "6577e304a263190e3efbdf991cffcc70e467f3bb28c8f620c816f76d0bb675d9", half: "c1fb26441f8a3798b7a73634e2af72da22f4d2d49b2a404eff3753d454912ba7", name: "Spectator"},
+      {full: "b3822a3a4f987493eeae423702ae012ab35e91f59a13a4d93b123250382d3fd8", half: "d81e8138957b1473704bfd9f43703f99f832df9143e278043949c517650e823a", name: "Gazer (prepainted)"},
+      {full: "bda002419e0cf212f6c05ba16e9c4a3cc0cf4fbdccf0c7b4ec0119bc4691936a", half: "0838787ef6ed011bb88a830b701fdec61bfe7f84aa0dc64d1a5af3a189ee3b3c", name: "Gazer (unpainted pair)"},
+
+      {full: "362662104b06a4ad84ed12d42d69ea55ea907fa8245f2987cc0ee81ef286d774", half: "7b801f32b67661b8bcd1d09ee7033c2d54bd8753979d5dde4d282c2e3d203f43", name: "Fire Elemental"},
+      {full: "38133ee7f5a2ef9bf02c73369050297e169c92c7890b87702aeec1c94cd1859d", half: "b6507cd470122d4c8c91a32d6b3bdb44b9d5f066bdcbb93beb4ace8b9a2fb9a8", name: "Air Elemental (Unpainted)"},
+      {full: "4ff2f3162e19ec9eb92c91ee3d079ad66200af19f51d204b5d1b679335bb6b06", half: "2dd5e84e08c81fe0ee85f9dfbbda53d146f9b5021ac3d6a64f8cf28812ca68e3", name: "Air Elemental(Painted)"},
+      {full: "abb726191d43684a5b8fb38f94c9d4c2b1d641a57c68cc6bd8ad986f40cf9180", half: "76ac38987d3a925ddccfc4f6d32e04f7c8342879d99f5f6a8e299853e73f4b47", name: "Water Elemental"},
+      {full: "7a144ccab4d848784c76b8efbf6a90b70d92748721fdc5fb6787b0a0a2f46254", half: "bca0a1b0ff285c2baffb639c339162ae441c5dc738e34dbb6bec3080d5b9b1cc", name: "Earth Elemental"},
+
+      {full: "dab17cfa10ce4480448e07006d40fdea09f9877c41d4a7fc1b58c5370bfc6e3c", half: "b01b8bb21f2d60bfe0d68c54dd0417b9a3820a57afea1feb50bb62298028103a", name: "Spider"},
+      {full: "82ee79565fd11af8e694b53fafd7abe9e2d49951c94c1d4c68e238873506d273", half: "34362d8e8326cfed219a925096d74fa0c610aec2223f4942b966341f4c503af0", name: "Spider (unpainted)"},
+      {full: "8c04d2414f97e59f1e92abf5fdbfd587ba04e0792e04d71cea56157740cabba1", half: "5faf333441e872eac00b0bb5bda1d86f0266a97c8c41642a7fd9d0dd313fd7ff", name: "Spider (Painted)"},
+
+      {full: "4b3493d3f631e02711bf7b83a64c105e5c76ab3dcb625ae15a1bb269fd5afab7", half: "15c981194f3f223004c75bddf9b2ed682de11392b5e8679241f935d2d0910e19", name: "Dancing Girl"},
+      {full: "ef78df5738605f0df9842bad2b56209fe2e6c11e0695bbcf54430f4829baa8d8", half: "3bf811800c24137f3a72163b92712163bc00e0355fb890a377f9c3b99822f2b8", name: "Bar Maid"},
+
+      {full: "226b8b7fa5c666038bc556ffa50cc9a8cdfe461b351226a98573e8e911716126", half: "059446529a07a718fdb684c07a75996807399ff959fbe0613973e64350922691", name: "Evil Human Wizard"},
+      {full: "d0c8970b51fe7d16d5a46a6dc9be04f1efbe5d2002c1fc65ed3d2869fa225375", half: "2c35eefdcdfb16364d9ae29ee7d433caf4a71636a6c54677169f7e5bab3cd022", name: "Evil Halfling Wizard"},
+
+      {full: "09505f420473bd06116d0eed674bd926027a58d0e6b45729bb71ac656c0026dd", half: "cc4b2337d08e5f2005a1d3a2b6ab115a8ad07a8fd2522554d8e339d001c9f4f3", name: "Goblin Alchemist"},
+      {full: "c96a58ecf002f0136175ac23f9c8ab69c5f39753f69bf2b44cb4980dca17d438", half: "18e27e30ee6cf062f03d1703b664a41b1cbb22795c9dbac9772c058ebb045787", name: "Goblin"},
+      {full: "583c700ae88f01116f52c0b5029e008de55b398fb7995253189dd0090eb11b61", half: "6db998d0335d9c3f0cef4f752269561ad8634a02a46e858b297da6d6771bad63", name: "Goblin Solider"},
+      {full: "fccd85c0cb007825231e0c853e480cf81f42a4abeffe56560305506f1e430843", half: "228581034a27a09dc90e55c19ab7e2cdc267177e0afbdce21a7f37f8364b4a75", name: "Goblin Spearman"},
+
+      {full: "54d7b0c6c701a9cf0b963dfbd17a83e34091b8fdfe114bfd199335f2eebc6046", half: "b8a03cd1a285d6b3df6cbd1e08261822bf33464d8538b1d24912a26ad492d222", name: "Imp"},
+      {full: "95603bc2c2697d95548f4ba46bdfb026ea0e437d87540a1ded1e539a241b16a3", half: "e6d9468d0a5e884594683ccbda27559cb41247a6218e812b30043e6d78655019", name: "Firebat"},
+      {full: "d5fc0e5c85dd4bd4803af7bde5bfaba1ced5673f04f9a833715bcd4afce9c616", half: "1204559c918501fddbf122f48c0faf13ff4b39aca42ceee350bfa19fdb587608", name: "Pseudodragon Familiar"},
+
+      {full: "8297de55289ff632fe2104a264af5c7a4a115026de79336997caffc3d8926131", half: "26555c6906ea477f10d21d322e90273582cf2cdd8ab8a2ab3deb9904d8f19630", name: "Sun Elf Wizard"},
+      {full: "e7709245876d243bc41f1b7437d2919aabc65f95d21eb7051c6d5442150a9d1c", half: "e66030e16fb1295811a3c1fd89f152110ec7474f4480587ee7a89f7c61f55ba0", name: "Wood Elf Druid"},
+      {full: "e9320fc1c68afc50341d96b53691cf143124e503bcff55dd8933a9cab73a8420", half: "420004c7319a4e01dc9930d80e1d2f0d67247856aafe90148ea5cf8386c57c17", name: "Half Elf Rogue"},
+
+      {full: "5ca9d2f96bb07b00019e75988e5554cefd3d562f2179b18a596051ad61560d8b", half: "ea338eebcc9e78bd0e16fd8e5471fcdb9923f460e8e62bde1852980fc552df3e", name: "Tiefling Rogue"},
+      {full: "d57884520cbf9f6181c8146e742ee7d8fce23df4f07c6e6f283baf4950e9eab6", half: "8ff7dbdd91304a746889fdce89df4a23752fa412ba0d2c8c23de87db2fc87fa1", name: "Tiefling Rogue"},
+
+      {full: "2d3c90634009a568b3c03e4db89c63af6c6c69b8b09604cc3ef272cee917ba4d", half: "71785d69842490fab8b42c1d56e6b7bbe4af7b442cc869d9f64583a2a03ab298", name: "Gelatenous Cube"},
+      {full: "3f87999f7a08ab1ed8e25a97149e0fc2ab6dc2ddbf51e929330cb3e53104c9c9", half: "68357d91a03aad6a570df664f7a1e96596634b55a8d9f23f050e7896644e5496", name: "Troll"},
+      {full: "469439e84bde46789427ac5c208cca90885c95a41ffa0d4dc9db4386c6c36d78", half: "82aa2569251dbbb85054fe60b3a8e31382e647f520e9a225aa94522bcfcc35e6", name: "Acerack"},
+      {full: "b28e22733a80a43359ddc6af1824a5050f36beb6a215a9914a3a01e56c9d45f1", half: "929960de47cedc1838298335a86189ed181a09063a5286acd1a48e4d65b55a2f", name: "Dracolich"},
+      {full: "67d78040b3882beee462846546e784a465bd3608c3b343e25d29072d43db2513", half: "2e6703d338856cb9f371de9f1780a54905e7fcaf510a6487b913148ab981eaa1", name: "Orc riding Direwolf"},
+      {full: "cf8ec1cf516952805f798911ac16b4eb0a6f1c0b5dd889bc781bf001560c33be", half: "b7e24fa00fc4633954e76fd8cd61ea6a0ffb5b016af1086042d7b7a6e27f5a97", name: "Brown Bear"},
+
+      {full: "0db83d6e8175ee3f88bb0f1c1f52f8eb85112fd69c8d05575bed66171b3dff64", half: "22ee4545afd34a98cfe6fbedfbffdfdf6b721bc1ca722321da00cf6ba04186e1", name: "Halfling Rogue"},
+      {full: "2ce28d2ce0ce7b4a44e05a39031c837aa7ff4e16ff28dd7f4a422b8b058d7856", half: "198d85f5eb3a940446151ac938f39729101f95e4629645651ee9d9e8c7b827ac"},
+      {full: "4eaa70b39ccb98cfcb8dd943205b1bc3e591d1719c5998b8dcd45dc5ed960599", half: "9b9b54caf6e2d77f0fc7369d7488d990755c07fa99cca6d2880cf82680642e47", name: "Fire Genasi Sorcerer"},
+      {full: "5030f178d196bd9726ae58aeedd4212b2247148962f1a265e453e40bc9243281", half: "a8000ee257aab2ef0642e6722cff71e1663905b8b2a79489d852158fe986bceb", name: "Female Gnome Wizard"},
+      {full: "5e881983314e69474aa7194588baeba4704a565fccb4a18b332f7a19b01c121e", half: "9d176fd67edf8ddcef127116f48f117370f0dca8b97840432698bc8e14226fcd", name: "Tortle Wizard"},
+      {full: "622ed9b8d73a4d427e73dfa4ea7d6ce1b0f18f6257081bb86c7916697dec5d17", half: "7654f232f4f37e8e5a6535ef839551b934e5ea088afa601fef8a9e0ad826ed32", name: "Dwarf Fighter"},
+      {full: "7f7c8bb385f95fab8287c49b0b15b5d525e9eca61d96e7fed7ef61331568c8c6", half: "f14e68040ec8065522293d08d0c147eea515bbd94819dd0802b5b7eabb9f3887", name: "Halfling Wizard"},
+      {full: "82a6b9e4e9824e645158b3e81a1ad8273820bf3866402ff74c64a588c980a768", half: "0e5793a17cd2c6c4d375df22bada50ffaa53050db60d7e508240d4415068ad44", name: "Female Human Wizard"},
+      {full: "8a57cf877eace04a6d9aa0c271da41a2a47f68f3ba6e8e6c10b499c3a17d9846", half: "96e597b32d44b3b2d773f67c1fce78e6d615c1dad2ed7e4b19e50f8e210b4f50", name: "Dragonborn Paladin"},
+      {full: "91536e86f5fdbac496657a6c2f02089e3e0be5bb4de03b89a3707bd5ab071009", half: "a54614f29d40c1477e712efd8b526bf6e1afb63d6af129ae116cae866346ff5c", name: "Vampire Cleric"},
+      {full: "9e90063e4a88f8b3b72cafb6ebf8623e85d31313af055c759e5f742e54299213", half: "2487d36fe1f3ea8e4dc64d2eacf31bb9e5f9718623928e1ff8e23aed425cae4b", name: "Grung rogue"},
+      {full: "4d2034f45a54e2271f306136f3900d396712fe8394a6fb09f0f7edb20d6f42e6", half: "1091324f502c871f2b43c87056f643d2cd0f9ff473ef629a0bf7a26060392260", name: "Grung Sorcerer"},
+      {full: "cbcbb12abc6971bee2c729c112ff6d9ae327f43568e0bfdbeeb8145d481a055e", half: "816977c1c5e73276eccafc0da82c643b9f4811d16ff36fa5897afa76ba50d890", name: "Grung Ranger"},
+      {full: "ab481294a6a635d140ccc397ff3e7003e98ab16b8d489e96293539d289c56db2", half: "f0bb86b59acaac453971cbb5a3d989cd9b4f2c9022b68f6cef8a429bf69731a9", name: "Half-orc Female Fighter"},
+      {full: "acc723ee3df506423cabd89324cc4ce73a184a9606bcf982f7de9d47229db62c", half: "7e2ea66e1adf8e640781e05c364d6d5d23a40e1a95037e8046db15ffd98761ef", name: "Human female Paladin"},
+      {full: "bbf01d5f4852a30a9f8cdf9feb169cbc4b46586e32d0e436369cf9e113efd8a0", half: "2cdda6197c2b7ece3a35564901f721dbea7c4a818e0bfb062a98eb8fa9fedefc", name: "Gold Dwarf Cleric"},
+      {full: "c66ff2f2ef2862e42ef6761ee8e3b866c2da0a767b2300af46a503204cfbcfd5", half: "e76dfcb28b47c9268c22bc2917470b34b1cb54ec81f0e021024b17666d53bab8", name: "Tabaxi Cleric"},
+      {full: "c716ae4548c1211b67d02c1c1d68f38247a4806aecf1aba98075945351246078", half: "d153efaea6bc96568699ca2f0a6dfdbb7ed35e6b1d1c3e5926407c7f191ec6e4", name: "Dragonborn Cleric"},
+      {full: "e28f65371c9be3657b2a20641bde628d818282abb93212060aaa0315a5f960e7", half: "3a9477f3b1d185f5cc9ae41a3ce4fb74e09dfe13d16ef15da4f2a39778a7bc76", name: "Dragonborn Sorcerer"},
+      {full: "dce6918324908b73afac9c4639ed216f2f373867b2cc365525189ebc815f24c2", half: "8c8a422fc871ff0f5b34c23a3684640a2327a403fbf5d45d6d15efb4f305eb4c", name: "Frost Giant"},
+    ]
+
+    // TODO Local storage to keep track of the scroll position?
+    var contentLength = 0
+    var lastImageIndex = 0
+
+    var addImage = (function(parent, imageHashes) {
+      return function(index) {
+        console.log('adding image ' + index)
+        if(parent && index < imageHashes.length) {
+          var a = document.createElement('a')
+          a.href = "2048/" + imageHashes[index].full + ".jpg"
+          var img = document.createElement('img')
+          img.src = "1024/" + imageHashes[index].half + ".jpg"
+          a.appendChild(img)
+          parent.appendChild(a)
+          contentLength += imageHeight / numColumns
+        }
+      }
+    }(parent, imageHashes))
+
+    for(var i=0; i<numColumns*imagesPerScreenPerColumn; ++i) {
+      addImage(i)
+      ++lastImageIndex
+    }
+
+    var ticking = false
+    window.addEventListener('scroll', function(e) {
+      if (!ticking) {
+        window.requestAnimationFrame(function() {
+          if(window.innerHeight + window.scrollY + imageHeight > contentLength && lastImageIndex < imageHashes.length) {
+            for(var i=0; i < numColumns; ++i) addImage(lastImageIndex++)
+          }
+          ticking = false
+        })
+        ticking = true
+      }
+
+    })
+  })
+</script>
