@@ -29,7 +29,7 @@ I stopped once I wrote down zig.
 Zig excites me and it is hard to explain why.
 Answering that will be the "B" plot this season.
 
-Next time on devlog: setting up the development environment and starting the first project.
+Next time on devlog: setting up the development environment.
 
 [^1]: I'm not going to write my own. I need to leave something for next season.
 [^2]: You can technically build a graph with a `Vec` of objects and use the index/offset as a "pointer". That ends up being unreadable and less safe than `unsafe`.
