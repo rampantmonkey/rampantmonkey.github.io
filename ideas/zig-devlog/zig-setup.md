@@ -1,5 +1,5 @@
 :title Devlog Season One Episode Two: Zig Setup
-:description devlog season one episode one
+:description devlog season one episode two
 :date 2025-01-19
 :slug zig-setup
 :category Devlog Season One
