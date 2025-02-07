@@ -65,6 +65,10 @@ img {
     height: auto;
 }
 
+emph {
+    font-style: italic;
+}
+
 .right {
     float: right;
     display: inline-block;
