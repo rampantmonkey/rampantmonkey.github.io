@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Korean Vocabulary Learning</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+            color: white;
+            overflow-x: hidden;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        
+        .container {
+            width: 100vw;
+            height: 100vh;
+            height: -webkit-fill-available;
+            margin: 0;
+            background: rgba(255,255,255,0.1);
+            padding: env(safe-area-inset-top, 20px) env(safe-area-inset-right, 20px) env(safe-area-inset-bottom, 100px) env(safe-area-inset-left, 20px);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .mode-selector {
+            position: fixed;
+            top: env(safe-area-inset-top, 20px);
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            background: rgba(0,0,0,0.3);
+            border-radius: 25px;
+            padding: 4px;
+            backdrop-filter: blur(20px);
+            z-index: 200;
+            gap: 4px;
+        }
+        
+        .vocab-selector {
+            position: fixed;
+            top: calc(env(safe-area-inset-top, 20px) + 60px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            padding: 8px;
+            backdrop-filter: blur(20px);
+            z-index: 199;
+        }
+        
+        .vocab-select {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            outline: none;
+            cursor: pointer;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        
+        .vocab-select option {
+            background: #333;
+            color: white;
+        }
+        
+        .mode-button {
+            background: transparent;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.7;
+            font-weight: 500;
+        }
+        
+        .mode-button.active {
+            background: rgba(255,255,255,0.2);
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        
+        .word-counter {
+            text-align: center;
+            margin: 10px 0 20px 0;
+            background: rgba(0,0,0,0.2);
+            border-radius: 15px;
+            padding: 12px 16px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .korean {
+            font-size: 3rem;
+            text-align: center;
+            margin: 16px 0;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            line-height: 1.2;
+            position: relative;
+        }
+        
+        .syllable {
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            padding: 8px 4px;
+            margin: 2px;
+            border-radius: 8px;
+            min-width: 44px;
+            min-height: 44px;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .syllable.active {
+            animation: syllablePulse 0.6s ease-out;
+        }
+        
+        @keyframes syllablePulse {
+            0% { 
+                transform: translateY(0) scale(1);
+                color: white;
+            }
+            50% { 
+                transform: translateY(-12px) scale(1.1);
+                color: #ffd700;
+                text-shadow: 0 0 25px rgba(255,215,0,0.8);
+            }
+            100% { 
+                transform: translateY(0) scale(1);
+                color: white;
+            }
+        }
+        
+        .bouncing-ball {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #ffd700;
+            border-radius: 50%;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            box-shadow: 0 0 15px rgba(255,215,0,0.8);
+            z-index: 10;
+        }
+        
+        .bouncing-ball.animate {
+            opacity: 1;
+            animation: bounce 0.6s ease-in-out;
+        }
+        
+        @keyframes bounce {
+            0% { transform: translateX(-50%) translateY(-10px); }
+            50% { transform: translateX(-50%) translateY(10px) scale(1.2); }
+            100% { transform: translateX(-50%) translateY(-10px); }
+        }
+        
+        .definition {
+            background: rgba(0,0,0,0.2);
+            border-radius: 20px;
+            padding: 20px 16px;
+            margin: 16px 0;
+            text-align: center;
+        }
+        
+        .english {
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+        
+        .romanization {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-top: 8px;
+            font-style: italic;
+        }
+        
+        .input-area {
+            background: rgba(0,0,0,0.2);
+            border-radius: 20px;
+            padding: 20px 16px;
+            margin: 16px 0;
+            text-align: center;
+            display: none;
+        }
+        
+        .input-field {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 15px;
+            padding: 12px 16px;
+            color: white;
+            font-size: 1.2rem;
+            text-align: center;
+            width: 100%;
+            max-width: 300px;
+            outline: none;
+            font-family: inherit;
+        }
+        
+        .input-field::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+        
+        .input-field:focus {
+            border-color: #ffd700;
+            box-shadow: 0 0 0 3px rgba(255,215,0,0.3);
+        }
+        
+        .feedback {
+            margin-top: 12px;
+            font-size: 1rem;
+            font-weight: 500;
+            min-height: 24px;
+        }
+        
+        .feedback.correct {
+            color: #4ade80;
+        }
+        
+        .feedback.incorrect {
+            color: #f87171;
+        }
+        
+        .controls {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 16px env(safe-area-inset-right, 16px) calc(16px + env(safe-area-inset-bottom, 0px)) env(safe-area-inset-left, 16px);
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            z-index: 100;
+        }
+        
+        button {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 28px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 0;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            min-height: 56px;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            flex: 1;
+            min-width: 0;
+            white-space: nowrap;
+        }
+        
+        @media (hover: hover) {
+            button:hover {
+                background: rgba(255,255,255,0.3);
+                transform: translateY(-2px);
+            }
+        }
+        
+        button:active {
+            transform: scale(0.95);
+            background: rgba(255,255,255,0.4);
+        }
+        
+        .loading {
+            text-align: center;
+            font-size: 1.2rem;
+            opacity: 0.7;
+            padding: 40px 0;
+        }
+        
+        @media screen and (max-width: 430px) {
+            .korean {
+                font-size: 2.5rem;
+                margin: 12px 0;
+            }
+            
+            .controls {
+                gap: 8px;
+                padding: 12px 12px calc(12px + env(safe-area-inset-bottom, 0px));
+            }
+            
+            button {
+                padding: 14px 16px;
+                font-size: 0.9rem;
+                border-radius: 24px;
+            }
+            
+            .mode-selector {
+                top: env(safe-area-inset-top, 10px);
+            }
+            
+            .mode-button {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+            
+            .vocab-selector {
+                top: calc(env(safe-area-inset-top, 10px) + 50px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mode-selector">
+        <button class="mode-button active" onclick="setMode('present')">Present</button>
+        <button class="mode-button" onclick="setMode('hangul')">Enter Hangul</button>
+        <button class="mode-button" onclick="setMode('english')">Enter English</button>
+    </div>
+    
+    <div class="vocab-selector">
+        <select class="vocab-select" id="vocabSelect" onchange="changeVocabSet()">
+            <option value="0">Loading vocabulary...</option>
+        </select>
+    </div>
+    
+    <div class="container">
+        <div id="loadingDiv" class="loading">Loading Korean vocabulary...</div>
+        
+        <div id="appDiv" style="display: none">
+            <div class="word-counter">
+                <span id="wordCounter">Word 1 of ---</span>
+            </div>
+            
+            <!-- Present Mode -->
+            <div id="presentMode" class="mode-content">
+                <div class="korean" id="korean">
+                    <div class="bouncing-ball" id="ball"></div>
+                </div>
+                
+                <div class="definition">
+                    <div class="english" id="english"></div>
+                    <div class="romanization" id="romanization"></div>
+                </div>
+            </div>
+            
+            <!-- Enter Hangul Mode -->
+            <div id="hangulMode" class="mode-content" style="display: none">
+                <div class="definition">
+                    <div class="english" id="englishPrompt"></div>
+                </div>
+                
+                <div class="input-area" style="display: block">
+                    <input type="text" class="input-field" id="hangulInput" placeholder="한국어를 입력하세요" autocomplete="off">
+                    <div class="feedback" id="hangulFeedback"></div>
+                </div>
+                
+                <div class="korean" id="hangulAnswer" style="display: none">
+                    <div class="bouncing-ball" id="hangulBall"></div>
+                </div>
+            </div>
+            
+            <!-- Enter English Mode -->
+            <div id="englishMode" class="mode-content" style="display: none">
+                <div class="korean" id="englishModeKorean">
+                    <div class="bouncing-ball" id="englishBall"></div>
+                </div>
+                
+                <div class="input-area" style="display: block">
+                    <input type="text" class="input-field" id="englishInput" placeholder="Enter English translation" autocomplete="off">
+                    <div class="feedback" id="englishFeedback"></div>
+                </div>
+                
+                <div class="definition" id="englishAnswer" style="display: none">
+                    <div class="english" id="englishCorrectAnswer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="controls">
+        <button onclick="playAudio()">🔊 Play</button>
+        <button onclick="playSlowAudio()">🐌 Slow</button>
+        <button onclick="nextWord()">➡️ Next</button>
+    </div>
+
+    <script>
+        // Korean syllable timing lookup table for animation
+        const koreanDurations = {
+            '가': 110, '나': 100, '다': 105, '라': 95, '마': 105,
+            '바': 100, '사': 95, '아': 120, '자': 100, '차': 105,
+            '카': 100, '타': 105, '파': 100, '하': 105,
+            '거': 105, '너': 95, '더': 100, '러': 90, '머': 100,
+            '버': 95, '서': 90, '어': 115, '저': 95, '처': 100,
+            '커': 95, '터': 100, '퍼': 95, '허': 100,
+            '고': 110, '노': 100, '도': 105, '로': 95, '모': 105,
+            '보': 100, '소': 95, '오': 115, '조': 100, '초': 105,
+            '코': 100, '토': 105, '포': 100, '호': 105,
+            '구': 105, '누': 95, '두': 100, '루': 90, '무': 100,
+            '부': 95, '수': 90, '우': 115, '주': 95, '추': 100,
+            '쿠': 95, '투': 100, '푸': 95, '후': 100,
+            '그': 100, '느': 95, '드': 100, '르': 90, '므': 95,
+            '브': 90, '스': 85, '으': 110, '즈': 90, '츠': 95,
+            '크': 90, '트': 95, '프': 90, '흐': 95,
+            '기': 95, '니': 85, '디': 90, '리': 80, '미': 90,
+            '비': 85, '시': 80, '이': 105, '지': 85, '치': 90,
+            '키': 85, '티': 90, '피': 85, '히': 90
+        };
+
+        function predictKoreanTiming(korean, rate = 1.0) {
+            const syllables = korean.split('');
+            const durations = syllables.map((syllable, index) => {
+                let duration = koreanDurations[syllable] || 100;
+                
+                if (index === 0) duration *= 1.1;
+                if (index === syllables.length - 1) duration *= 1.2;
+                
+                duration = duration / Math.pow(rate, 0.8);
+                
+                return Math.round(duration);
+            });
+
+            let currentTime = 0;
+            const timings = durations.map((duration, index) => {
+                const timing = {
+                    syllable: syllables[index],
+                    startTime: currentTime,
+                    duration: duration
+                };
+                currentTime += duration;
+                return timing;
+            });
+
+            return {
+                totalDuration: currentTime,
+                timings: timings
+            };
+        }
+
+        // Simple Korean romanization lookup table
+        const romanizationMap = {
+            '가': 'ga', '나': 'na', '다': 'da', '라': 'ra', '마': 'ma',
+            '바': 'ba', '사': 'sa', '아': 'a', '자': 'ja', '차': 'cha',
+            '카': 'ka', '타': 'ta', '파': 'pa', '하': 'ha',
+            '거': 'geo', '너': 'neo', '더': 'deo', '러': 'reo', '머': 'meo',
+            '버': 'beo', '서': 'seo', '어': 'eo', '저': 'jeo', '처': 'cheo',
+            '커': 'keo', '터': 'teo', '퍼': 'peo', '허': 'heo',
+            '고': 'go', '노': 'no', '도': 'do', '로': 'ro', '모': 'mo',
+            '보': 'bo', '소': 'so', '오': 'o', '조': 'jo', '초': 'cho',
+            '코': 'ko', '토': 'to', '포': 'po', '호': 'ho',
+            '구': 'gu', '누': 'nu', '두': 'du', '루': 'ru', '무': 'mu',
+            '부': 'bu', '수': 'su', '우': 'u', '주': 'ju', '추': 'chu',
+            '쿠': 'ku', '투': 'tu', '푸': 'pu', '후': 'hu',
+            '그': 'geu', '느': 'neu', '드': 'deu', '르': 'reu', '므': 'meu',
+            '브': 'beu', '스': 'seu', '으': 'eu', '즈': 'jeu', '츠': 'cheu',
+            '크': 'keu', '트': 'teu', '프': 'peu', '흐': 'heu',
+            '기': 'gi', '니': 'ni', '디': 'di', '리': 'ri', '미': 'mi',
+            '비': 'bi', '시': 'si', '이': 'i', '지': 'ji', '치': 'chi',
+            '키': 'ki', '티': 'ti', '피': 'pi', '히': 'hi',
+            
+            // Common words
+            '안': 'an', '녕': 'nyeong', '세': 'se', '요': 'yo',
+            '감': 'gam', '합': 'hap', '다': 'da',
+            '물': 'mul', '밥': 'bap', '집': 'jip',
+            '학': 'hak', '교': 'gyo', '친': 'chin', '구': 'gu',
+            '먹': 'meok', '마': 'ma', '시': 'si',
+            '좋': 'joh', '작': 'jak', '큰': 'keun',
+            '뭐': 'mwo', '왜': 'wae', '어': 'eo', '디': 'di',
+            '언': 'eon', '제': 'je', '누': 'nu',
+            '어': 'eo', '떻': 'tteoh', '게': 'ge',
+            '있': 'iss', '원': 'won', '말': 'mal',
+            '알': 'al', '네': 'ne', '아': 'a', '니': 'ni',
+            '주': 'ju', '세': 'se', '와': 'wa',
+            '것': 'geot', '이': 'i', '저': 'jeo',
+            '여': 'yeo', '기': 'gi', '들': 'deul'
+        };
+
+        function getRomanization(korean) {
+            const syllables = korean.split('');
+            const romanized = syllables.map(syllable => {
+                return romanizationMap[syllable] || syllable;
+            });
+            return romanized.join('-');
+        }
+
+        // Vocabulary sets with embedded data
+        const vocabularySets = {
+            'first-30': {
+                name: 'First 30 Essential Words',
+                description: 'The most essential Korean words for beginners',
+                words: [
+                    {"english": "I", "korean": "나"},
+                    {"english": "You (informal)", "korean": "너"},
+                    {"english": "We", "korean": "우리"},
+                    {"english": "What", "korean": "뭐"},
+                    {"english": "Why", "korean": "왜"},
+                    {"english": "Where", "korean": "어디"},
+                    {"english": "When", "korean": "언제"},
+                    {"english": "Who", "korean": "누구"},
+                    {"english": "How", "korean": "어떻게"},
+                    {"english": "To be", "korean": "이다"},
+                    {"english": "To have/exist", "korean": "있다"},
+                    {"english": "To do", "korean": "하다"},
+                    {"english": "To go", "korean": "가다"},
+                    {"english": "They", "korean": "그들"},
+                    {"english": "To want", "korean": "원하다"},
+                    {"english": "To eat", "korean": "먹다"},
+                    {"english": "To drink", "korean": "마시다"},
+                    {"english": "To speak", "korean": "말하다"},
+                    {"english": "To know/understand", "korean": "알다"},
+                    {"english": "Yes", "korean": "네"},
+                    {"english": "No", "korean": "아니요"},
+                    {"english": "Please (when requesting)", "korean": "주세요"},
+                    {"english": "Thank you", "korean": "감사합니다"},
+                    {"english": "Hello", "korean": "안녕하세요"},
+                    {"english": "Goodbye", "korean": "안녕히 가세요"},
+                    {"english": "This", "korean": "이것"},
+                    {"english": "That", "korean": "저것"},
+                    {"english": "Here", "korean": "여기"},
+                    {"english": "There", "korean": "저기"}
+                ]
+            },
+            'starter': {
+                name: 'Starter Vocabulary',
+                description: 'Extended vocabulary for daily conversations',
+                words: [
+                    {"korean": "안녕하세요", "english": "Hello (formal)"},
+                    {"korean": "감사합니다", "english": "Thank you"},
+                    {"korean": "죄송합니다", "english": "I'm sorry"},
+                    {"korean": "물", "english": "water"},
+                    {"korean": "밥", "english": "rice/meal"},
+                    {"korean": "집", "english": "house"},
+                    {"korean": "학교", "english": "school"},
+                    {"korean": "친구", "english": "friend"},
+                    {"korean": "가다", "english": "to go"},
+                    {"korean": "오다", "english": "to come"},
+                    {"korean": "먹다", "english": "to eat"},
+                    {"korean": "마시다", "english": "to drink"},
+                    {"korean": "좋다", "english": "to be good"},
+                    {"korean": "크다", "english": "to be big"},
+                    {"korean": "작다", "english": "to be small"},
+                    {"korean": "새", "english": "bird"},
+                    {"korean": "고양이", "english": "cat"},
+                    {"korean": "개", "english": "dog"},
+                    {"korean": "책", "english": "book"},
+                    {"korean": "연필", "english": "pencil"},
+                    {"korean": "사람", "english": "person"},
+                    {"korean": "아이", "english": "child"},
+                    {"korean": "엄마", "english": "mom"},
+                    {"korean": "아빠", "english": "dad"},
+                    {"korean": "선생님", "english": "teacher"},
+                    {"korean": "학생", "english": "student"},
+                    {"korean": "의사", "english": "doctor"},
+                    {"korean": "간호사", "english": "nurse"},
+                    {"korean": "음식", "english": "food"},
+                    {"korean": "차", "english": "tea/car"}
+                ]
+            }
+        };
+
+        // App state
+        let currentWordIndex = 0;
+        let totalWordCount = 0;
+        let currentWord = null;
+        let currentMode = 'present';
+        let loadedKoreanVoice = null;
+        let currentVocabSet = 'first-30';
+
+        // Vocabulary data is now embedded directly in the code above
+        function initVocabularyData() {
+            console.log('✅ Using embedded vocabulary data');
+            console.log('✅ First-30 vocabulary:', vocabularySets['first-30'].words.length, 'words');
+            console.log('✅ Starter vocabulary:', vocabularySets['starter'].words.length, 'words');
+            return true;
+        }
+
+        function populateVocabSelector() {
+            const select = document.getElementById('vocabSelect');
+            select.innerHTML = '';
+            
+            Object.keys(vocabularySets).forEach(key => {
+                const set = vocabularySets[key];
+                if (set.words.length > 0) {
+                    const option = document.createElement('option');
+                    option.value = key;
+                    option.textContent = `${set.name} (${set.words.length} words)`;
+                    select.appendChild(option);
+                }
+            });
+            
+            select.value = currentVocabSet;
+            console.log('✅ Vocabulary selector populated');
+        }
+
+        function changeVocabSet() {
+            const select = document.getElementById('vocabSelect');
+            const newSet = select.value;
+            
+            if (vocabularySets[newSet] && vocabularySets[newSet].words.length > 0) {
+                currentVocabSet = newSet;
+                currentWordIndex = 0;
+                totalWordCount = vocabularySets[newSet].words.length;
+                currentWord = vocabularySets[newSet].words[0];
+                
+                resetModeState();
+                updateDisplay();
+                
+                console.log(`📚 Switched to: ${vocabularySets[newSet].name} (${totalWordCount} words)`);
+            }
+        }
+
+        function getCurrentVocabulary() {
+            return vocabularySets[currentVocabSet]?.words || [];
+        }
+
+        function setMode(mode) {
+            currentMode = mode;
+            
+            // Update mode buttons
+            document.querySelectorAll('.mode-button').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`.mode-button[onclick="setMode('${mode}')"]`).classList.add('active');
+            
+            // Show/hide appropriate content
+            document.querySelectorAll('.mode-content').forEach(content => content.style.display = 'none');
+            document.getElementById(`${mode}Mode`).style.display = 'block';
+            
+            // Reset current mode state
+            resetModeState();
+            
+            // Update display for current word
+            updateDisplay();
+        }
+
+        function resetModeState() {
+            // Clear input fields
+            document.getElementById('hangulInput').value = '';
+            document.getElementById('englishInput').value = '';
+            
+            // Clear feedback
+            document.getElementById('hangulFeedback').textContent = '';
+            document.getElementById('englishFeedback').textContent = '';
+            document.getElementById('hangulFeedback').className = 'feedback';
+            document.getElementById('englishFeedback').className = 'feedback';
+            
+            // Hide answer reveals
+            document.getElementById('hangulAnswer').style.display = 'none';
+            document.getElementById('englishAnswer').style.display = 'none';
+        }
+
+        function updateDisplay() {
+            if (!currentWord) return;
+            
+            // Update word counter
+            document.getElementById('wordCounter').textContent = `Word ${currentWordIndex + 1} of ${totalWordCount}`;
+            
+            switch(currentMode) {
+                case 'present':
+                    updatePresentMode();
+                    break;
+                case 'hangul':
+                    updateHangulMode();
+                    break;
+                case 'english':
+                    updateEnglishMode();
+                    break;
+            }
+        }
+
+        function updatePresentMode() {
+            // Update Korean text with syllable spans
+            const koreanEl = document.getElementById('korean');
+            koreanEl.innerHTML = '<div class="bouncing-ball" id="ball"></div>' +
+                currentWord.korean.split('').map((char, i) => 
+                    `<span class="syllable" data-index="${i}" onclick="animateSyllable(${i})">${char}</span>`
+                ).join('');
+            
+            // Update English definition
+            document.getElementById('english').textContent = currentWord.english;
+            
+            // Update romanization
+            document.getElementById('romanization').textContent = getRomanization(currentWord.korean);
+        }
+
+        function updateHangulMode() {
+            document.getElementById('englishPrompt').textContent = currentWord.english;
+        }
+
+        function updateEnglishMode() {
+            const koreanEl = document.getElementById('englishModeKorean');
+            koreanEl.innerHTML = '<div class="bouncing-ball" id="englishBall"></div>' +
+                currentWord.korean.split('').map((char, i) => 
+                    `<span class="syllable" data-index="${i}">${char}</span>`
+                ).join('');
+        }
+
+        function animateSyllable(index, ballId = 'ball') {
+            document.querySelectorAll('.syllable').forEach(s => s.classList.remove('active'));
+            
+            const syllable = document.querySelector(`.syllable[data-index="${index}"]`);
+            if (syllable) {
+                syllable.classList.add('active');
+                
+                const ball = document.getElementById(ballId);
+                const rect = syllable.getBoundingClientRect();
+                const containerRect = syllable.parentElement.getBoundingClientRect();
+                const ballPos = rect.left - containerRect.left + rect.width / 2;
+                
+                ball.style.left = `${ballPos}px`;
+                ball.classList.remove('animate');
+                setTimeout(() => ball.classList.add('animate'), 10);
+                
+                setTimeout(() => syllable.classList.remove('active'), 600);
+            }
+        }
+
+        function preloadKoreanVoice() {
+            const voices = speechSynthesis.getVoices();
+            loadedKoreanVoice = voices.find(voice => voice.lang.startsWith('ko')) || voices[0];
+        }
+
+        function playAudio(slow = false) {
+            if (!currentWord) return;
+            
+            const rate = slow ? 0.5 : 1.0;
+            const timing = predictKoreanTiming(currentWord.korean, rate);
+            
+            const utterance = new SpeechSynthesisUtterance(currentWord.korean);
+            utterance.lang = 'ko-KR';
+            utterance.rate = rate;
+            utterance.volume = 1.0;
+            
+            if (loadedKoreanVoice) {
+                utterance.voice = loadedKoreanVoice;
+            }
+            
+            let animationStartTime;
+            let syllableIndex = 0;
+            let animationId;
+            
+            const animateWithPredictedTiming = () => {
+                const now = Date.now();
+                const elapsedTime = now - animationStartTime;
+                
+                timing.timings.forEach((syllableTiming, index) => {
+                    if (elapsedTime >= syllableTiming.startTime && index >= syllableIndex) {
+                        const ballId = currentMode === 'english' ? 'englishBall' : (currentMode === 'hangul' ? 'hangulBall' : 'ball');
+                        animateSyllable(index, ballId);
+                        syllableIndex = index + 1;
+                    }
+                });
+                
+                if (syllableIndex < timing.timings.length) {
+                    animationId = requestAnimationFrame(animateWithPredictedTiming);
+                }
+            };
+            
+            utterance.onstart = () => {
+                animationStartTime = Date.now();
+                animationId = requestAnimationFrame(animateWithPredictedTiming);
+            };
+            
+            utterance.onend = () => {
+                if (animationId) cancelAnimationFrame(animationId);
+            };
+            
+            speechSynthesis.speak(utterance);
+        }
+
+        function playSlowAudio() {
+            playAudio(true);
+        }
+
+        function nextWord() {
+            const vocabulary = getCurrentVocabulary();
+            currentWordIndex = (currentWordIndex + 1) % vocabulary.length;
+            currentWord = vocabulary[currentWordIndex];
+            resetModeState();
+            updateDisplay();
+        }
+
+        // Input handling for learning modes
+        document.getElementById('hangulInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkHangulAnswer();
+            }
+        });
+
+        document.getElementById('englishInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkEnglishAnswer();
+            }
+        });
+
+        function checkHangulAnswer() {
+            const input = document.getElementById('hangulInput').value.trim();
+            const feedback = document.getElementById('hangulFeedback');
+            
+            if (input === currentWord.korean) {
+                feedback.textContent = '정답! Correct!';
+                feedback.className = 'feedback correct';
+                
+                // Show the Korean answer with animation capability
+                const answerEl = document.getElementById('hangulAnswer');
+                answerEl.innerHTML = '<div class="bouncing-ball" id="hangulBall"></div>' +
+                    currentWord.korean.split('').map((char, i) => 
+                        `<span class="syllable" data-index="${i}">${char}</span>`
+                    ).join('');
+                answerEl.style.display = 'block';
+            } else {
+                feedback.textContent = `Try again! The answer is: ${currentWord.korean}`;
+                feedback.className = 'feedback incorrect';
+            }
+        }
+
+        function checkEnglishAnswer() {
+            const input = document.getElementById('englishInput').value.trim().toLowerCase();
+            const correct = currentWord.english.toLowerCase();
+            const feedback = document.getElementById('englishFeedback');
+            
+            if (input === correct || currentWord.english.toLowerCase().includes(input)) {
+                feedback.textContent = 'Correct!';
+                feedback.className = 'feedback correct';
+                
+                document.getElementById('englishCorrectAnswer').textContent = currentWord.english;
+                document.getElementById('englishAnswer').style.display = 'block';
+            } else {
+                feedback.textContent = `Try again! The answer is: ${currentWord.english}`;
+                feedback.className = 'feedback incorrect';
+            }
+        }
+
+        // Initialize app
+        function initApp() {
+            console.log('🚀 Starting Korean vocabulary app...');
+            
+            // Initialize embedded vocabulary data
+            const dataLoaded = initVocabularyData();
+            
+            if (dataLoaded && vocabularySets[currentVocabSet].words.length > 0) {
+                // Populate vocabulary selector
+                populateVocabSelector();
+                
+                // Initialize current word
+                totalWordCount = vocabularySets[currentVocabSet].words.length;
+                currentWord = vocabularySets[currentVocabSet].words[0];
+                
+                console.log('✅ Vocabulary loaded:', totalWordCount, 'words');
+            } else {
+                console.log('❌ No vocabulary data available');
+                document.querySelector('.vocab-selector').style.display = 'none';
+            }
+            
+            // Load Korean voices
+            speechSynthesis.onvoiceschanged = preloadKoreanVoice;
+            preloadKoreanVoice();
+            
+            document.getElementById('loadingDiv').style.display = 'none';
+            document.getElementById('appDiv').style.display = 'block';
+            
+            updateDisplay();
+            
+            console.log('✅ Korean vocabulary app loaded successfully');
+        }
+
+        // Start the app
+        initApp();
+    </script>
+</body>
+</html>
