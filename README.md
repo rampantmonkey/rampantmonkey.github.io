@@ -6,8 +6,7 @@ Personal website, now maintained as plain static HTML/CSS.
 
 - Edit pages directly in the repo root.
 - Home page: `index.html`
-- Writing index: `writing/index.html`
-- Individual posts: `writing/<slug>/index.html`
+- Writing posts: `writing/<slug>/index.html`
 - Shared styles: `main.css`
 - Static assets: `images/` and `files/`
 

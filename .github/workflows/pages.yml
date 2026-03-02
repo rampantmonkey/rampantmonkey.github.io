@@ -14,7 +14,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Build static artifact by copying site files
-        run: mkdir site && cp -R CNAME index.html main.css images files writing colors contact keyboards puzzles resume site/
+        run: mkdir site && cp -R CNAME index.html main.css images files writing colors keyboards puzzles resume site/
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:

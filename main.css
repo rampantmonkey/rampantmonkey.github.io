@@ -33,7 +33,6 @@ body {
     padding: 0 2em;
     max-width: 1024px;
     background-color: var(--antique-white-light);
-    background-image: radial-gradient(circle at 8% 12%, rgba(181, 166, 66, 0.12) 0%, rgba(181, 166, 66, 0) 44%);
     color: var(--dark-sienna);
     font-family: monospace;
 }
@@ -99,8 +98,6 @@ emph {
     gap: 1rem;
     align-items: center;
     padding: 1rem;
-    border: 1px solid rgba(78, 56, 34, 0.3);
-    background: linear-gradient(120deg, rgba(255, 233, 211, 0.95) 0%, rgba(253, 249, 243, 0.95) 100%);
 }
 
 .hero-logo {
@@ -135,14 +132,11 @@ emph {
 }
 
 .hero-links a {
-    border: 1px solid var(--cafe-noir);
-    padding: 0.25rem 0.5rem;
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 .hero-links a:hover {
-    background: var(--brass);
-    color: var(--dark-sienna);
+    text-decoration-thickness: 2px;
 }
 
 .landing-grid {
@@ -152,9 +146,7 @@ emph {
 }
 
 .panel {
-    border: 1px solid rgba(78, 56, 34, 0.3);
     padding: 0.7rem 1rem;
-    background: rgba(253, 249, 243, 0.8);
 }
 
 .panel h2 {
@@ -164,17 +156,6 @@ emph {
 .panel ul {
     margin-bottom: 0.4rem;
 }
-
-.hero,
-.panel {
-    opacity: 0;
-    transform: translateY(10px);
-    animation: rise-in 420ms ease-out forwards;
-}
-
-.landing-grid .panel:nth-child(1) { animation-delay: 120ms; }
-.landing-grid .panel:nth-child(2) { animation-delay: 180ms; }
-.landing-grid .panel:nth-child(3) { animation-delay: 240ms; }
 
 .widget {
   width: 90%;
@@ -284,25 +265,5 @@ input:focus {
 
   .print-only {
     display: initial;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero,
-  .panel {
-    animation: none;
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes rise-in {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
