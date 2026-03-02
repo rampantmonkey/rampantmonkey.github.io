@@ -13,18 +13,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Install go toolchain
-        uses: actions/setup-go@v5
-        with:
-          go-version: '^1.16.0'
-      - name: Compile static site generator
-        run: go build
-      - name: Render Website
-        run: ./website
+      - name: Build static artifact by copying site files
+        run: mkdir site && cp -R CNAME index.html main.css images files writing colors contact keyboards puzzles resume site/
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./rendered
+          path: ./site
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

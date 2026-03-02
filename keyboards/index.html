@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Casey Robinson - Keyboards</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="/main.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
+    <script src="/files/img-showcase.js"></script>
+    <script src="/files/pagemap.js"></script>
+</head>
+
+<body>
+    <nav>
+        <p> <a href="/">Casey</a>
+          - <a href="/writing/">Writing</a>
+          - <a href="/contact/">Contact</a>
+          - <a href="/resume/">Resume</a>
+        </p>
+    </nav>
+    <style>
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  .gallery div {
+    position: relative;
+  }
+
+  .gallery span {
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: var(--antique-white);
+    background: var(--cafe-noir);
+    padding: 0.5em;
+  }
+
+  .gallery div:hover span {
+    visibility: visible;
+  }
+</style>
+
+<section class="gallery">
+  <div><span>Poker II</span><img src="/images/keyboards/poker_ii.thumb.jpg" /></div>
+  <div><span>Ergodox EZ</span><img src="/images/keyboards/ergodox-ez-white.thumb.jpg" /></div>
+  <div><span>Kinesis Advantage</span><img src="/images/keyboards/kinesis-advantage.thumb.jpg" /></div>
+  <div><span>Planck EZ</span><img src="/images/keyboards/planck-ez.thumb.jpg" /></div>
+  <div><span>Atreus</span><img src="/images/keyboards/atreus.thumb.jpg" /></div>
+  <div><span>Happy Hacking Pro 2</span><img src="/images/keyboards/hhkb_pro_2.thumb.jpg" /></div>
+  <div><span>Ergodox Infinity</span><img src="/images/keyboards/ergodox-infinity.thumb.jpg" /></div>
+  <div><span>DASKey</span><img src="/images/keyboards/daskey.thumb.jpg" /></div>
+  <div><span>Ergodox EZ</span><img src="/images/keyboards/ergodox-ez-black.thumb.jpg" /></div>
+</section>
+    <div data-pagemap></div>
+    <footer>
+        <p>Casey Robinson 2009-2026. Any and all opinions listed here are my own and not representative of my employers; past, present, or future.</p>
+    </footer>
+</body>

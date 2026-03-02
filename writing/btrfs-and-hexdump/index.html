@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>btrfs and hexdump</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="/main.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
+    <script src="/files/img-showcase.js"></script>
+    <script src="/files/pagemap.js"></script>
+</head>
+
+<body>
+    <nav>
+        <p> <a href="/">Casey</a>
+          - <a href="/writing/">Writing</a>
+          - <a href="/contact/">Contact</a>
+          - <a href="/resume/">Resume</a>
+        </p>
+    </nav>
+    <main class="writing"><h1>btrfs and hexdump</h1>
+<hr />
+<p>Today I made a silly mistake.
+I hit tab-complete one too many times and accidentally removed a project instead of a symlink.
+This could have been disastrous but I have backups and remote copies of the code.<sup id="fnref1"><a href="#fn1" rel="footnote">1</a></sup>
+Since I was confident with my backup strategy I decided to experiment.
+What if I use <a href="http://manpages.debian.org/cgi-bin/man.cgi?query=hexdump">hexdump</a> to find my files?</p>
+
+<p>Now for an attempt at reverse engineering my thought process.</p>
+
+<pre><code>1. My home directory is stored on a btrfs volume.
+2. btrfs uses copy-on-write.
+3. Therefore my files should still be intact (even if I zeroed out the files).
+4. hexdump can present the raw contents of a file.
+5. Everything in linux is a file.
+6. Use hexdump to display contents of hard drive /dev/sda2
+</code></pre>
+
+<p>Conveniently <a href="https://btrfs.wiki.kernel.org">btrfs</a> stores the filename at the end of a file block (at least for small enough files).
+This made searching trivial, just search for the filename.
+A few rounds of copy and paste later, my project was back.</p>
+
+<p>While hexdump is not the ideal answer for data recovery it works.</p>
+
+<div class="footnotes">
+<hr>
+<ol>
+
+<li id="fn1">
+<p>distributed version control ftw!&nbsp;<a href="#fnref1" rev="footnote">&#8617;</a></p>
+</li>
+
+</ol>
+</div>
+
+</main>
+
+    <div data-pagemap></div>
+    <footer>
+        <p>Casey Robinson 2009-2026. Any and all opinions listed here are my own and not representative of my employers; past, present, or future.</p>
+    </footer>
+</body>

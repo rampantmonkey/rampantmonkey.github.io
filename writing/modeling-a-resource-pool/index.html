@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Modeling a Resource Pool</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="/main.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
+    <script src="/files/img-showcase.js"></script>
+    <script src="/files/pagemap.js"></script>
+</head>
+
+<body>
+    <nav>
+        <p> <a href="/">Casey</a>
+          - <a href="/writing/">Writing</a>
+          - <a href="/contact/">Contact</a>
+          - <a href="/resume/">Resume</a>
+        </p>
+    </nav>
+    <main class="writing"><h1>Modeling a Resource Pool</h1>
+<hr />
+<p>During a hackathon at work I took the opportunity to use TLA+<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup> to model one of our services.
+After modeling this service I found a correctness bug, which led to a new design and a second model which upholds the desired invariant.</p>
+
+<p>First some background on the service.
+This service is responsible for providing access tokens to one of our vendors.
+We pre-pay for a fixed number of tokens in use concurrently.
+If we go over this limit we will be billed for the excess.
+This provides our invariant: the system must ensure that we never exceed the initial allocation.</p>
+
+<p>Great start.
+I found a concurrent system which has an easily statable goal.
+Now to model the existing implementation and see if it works.
+(If you want to skip ahead you can find the full model here.<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup>)</p>
+
+<p>I began by defining the module and setting up a few constants.</p>
+
+<ul>
+<li><p><code>MaxTokens</code>, the number of tokens we pay for.</p></li>
+
+<li><p><code>Instances</code>, a set<sup class="footnote-ref" id="fnref:3"><a href="#fn:3">3</a></sup> where each member represents an individual running instance of the service.</p>
+
+<pre><code>------------------------ MODULE ExistingService ------------------------
+EXTENDS Integers
+CONSTANTS MaxTokens, Instances
+
+
+ASSUME MaxTokens &gt; 0
+ASSUME Instances /= {}
+========================================================================
+</code></pre></li>
+</ul>
+
+<p>Next up, defining the invariant.
+This required defining two global variables to represent the external state of our vendor; the number of tokens fetched and the number of tokens returned.</p>
+
+<pre><code>    (*--algorithm tokensWithLock
+    variables
+        token_fetch_count = 0,
+        token_return_count = 0;
+
+    define
+        MaxTokensNotExceeded == MaxTokens &gt;= token_fetch_count - token_return_count
+    end define;
+    end algorithm;*)
+</code></pre>
+
+<p>Each instance of the is essentially an infinite loop which does one of two things on each iteration: fetch a new token, or return a used token.
+This can be directly modeled with a <code>process</code> and trivial implementations of fetch and return.</p>
+
+<pre><code>    process instance \in Instances
+    begin
+        InstanceLoop:
+            while TRUE do
+                either
+                    FetchToken:
+                        token_fetch_count := token_fetch_count + 1;
+                or
+                    ReturnToken:
+                        token_return_count := token_return_count + 1;
+                end either;
+            end while;
+    end process;
+</code></pre>
+
+<p>At this point we have a specification that can be evaluated with <code>tlc</code>.
+<code>Invariant MaxTokensNotExceeded is violated.</code>, this was expected since the specification allocates new tokens without considering how many tokens have been fetched or returned yet.</p>
+
+<p>To coordinate access, the existing implementation uses redlock to create a shared lock inside of Redis.
+Let&rsquo;s add the lock into our specification and see what happens.<sup class="footnote-ref" id="fnref:4"><a href="#fn:4">4</a></sup></p>
+
+<pre><code>    process instance \in Instances
+    variable has_lock = FALSE;
+    begin
+        InstanceLoop:
+            while TRUE do
+                either
+                    FetchToken:
+                        GetLock:
+                            has_lock := TRUE;
+                        GetToken:
+                            if MaxTokens - token_fetch_count + token_return_count &gt; 1 then
+                            token_fetch_count := token_fetch_count + 1;
+                            end if;
+                        ReleaseLock:
+                            has_lock := FALSE;
+                or
+                    ReturnToken:
+                        \* Returning the same token multiple times is fine.
+                        \* So rather than modeling the individual tokens, just enforce this invariant with an if statment.
+                        if token_return_count &lt; token_fetch_count then
+                            token_return_count := token_return_count + 1;
+                        end if;
+                end either;
+            end while;
+    end process;
+</code></pre>
+
+<p>This is the fundamental error inside of the existing implementation.
+Redlock uses a timeout to ensure liveness since it is designed to reduce resource contention not correctness.
+Therefore we need something with a stronger guarantee.</p>
+
+<p>For this new version, I introduced the concept of a &lsquo;lease&rsquo; to represent the number of outstanding token requests and use this when deciding whether it is possible to fetch a token or not.
+In the spec, which can be found here<sup class="footnote-ref" id="fnref:5"><a href="#fn:5">5</a></sup>, the lease was implemented as another global variable <code>outstanding_fetches</code>.
+This was then implemented with Lua inside of Redis.</p>
+
+<p>Now our token service guarantees that we always stay below our prepaid limit.
+And we demonstrated this behavior using TLA+ without writing any code.
+I look forward to the next project I can use TLA+ with to help guide the design.</p>
+
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1">Well, technically PlusCal.</li>
+
+<li id="fn:2">The full specification of the existing service including the translation to TLA+, <a href="https://rampantmonkey.com/2020/01/modeling-a-resource-pool/ExistingService.tla">ExistingService.tla</a></li>
+
+<li id="fn:3">A symmetry set of model values to reduce <code>tlc</code>&rsquo;s search space.</li>
+
+<li id="fn:4">Since we are already coordinating access, we can also keep track of the number of requests that have been made and therefore use <code>token_fetch_count</code> and <code>token_return_count</code> in our process&rsquo;s logic.</li>
+
+<li id="fn:5">The full specification of the updated service including the translation to TLA+, <a href="https://rampantmonkey.com/2020/01/modeling-a-resource-pool/UpdatedService.tla">UpdatedService.tla</a></li>
+</ol>
+
+</div>
+
+</main>
+
+    <div data-pagemap></div>
+    <footer>
+        <p>Casey Robinson 2009-2026. Any and all opinions listed here are my own and not representative of my employers; past, present, or future.</p>
+    </footer>
+</body>

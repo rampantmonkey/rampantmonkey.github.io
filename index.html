@@ -1,39 +1,76 @@
-<main class="landing-page">
-  <aside>
-    <img alt="rampant monkey heraldry logo" src="images/heraldry-logo-256.png"/>
-    <a href="/contact" style="display: block">Contact Me</a>
-  </aside>
-  <article>
-    <h1>Casey Robinson</h1>
-    <hr />
-    <h3>Software Engineer</h3>
-    <section>
-      <h4>Skills</h4>
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Casey Robinson</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="/main.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
+    <script src="/files/img-showcase.js"></script>
+    <script src="/files/pagemap.js"></script>
+</head>
+
+<body>
+    <nav>
+        <p> <a href="/">Casey</a>
+          - <a href="/writing/">Writing</a>
+          - <a href="/contact/">Contact</a>
+          - <a href="/resume/">Resume</a>
+        </p>
+    </nav>
+    <main class="landing-page">
+  <section class="hero">
+    <img class="hero-logo" alt="rampant monkey heraldry logo" src="images/heraldry-logo-256.png"/>
+    <div>
+      <p class="eyebrow">Casey Robinson</p>
+      <h1>Software engineer for systems, infrastructure, and curious side projects.</h1>
+      <p class="hero-copy">I build practical software for research, data-heavy workloads, and production systems. This page is the quick tour: who I am, what I write about, and what to click next.</p>
+      <div class="hero-links">
+        <a href="mailto:casey@rampantmonkey.com">Email</a>
+        <a href="/resume/">Resume</a>
+        <a href="/writing/">All Writing</a>
+        <a href="/contact/">Contact</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="landing-grid">
+    <article class="panel">
+      <h2>What I Do</h2>
       <ul>
-        <li>Scientific Computing - Julia, C, Slurm, Differential Equations, Machine Learning, GPUs.</li>
-        <li>DevOps - AWS, Terraform, Docker, Linux, Orchestration.</li>
-        <li>IoT - Cellular Networking, MQTT, FreeRTOS.</li>
-        <li>Data - PostgreSQL, Redis, ZeroMQ, MapReduce, Visualization.</li>
-        <li>Web Development - JavaScript, CSS, Go.</li>
+        <li>Scientific computing with Julia and C for modeling, simulation, and machine learning workloads.</li>
+        <li>DevOps and platform work across AWS, Terraform, Docker, Linux, and orchestration tooling.</li>
+        <li>Data systems with PostgreSQL, Redis, ZeroMQ, and visualization pipelines.</li>
+        <li>Embedded and IoT projects using cellular networking, MQTT, and FreeRTOS.</li>
       </ul>
-    </section>
-    <section>
-      <h4>Highlighted Posts</h4>
+    </article>
+
+    <article class="panel">
+      <h2>Featured Posts</h2>
       <ul>
-        <li><a href="/writing/chemspell/">Chemspell</a> - spelling words with atomic symbols</li>
-        <li><a href="/writing/solving-zebra-puzzles-with-minizinc/">Solving Zebra Puzzles with MiniZinc</a> - integer programming and nlp</li>
-        <li><a href="/writing/property-based-testing/">Property Based Testing</a> - asserting properties of software with randomness</li>
+        <li><a href="/writing/solving-zebra-puzzles-with-minizinc/">Solving Zebra Puzzles with MiniZinc</a> - Integer programming and NLP constraints in puzzle solving.</li>
+        <li><a href="/writing/property-based-testing/">Property Based Testing</a> - A practical approach to random, property-driven tests.</li>
+        <li><a href="/writing/chemspell/">Chemspell</a> - Spelling words with atomic symbols.</li>
+        <li><a href="/writing/building-a-compute-cluster/">Building a Compute Cluster</a> - Notes from assembling a compact compute setup.</li>
       </ul>
-    </section>
-    <section>
-      <h4>Highlighted Projects</h4>
+    </article>
+
+    <article class="panel">
+      <h2>Projects</h2>
       <ul>
-        <li><a href="/files/tarmap/">The Amazing Race Map</a> - Visualizing the routes from The Amazing Race</li>
-        <li><a href="/files/mini-gallery/">D&D Miniature gallery</a> - pictures of my miniature collection</li>
-        <li><a href="/puzzles/">Puzzle Box Collection</a></li>
-        <li><a href="/keyboards/">Keyboard Collection</a></li>
-        <li><a href="/files/worldle/">Worldle</a> - guessing a country by silhouette</li>
+        <li><a href="/files/tarmap/">The Amazing Race Map</a> - Visualizing route history from the show.</li>
+        <li><a href="/files/mini-gallery/">D&amp;D Miniature Gallery</a> - A gallery of painted miniatures.</li>
+        <li><a href="/puzzles/">Puzzle Box Collection</a> - Mechanical puzzle archive and notes.</li>
+        <li><a href="/keyboards/">Keyboard Collection</a> - Keyboards and build details.</li>
+        <li><a href="/files/worldle/">Worldle</a> - Guessing countries by silhouette.</li>
       </ul>
-    </section>
-  </article>
+    </article>
+  </section>
 </main>
+
+    <div data-pagemap></div>
+    <footer>
+        <p>Casey Robinson 2009-2026. Any and all opinions listed here are my own and not representative of my employers; past, present, or future.</p>
+    </footer>
+</body>

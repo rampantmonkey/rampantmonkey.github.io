@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>What Does the LLM Say?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="/main.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
+    <script src="/files/img-showcase.js"></script>
+    <script src="/files/pagemap.js"></script>
+</head>
+
+<body>
+    <nav>
+        <p> <a href="/">Casey</a>
+          - <a href="/writing/">Writing</a>
+          - <a href="/contact/">Contact</a>
+          - <a href="/resume/">Resume</a>
+        </p>
+    </nav>
+    <main class="writing"><h1>What Does the LLM Say?</h1>
+<hr />
+<p><img src="spectrogram.jpg" alt="Spectrogram of the coil whine" /></p>
+
+<p><audio controls src="what-does-the-llm-say.mp3" type="audio/mpeg"></audio></p>
+
+<p>Recording the coil whine on my laptop as I generate haikus with various models.</p>
+
+<pre><code>echo &quot;qwen3-coder&quot;
+say &quot;Qwen 3 Coder&quot;
+ollama run qwen3-coder:latest &quot;Generate 100 haikus&quot;
+sleep 30
+
+echo &quot;mistral-7b&quot;
+say &quot;Mistral 7b Instruct&quot;
+ollama run mistral:7b-instruct-v0.3-q8_0 &quot;Generate 100 haikus&quot;
+sleep 30
+
+echo &quot;qwen3:8b&quot;
+say &quot;Qwen 3 8b&quot;
+ollama run qwen3:8b &quot;Generate 100 haikus&quot;
+sleep 30
+
+echo &quot;gemma3:4b&quot;
+say &quot;Gemma 3 4b&quot;
+ollama run gemma3:4b &quot;Generate 100 haikus&quot;
+sleep 30
+
+echo &quot;qwen3:32b&quot;
+say &quot;Qwen 3 32b&quot;
+ollama run qwen3:32b &quot;Generate 10 haikus&quot;
+sleep 30
+
+echo &quot;gemma3:27b&quot;
+say &quot;Gemma 3 27B&quot;
+ollama run gemma3:27b &quot;Generate 10 haikus&quot;
+sleep 30
+
+echo &quot;deepseek-r1&quot;
+say &quot;Deepseek R1&quot;
+ollama run deepseek-r1:latest &quot;Generate 10 haikus&quot;
+sleep 30
+
+</code></pre>
+
+</main>
+
+    <div data-pagemap></div>
+    <footer>
+        <p>Casey Robinson 2009-2026. Any and all opinions listed here are my own and not representative of my employers; past, present, or future.</p>
+    </footer>
+</body>

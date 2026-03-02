@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>giveMeAnEventBus</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="/main.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
+    <script src="/files/img-showcase.js"></script>
+    <script src="/files/pagemap.js"></script>
+</head>
+
+<body>
+    <nav>
+        <p> <a href="/">Casey</a>
+          - <a href="/writing/">Writing</a>
+          - <a href="/contact/">Contact</a>
+          - <a href="/resume/">Resume</a>
+        </p>
+    </nav>
+    <main class="writing"><h1>giveMeAnEventBus</h1>
+<hr />
+<p>Feeling down?
+No need to inject yourself with dependencies, just call 1-800-<code>giveMeAnEventBus</code> today.
+The event bus will arrive immediately and you can <code>subscribe</code> to all of the latest news.
+You can even <code>publish</code> your own stories.</p>
+
+<p>And that&rsquo;s not all.
+If you provide the magic key<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>, you can even communicate with your friends in neighboring tabs.</p>
+
+<pre>
+const giveMeAnEventBus = (() => {
+  let eventBusId = 0
+
+  return (key=null) => {
+    eventBusId++
+    let subscribers = []
+    let subscriberId = 0
+
+    if(key) {
+      window.addEventListener('storage', (e) => {
+        if(e.key === key) {
+          try { var value = JSON.parse(e.newValue) }
+          catch(err) { return }
+          publish(value.payload, false)
+        }
+      })
+
+      setTimeout(() => {
+        const initialValues = JSON.parse(localStorage.getItem(key))
+        if(initialValues) {
+          publish(initialValues.payload, false)
+        }
+      }, 0)
+    }
+
+
+    const unsubscribe = (handle) => {
+      if(handle.eventBusId === eventBusId) {
+        for(var i=0, l=subscribers.length; i < l; i++) {
+          if(subscribers[i].subscriberId === handle.subscriberId) {
+            subscribers.splice(i, 1)
+            return
+          }
+        }
+      }
+    }
+
+    const subscribe = (cb) => {
+      subscriberId++
+      subscribers.push({cb, subscriberId})
+      let handle = { subscriberId, eventBusId }
+      handle.unsubscribe = () => unsubscribe(handle)
+      return handle
+    }
+
+    let eventId = 0
+    const publish = ((event, persist=true) => {
+      eventId++
+      subscribers.forEach(s => s.cb({eventId, payload: event}))
+      if(persist) {
+        localStorage.setItem(key, JSON.stringify({payload: event, nonce: new Date()}))
+      }
+    }
+
+    return { subscribe, unsubscribe, publish }
+  }
+})()
+</pre>
+
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1">If a string <code>key</code> is provided, the messages are saved to local storage under that key. This will then trigger the <code>storage</code> event to be fired in every other document from the same domain. Which is then caught by our event listener and republished to all subscribers in its own document. To bootstrap the process we also check for the lastest persisted message on bus creation. This check and load is defered until after the initial round of subscribers have a chance to connect. <em>Just cooperative-multitasking things</em>.</li>
+</ol>
+
+</div>
+
+</main>
+
+    <div data-pagemap></div>
+    <footer>
+        <p>Casey Robinson 2009-2026. Any and all opinions listed here are my own and not representative of my employers; past, present, or future.</p>
+    </footer>
+</body>

@@ -33,6 +33,7 @@ body {
     padding: 0 2em;
     max-width: 1024px;
     background-color: var(--antique-white-light);
+    background-image: radial-gradient(circle at 8% 12%, rgba(181, 166, 66, 0.12) 0%, rgba(181, 166, 66, 0) 44%);
     color: var(--dark-sienna);
     font-family: monospace;
 }
@@ -89,14 +90,91 @@ emph {
     text-indent: -5px;
 }
 
-.landing-page aside img {
-    display: block;
-    margin: 0 auto;
+.landing-page {
+    margin: 1rem 0 1.5rem;
 }
 
-.landing-page aside a {
-    visibility: hidden;
+.hero {
+    display: grid;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid rgba(78, 56, 34, 0.3);
+    background: linear-gradient(120deg, rgba(255, 233, 211, 0.95) 0%, rgba(253, 249, 243, 0.95) 100%);
 }
+
+.hero-logo {
+    width: min(220px, 50vw);
+    justify-self: center;
+}
+
+.eyebrow {
+    margin: 0;
+    color: var(--cafe-noir);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.8em;
+}
+
+.hero h1 {
+    margin: 0.3rem 0;
+    line-height: 1.25;
+    font-size: clamp(1.6rem, 2.8vw, 2.25rem);
+}
+
+.hero-copy {
+    margin: 0.6rem 0 0;
+    max-width: 65ch;
+}
+
+.hero-links {
+    margin-top: 0.9rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+}
+
+.hero-links a {
+    border: 1px solid var(--cafe-noir);
+    padding: 0.25rem 0.5rem;
+    text-decoration: none;
+}
+
+.hero-links a:hover {
+    background: var(--brass);
+    color: var(--dark-sienna);
+}
+
+.landing-grid {
+    margin-top: 1rem;
+    display: grid;
+    gap: 1rem;
+}
+
+.panel {
+    border: 1px solid rgba(78, 56, 34, 0.3);
+    padding: 0.7rem 1rem;
+    background: rgba(253, 249, 243, 0.8);
+}
+
+.panel h2 {
+    margin-top: 0.2rem;
+}
+
+.panel ul {
+    margin-bottom: 0.4rem;
+}
+
+.hero,
+.panel {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: rise-in 420ms ease-out forwards;
+}
+
+.landing-grid .panel:nth-child(1) { animation-delay: 120ms; }
+.landing-grid .panel:nth-child(2) { animation-delay: 180ms; }
+.landing-grid .panel:nth-child(3) { animation-delay: 240ms; }
 
 .widget {
   width: 90%;
@@ -149,26 +227,17 @@ input:focus {
 }
 
 @media (min-width: 950px) {
-    .landing-page {
-        display: flex;
-        gap: 1em;
-        margin-top: 1.33em;
+    .hero {
+        grid-template-columns: auto 1fr;
+        gap: 1.2rem;
     }
 
-    .landing-page > aside {
-        flex: 0 0 auto;
+    .landing-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .landing-page > article {
-        flex-grow: 1;
-    }
-
-    .landing-page h1 {
-        margin-top: 0;
-    }
-
-    .landing-page aside a {
-        visibility: visible;
+    .landing-grid .panel:last-child {
+        grid-column: span 2;
     }
 
     .writing aside {
@@ -215,5 +284,25 @@ input:focus {
 
   .print-only {
     display: initial;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero,
+  .panel {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Solving Zebra Puzzles with MiniZinc</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="/main.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
+    <script src="/files/img-showcase.js"></script>
+    <script src="/files/pagemap.js"></script>
+</head>
+
+<body>
+    <nav>
+        <p> <a href="/">Casey</a>
+          - <a href="/writing/">Writing</a>
+          - <a href="/contact/">Contact</a>
+          - <a href="/resume/">Resume</a>
+        </p>
+    </nav>
+    <main class="writing"><h1>Solving Zebra Puzzles with MiniZinc</h1>
+<hr />
+<p>For the past month my wife and I have been solving <a href="https://www.brainzilla.com/logic/zebra">Brainzilla&rsquo;s zebra puzzles</a> in the evenings while we wait for dinner to cook.
+I wanted to see if I could write a program to solve the puzzles.
+I <a href="zebra.tar.gz">did</a>.
+Well, for at least two of the puzzles and built a framework to expand on for the other puzzles when I want to invest more time.</p>
+
+<p>The core structure of my solution is a single pipeline composed of a series of phases passing their output as input to the next phase, essentially the same structure as a compiler.
+Each phase has a separate area of responsibility.</p>
+
+<p><img style="display: inline-block" class="aligncenter" alt="zebra solving pipeline. Extract, Sanitize, Tag, Parse, Analyze, Simplify, Render, Solve" src="zebra-pipeline.png" /></p>
+
+<p>The extract phase reads the PDF version of the puzzle finding the categories and clues.
+The <a href="https://www.npmjs.com/package/pdf-extraction">pdf-extraction</a> package produces a plain text version of the pdf which is sliced into the sections of a puzzle.</p>
+
+<p>The sanitize phase filters out typos, replaces contractions, and normalizes the capitalization of words.
+This phase is also a convenient place to inject shortcuts while refining the rest of the pipeline.
+For example the clue, <em>The first person on the right likes Swimming</em>, includes a compound noun phrase, <em>the first person</em>, where the only important word for solving is <em>first</em>.
+Extracting this meaning would require additional parsing and analysis rules.
+If the clue were replaced with <em>The first on the right likes Swimming</em>, we can reuse the rules for parsing &lsquo;the first&rsquo; and test the rest of the pipeline.
+While a generic solver would minimize the number of these shortcuts, the flexibility can reduce frustration while developing the later stages of the pipeline by removing the more difficult clues until you are ready to work through the additional rules.</p>
+
+<p>The tag phase tokenizes the sentence into words and labels each word with the corresponding part of speech.
+The sentence is split into individual words based on whitespace and punctuation.
+Each word is then labeled with a preliminary part of speech by searching through an English language lexicon<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>.
+A set of grammar heuristics are then applied to the preliminary tags to produce a final part of speech tag.
+For example, &lsquo;convert a noun to a number if a period appears within the word&rsquo; or &lsquo;convert any word into an adverb if it ends in ly&rsquo;.
+The <a href="https://www.npmjs.com/package/pos">pos</a> package implements this phase of the pipeline.</p>
+
+<p>The tag phase produces an array of labeled tokens which provides meaning to the individual words.
+In order to extract meaning from the entire sentence these tokens are assembled into a tree.
+Each node in the tree is one of the labeled tokens.
+The root of a tree is the start of a phrase, often a verb or preposition, while the children provide additional context.
+Suppose we are parsing the phrase <em>Jessica likes green</em>, this phrase would have three tagged tokens (<code>['Jessica', 'noun'], ['likes', 'verb'], ['green, 'noun']</code>).
+This phrase is an example of a common pattern in english - noun phrase, verb, verb phrase - which produces a dependency tree of <code>[verb, [noun phrase], [verb phrase]]</code>.
+Or for this specific case</p>
+
+<p><img style="display: block" class="aligncenter" alt="[['likes', 'verb'], [['Jessica', 'noun']], [['green', 'noun']]]" src="jessica-likes-green.png" /></p>
+
+<p>The parse phrase is responsible for producing these dependency trees and is implemented as a collection of rules which encode the common patterns found in the clues.</p>
+
+<p>The dependency tree represents the grammatic structure of the sentence but lacks the semantic meaning required to produce concrete logical constraints.
+The analyze phase injects the semantic meaning by walking the dependency tree looking for common patterns (e.g. a <code>[verb, [noun_a], [noun_b]]</code> means <code>noun_a</code> is <code>noun_b</code> or as an s-expression <code>[is, noun_a, noun_b]</code>).
+This phase also looks for key words from the domain of zebra puzzle clues: positional (e.g. <code>left</code>, <code>right</code>, <code>middle</code>), ordinal words (e.g. <code>first</code>, <code>fourth</code>, <code>last</code>), and relational words (e.g. <code>next to</code>, <code>between</code>).
+If any of these key words are found, the constraints are enhanced with the specific meaning.
+For example, if <code>middle</code> is found it is replaced with the concrete value <code>3</code> or if <code>between</code> is found the <code>is</code> constraint is replaced with <code>between</code>.
+Since this phrase is responsible for translating between English and the constraint domain model it is where the most creativity lies and also the most complication.</p>
+
+<p>The analyze phase is constructed to filter and identify constraints.
+Its output correctly represents the constraint expressed in the clue, but is often cryptic and verbose.
+For example, the analyzed tree for <em>The girl who likes Skiing sits next to the girl who plays ten-pin bowling</em> is the following tree.</p>
+
+<pre><code>[
+  'is',
+  [ 'is', undefined, 'Skiing' ],
+  [ 'next to',
+    [ 'is'
+    , undefined
+    , 'ten-pin bowling'
+    ]
+  ],
+]
+</code></pre>
+
+<p>The simplify phase is responsible for translating the analyzed trees into single constraints.
+The primary tactics of the simplify phase are term rewriting and null removal.
+Simplify will walk the tree identifying nulls or common patterns and rewrite that subtree as a simpler expression.
+For example, <code>['is', null, 'Purple']</code> would be simplified to <code>'Purple'</code> and the tree above recursively simplifies to <code>['next to', 'Skiing', 'ten-pin bowling']</code>.</p>
+
+<p>The render phase converts the extracted categories and simplified constraints into a model that can be solved by <code>minizinc</code><sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup>.
+This is implemented as straightforward string templates.
+Here is an <a href="fancy_hotels.mzn">example</a> of a puzzle rendered for minizinc to solve.</p>
+
+<p>The solve phase uses the <a href="https://nodejs.org/api/child_process.html">child_process</a> module to fork/exec <code>minizinc</code>, provide the rendered input via a pipe, and parse the output.
+Nothing clever here, just plumbing.</p>
+
+<p>That&rsquo;s the whole pipeline.
+There are three areas I plan to improve in the future.
+The most obvious area is adding more rules to the dependency parser and analyzer to handle a wider variety of clues including: parsing dollar amounts and analyzing &ldquo;between&rdquo; relationships.
+The second area is using the puzzle categories to expand the tagging lexicon with words that are known to be important in the clues and then incorporating the categories into the analyzer to make more accurate decisions about compound nouns.
+The last area is introducing a knowledge base to properly analyze the trivia portions of some of the clues (e.g. <em>At the third position is the hotel founded when The Great Depression started</em>).</p>
+
+<p>This was a fun project to learn more about natural language processing and constraint solving.
+I wonder what other puzzles I can solve with MiniZinc.</p>
+
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1">essentially a dictionary of common words and their part of speech</li>
+
+<li id="fn:2">What is MiniZinc? The <a href="https://www.minizinc.org/">MiniZinc website</a> and <a href="https://www.hillelwayne.com/post/minizinc/">Hillel Wayne</a> answer this much better than I can.</li>
+</ol>
+
+</div>
+
+</main>
+
+    <div data-pagemap></div>
+    <footer>
+        <p>Casey Robinson 2009-2026. Any and all opinions listed here are my own and not representative of my employers; past, present, or future.</p>
+    </footer>
+</body>
